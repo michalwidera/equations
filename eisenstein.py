@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
+
 """Eisenstein Irrational Fractions Type Implemenation - Python 3.x
    Copyright (c) 2019 Michal Widera
 """
@@ -15,7 +18,7 @@ class Eisenstein:
             self.a = a
             self.b = b
         else:
-            raise TypeError("arguments should be a int")
+            raise TypeError("arguments should be an int")
 
     def __repr__(self):
         return "(%s, %sw)" % (self.a, self.b)
@@ -35,7 +38,10 @@ class Eisenstein:
         # https://en.wikipedia.org/wiki/Eisenstein_integer
         if isinstance(other, int):
             other = Eisenstein(other, 0)
-        return Eisenstein((self.a * other.a)-(self.b * other.b), (self.b * other.a)+(self.a * other.b)-(self.b * other.b))
+        return Eisenstein(
+            (self.a * other.a) - (self.b * other.b),
+            (self.b * other.a) + (self.a * other.b) - (self.b * other.b),
+        )
 
     def __abs__(self):
         # |a+bw|^2 = a*a - a*b + b*b
@@ -55,10 +61,11 @@ class Eisenstein:
         a = adivb.real
         b = adivb.imag
 
-        K = Eisenstein(round(a + b / math.sqrt(3)),
-                       round((b * 2) / math.sqrt(3)))
-        print("self = K * other + R : %r = %r * %r + %r" % (self, K, other,
-                                                            self - K * other))
+        K = Eisenstein(round(a + b / math.sqrt(3)), round((b * 2) / math.sqrt(3)))
+        print(
+            "self = K * other + R : %r = %r * %r + %r"
+            % (self, K, other, self - K * other)
+        )
         return self - K * other
 
     def gcd(a, b):
@@ -73,7 +80,6 @@ class Eisenstein:
 
 
 class EisensteinFraction:
-
     def __init__(self, numerator=0, denominator=1):
 
         if isinstance(numerator, Eisenstein):
@@ -147,7 +153,7 @@ def test():
 
     print("modulo E2 % 3", E2, 3, E2 % 3)
     print("modulo 22 % 3", 22, 3, 22 % 3)
-    #print("gcd 22,2:", Eisenstein.gcd(E2, E1))
+    # print("gcd 22,2:", Eisenstein.gcd(E2, E1))
 
     print("Success.")
 
@@ -155,7 +161,10 @@ def test():
 def inverse(e: EisensteinFraction):
     a = e.n.a
     b = e.n.b
-    return (EisensteinFraction(a - b, a * a - a * b + b * b) - EisensteinFraction(Eisenstein(0, -b), a * a - a * b + b * b)) * EisensteinFraction(e.d, 1)
+    return (
+        EisensteinFraction(a - b, a * a - a * b + b * b)
+        - EisensteinFraction(Eisenstein(0, -b), a * a - a * b + b * b)
+    ) * EisensteinFraction(e.d, 1)
 
 
 if __name__ == "__main__":
