@@ -30,20 +30,17 @@ class Eisenstein:
         return "(%s, %sw)" % (self.a, self.b)
 
     def __add__(self, other):
-        if isinstance(other, int):
-            other = Eisenstein(other, 0)
+        other = upgrade_int(other)
         return Eisenstein(self.a + other.a, self.b + other.b)
 
     def __sub__(self, other):
-        if isinstance(other, int):
-            other = Eisenstein(other, 0)
+        other = upgrade_int(other)
         return Eisenstein(self.a - other.a, self.b - other.b)
 
     def __mul__(self, other):
         # (a+bw)(c+dw)=(ac-bd)+(bc+ad-db)w
         # https://en.wikipedia.org/wiki/Eisenstein_integer
-        if isinstance(other, int):
-            other = Eisenstein(other, 0)
+        other = upgrade_int(other)
         return Eisenstein(
             (self.a * other.a) - (self.b * other.b),
             (self.b * other.a) + (self.a * other.b) - (self.b * other.b),
@@ -60,8 +57,7 @@ class Eisenstein:
     # sprawdzic
     # wolfram alpha : w = ( -1 + i sqrt(3) ) / 2 ; z = ( a + b * w ) * ( a + b * ( w ^ 2 ) )-> z = a^2 - ab + b^2
     def __mod__(self, other):
-        if isinstance(other, int):
-            other = Eisenstein(other, 0)
+        other = upgrade_int(other)
         w = (-1 + math.sqrt(3)) / 2
         adivb = complex(self.a, self.b * w) / complex(other.a, other.b * w)
         a = adivb.real
