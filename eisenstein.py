@@ -13,6 +13,7 @@ import math
 
 # https://docs.python.org/3.7/reference/datamodel.html
 
+
 class Eisenstein:
     def __init__(self, a=0, b=0):
 
@@ -22,7 +23,7 @@ class Eisenstein:
         else:
             raise TypeError("arguments should be an int")
 
-    def __upgrade_int(self,other):
+    def __upgrade_int(self, other):
         if isinstance(other, int):
             other = Eisenstein(other, 0)
         return other
