@@ -19,7 +19,7 @@ def sum(A: list, deltaA: Fraction, B: list, deltaB: Fraction):
     result = []
     deltaC = min(deltaA, deltaB)
 
-    for i in range(0, 20):
+    for i in range(20):
         if deltaC == deltaA:
             result.append(str(A[i]) + B[int(i * deltaA / deltaB)]),
         else:
@@ -32,7 +32,7 @@ def diff(C: list, deltaA: Fraction, deltaB: Fraction):
     result = []
     deltaC = min(deltaA, deltaB)
 
-    for i in range(0, 10):
+    for i in range(10):
         if deltaA > deltaB:
             result.append(C[int(ceil(i * deltaA / deltaB))])
         else:
@@ -45,7 +45,7 @@ def hash(A: list, deltaA: Fraction, B: list, deltaB: Fraction):
     result = []
     delta = deltaB / (deltaA + deltaB)
 
-    for i in range(0, 20):
+    for i in range(20):
         if floor(i * delta) == floor((i + 1) * delta):
             result.append(B[i - int(floor((i + 1) * delta))])
         else:
@@ -60,7 +60,7 @@ def dehasheven(C: list, deltaC: Fraction, deltaA: Fraction):
     result = []
     deltaB = deltaA * deltaC / (deltaA - deltaC)
 
-    for i in range(0, 6):
+    for i in range(6):
         result.append(C[i + int(ceil((i + 1) * deltaA / deltaB))])
     return result, deltaB
 
@@ -70,7 +70,7 @@ def dehashodd(C: list, deltaC: Fraction, deltaB: Fraction):
     result = []
     deltaA = deltaB * deltaC / (deltaB - deltaC)
 
-    for i in range(0, 6):
+    for i in range(6):
         result.append(C[i + int(i * deltaB / deltaA)])
     return result, deltaA
 
@@ -90,7 +90,7 @@ def z(i: int):
 def vhash():
 
     result = []
-    for i in range(0, 20):
+    for i in range(20):
         if int(i * z(i)) == int((i + 1) * z(i + 1)):
             result.append(B[i - int((i) * z(i))])
         else:
