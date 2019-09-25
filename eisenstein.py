@@ -11,10 +11,13 @@ import math
 # https://docs.python.org/3.7/reference/datamodel.html
 
 
+def upgrade_int(other):
+    if isinstance(other, int):
+        other = Eisenstein(other, 0)
+    return other
 
 
 class Eisenstein:
-
     def __init__(self, a=0, b=0):
 
         if isinstance(a, int) and isinstance(b, int):
@@ -23,26 +26,21 @@ class Eisenstein:
         else:
             raise TypeError("arguments should be an int")
 
-    def __upgrade_int(other):
-        if isinstance(other, int):
-            other = Eisenstein(other, 0)
-        return other
-  
     def __repr__(self):
         return "(%s, %sw)" % (self.a, self.b)
 
     def __add__(self, other):
-        other = __upgrade_int(other)
+        other = upgrade_int(other)
         return Eisenstein(self.a + other.a, self.b + other.b)
 
     def __sub__(self, other):
-        other = __upgrade_int(other)
+        other = upgrade_int(other)
         return Eisenstein(self.a - other.a, self.b - other.b)
 
     def __mul__(self, other):
         # (a+bw)(c+dw)=(ac-bd)+(bc+ad-db)w
         # https://en.wikipedia.org/wiki/Eisenstein_integer
-        other = __upgrade_int(other)
+        other = upgrade_int(other)
         return Eisenstein(
             (self.a * other.a) - (self.b * other.b),
             (self.b * other.a) + (self.a * other.b) - (self.b * other.b),
@@ -59,7 +57,7 @@ class Eisenstein:
     # sprawdzic
     # wolfram alpha : w = ( -1 + i sqrt(3) ) / 2 ; z = ( a + b * w ) * ( a + b * ( w ^ 2 ) )-> z = a^2 - ab + b^2
     def __mod__(self, other):
-        other = __upgrade_int(other)
+        other = upgrade_int(other)
         w = (-1 + math.sqrt(3)) / 2
         adivb = complex(self.a, self.b * w) / complex(other.a, other.b * w)
         a = adivb.real
