@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
 
-"""Time Series Algebra Equations Implemenation - Python 3.x
+"""Time Series Algebra Equations Implementation - Python 3.x
    Copyright (c) 2019 Michal Widera
 """
 
