@@ -11,6 +11,12 @@ import math
 # https://docs.python.org/3.7/reference/datamodel.html
 
 
+def upgrade_int(other):
+    if isinstance(other, int):
+        other = Eisenstein(other, 0)
+    return other
+
+
 class Eisenstein:
     def __init__(self, a=0, b=0):
 
