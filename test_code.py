@@ -14,11 +14,17 @@ from eisenstein import Eisenstein
 
 class TestEisensteinNumbers(unittest.TestCase):
 
-    # TODO: No GCD implemented yet
-    #    def test_equal_values(self):
-    #        a = Eisenstein(1, 2)
-    #        b = Eisenstein(2, 4)
-    #        self.assertEqual(a, b)
+    def test_substraction_values(self):
+        """
+        TestNumbers:
+        wolframalfa.com
+        w = ( -1 + i sqrt(3) ) / 2 ; c = ( 1 + 2 w ) - ( 2 + 4 w )
+        result: 32w + 21
+        """
+        a = Eisenstein(1, 2)
+        b = Eisenstein(2, 4)
+        c = a - b
+        self.assertEqual(c, Eisenstein(-1, -2))
 
     def test_add_values(self):
         """
