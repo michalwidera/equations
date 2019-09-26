@@ -30,6 +30,9 @@ class Eisenstein:
     def __repr__(self):
         return "(%s, %sw)" % (self.a, self.b)
 
+    def __eq__(self, other):
+        return self.a == other.a and self.b == other.b
+
     def __add__(self, other):
         other = self.__upgrade_int(other)
         return Eisenstein(self.a + other.a, self.b + other.b)
