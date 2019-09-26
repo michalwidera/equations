@@ -12,7 +12,7 @@ import unittest
 from eisenstein import Eisenstein
 
 
-class TestNumbers(unittest.TestCase):
+class TestEisensteinNumbers(unittest.TestCase):
     def test_equal_values(self):
         """
         TestNumbers:
@@ -22,8 +22,20 @@ class TestNumbers(unittest.TestCase):
         c = a + b
         self.assertEqual(c, Eisenstein(21, 32))
 
+    def test_multiplication(self):
+        """
+        TestNumbers:
+        wolframalfa.com
+        query: w = ( -1 + i sqrt(3) ) / 2 ; a = ( 1 + 2 w ); b = ( 2 + 4 w ) ; c = a * b
+        answer: c = -6
+        """
+        a = Eisenstein(1, 2)
+        b = Eisenstein(2, 4)
+        c = a * b
+        self.assertEqual(c, Eisenstein(-6, 0))
 
-fast_test_ls = [TestNumbers]
+
+fast_test_ls = [TestEisensteinNumbers]
 
 
 def add_all_fast(suite):
