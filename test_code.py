@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 """
-./test_code.py test; red_green_bar.py $? $COLUMNS
+./test_code.py; red_green_bar.py $? $COLUMNS
 red_green_bar.py is taken from https://github.com/kwadrat/rgb_tdd.git
 """
 
@@ -43,8 +43,5 @@ def perform_tests():
 
 
 if __name__ == "__main__":
-    if len(sys.argv) >= 2 and sys.argv[1] == "slowtest":
-        result = perform_slow_tests()
-    else:
-        result = perform_tests()
+    result = perform_tests()
     sys.exit(result)
