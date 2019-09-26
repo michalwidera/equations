@@ -23,9 +23,9 @@ def sum(A: list, deltaA: Fraction, B: list, deltaB: Fraction):
 
     for i in range(20):
         if deltaC == deltaA:
-            result.append(str(A[i]) + B[int(i * deltaA / deltaB)]),
+            result.append(str(A[i]) + B[int(i * deltaA / deltaB)])
         else:
-            result.append(str(A[int(i * deltaB / deltaA)]) + B[i]),
+            result.append(str(A[int(i * deltaB / deltaA)]) + B[i])
     return result, deltaC
 
 
