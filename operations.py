@@ -3,6 +3,8 @@
 
 """Time Series Algebra Equations Implementation - Python 3.x
    Copyright (c) 2019 Michal Widera
+
+   https://planetmath.org/StreamInterlaceAndDeinterlace
 """
 
 from fractions import Fraction

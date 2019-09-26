@@ -131,6 +131,11 @@ class EisensteinFraction:
     __radd__ = __add__
 
 
+def floor(var: EisensteinFraction) -> int:
+    # ToDo
+    return int(1)
+
+
 def test():
     E1 = Eisenstein(2, 1)
     E2 = Eisenstein(22, 4)
