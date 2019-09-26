@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
 
-"""Eisenstein Irrational Fractions Type Implementation - Python 3.x
+"""Eisenstein Rational Fractions Type Implementation - Python 3.x
    Copyright (c) 2019 Michal Widera
 
    Defined operations on Eisenstein integers:
