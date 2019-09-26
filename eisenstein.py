@@ -132,7 +132,7 @@ class EisensteinFraction:
 
 
 def floor(var: EisensteinFraction) -> int:
-    # ToDo
+    # TODO need figure out how to implement Floor function
     return int(1)
 
 
@@ -161,6 +161,8 @@ def test():
 
     print("modulo E2 % 3", E2, 3, E2 % 3)
     print("modulo 22 % 3", 22, 3, 22 % 3)
+
+    # TODO this goes crazy where uncommented - need to fix this and find proper value of gcd
     # print("gcd 22,2:", Eisenstein.gcd(E2, E1))
 
     print("Success.")

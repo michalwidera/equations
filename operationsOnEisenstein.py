@@ -11,6 +11,8 @@
 
 from eisenstein import *
 
+# TODO I'm not sure how to interpret delta as EisnensteinFraction maybe there should appear norm function and delta
+#  became variable like in vhash?
 A = range(1, 24)
 deltaA = EisensteinFraction(1, 2)
 B = list(map(chr, range(ord("a"), ord("z") + 1)))
@@ -18,7 +20,7 @@ deltaB = EisensteinFraction(1, 1)
 
 
 def hash(A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFraction):
-
+    # TODO check if we need here hash of vhash from operations.py or something completly different
     result = []
     delta = deltaB / (deltaA + deltaB)
 
