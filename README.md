@@ -6,4 +6,4 @@ This project contains implementation of some equations published here:
 - M.Widera: Deterministyczna metoda przetwarzania ciągów danych, XXI Autumn Meeting of Polish Information Processing Society, Conf.Proc. pages 243-254
 - M.Widera: Implementacja zapytań ciągłych w strumieniowym systemie zarządzania danymi na potrzeby przetwarzania sygnałów, 2012, Studia Informatica, BDAS 2012.
 
-This is experminetal work that create base for Abracadabra DB - Time Series Management System.
+This is experminetal work that creates base for Abracadabra DB - Time Series Management System.
