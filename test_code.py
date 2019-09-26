@@ -19,7 +19,7 @@ class TestEisensteinNumbers(unittest.TestCase):
         TestNumbers:
         wolframalfa.com
         w = ( -1 + i sqrt(3) ) / 2 ; c = ( 1 + 2 w ) - ( 2 + 4 w )
-        result: 32w + 21
+        result: -1 - 2w
         """
         a = Eisenstein(1, 2)
         b = Eisenstein(2, 4)
