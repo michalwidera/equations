@@ -13,10 +13,9 @@ from eisenstein import Eisenstein
 
 
 class TestEisensteinNumbers(unittest.TestCase):
-
     def test_substraction_values(self):
         """
-        TestNumbers:
+        TestEisensteinNumbers:
         wolframalfa.com
         w = ( -1 + i sqrt(3) ) / 2 ; c = ( 1 + 2 w ) - ( 2 + 4 w )
         result: -1 - 2w
@@ -28,7 +27,7 @@ class TestEisensteinNumbers(unittest.TestCase):
 
     def test_add_values(self):
         """
-        TestNumbers:
+        TestEisensteinNumbers:
         wolframalfa.com
         query: w = ( -1 + i sqrt(3) ) / 2 ; c = ( 1 + 2w ) + ( 20 + 30w )
         result: 32w + 21
@@ -40,7 +39,7 @@ class TestEisensteinNumbers(unittest.TestCase):
 
     def test_multiplication(self):
         """
-        TestNumbers:
+        TestEisensteinNumbers:
         wolframalfa.com
         query: w = ( -1 + i sqrt(3) ) / 2 ; c = ( 1 + 2 w ) * ( 2 + 4 w )
         answer: c = -6
@@ -54,7 +53,7 @@ class TestEisensteinNumbers(unittest.TestCase):
 """ TODO Not yet implemented - or should be straight in EisensteinFraction? """
 #    def test_division(self):
 #
-#        TestNumbers:
+#        TestEisensteinNumbers:
 #        wolframalfa.com
 #        query: w = w = ( -1 + i sqrt(3) ) / 2 ; a = ( 2 + 4 w ); b = ( 2 + 4 w ) ; c = a / b
 #        answer: c = 1
