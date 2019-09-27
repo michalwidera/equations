@@ -68,10 +68,16 @@ class Eisenstein:
         b = adivb.imag
 
         K = Eisenstein(round(a + b / math.sqrt(3)), round((b * 2) / math.sqrt(3)))
-        print(
-            "self = K * other + R : %r = %r * %r + %r"
-            % (self, K, other, self - K * other)
-        )
+
+        # This debug code is important - it creates queries for
+        # wolframalfa that can be checked if mod function works correctly
+
+        # print(
+        #    # self = K * other + R
+        #    'w = ( -1 + i sqrt(3) ) / 2 ; %r %r + %r ; expected %r'
+        #    % (K, other, self - K * other, self)
+        # )
+
         return self - K * other
 
     def gcd(a, b):
