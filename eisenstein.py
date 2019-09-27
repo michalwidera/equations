@@ -58,17 +58,23 @@ class Eisenstein:
     __rmul__ = __mul__
     __radd__ = __add__
 
+    def get_complex_form(self):
+        return complex(self.a - (self.b / 2), (self.b * math.sqrt(3)) / 2)
+
+    def get_eisenstein_form(self, var: complex):
+        """
+        (x,iy) -> (a,bw)
+        """
+        x = var.real
+        y = var.imag
+        return Eisenstein(round(x + y / math.sqrt(3)), round((2 * y) / math.sqrt(3)))
+
     # sprawdzic
     # wolfram alpha : w = ( -1 + i sqrt(3) ) / 2 ; z = ( a + b * w ) * ( a + b * ( w ^ 2 ) )-> z = a^2 - ab + b^2
     def __mod__(self, other):
         other = self.__upgrade_int(other)
-        w = (-1 + math.sqrt(3)) / 2
-        adivb = complex(self.a, self.b * w) / complex(other.a, other.b * w)
-        a = adivb.real
-        b = adivb.imag
 
-        K = Eisenstein(round(a + b / math.sqrt(3)), round((b * 2) / math.sqrt(3)))
-
+        K = self.get_eisenstein_form(self.get_complex_form() / other.get_complex_form())
         # This debug code is important - it creates queries for
         # wolframalfa that can be checked if mod function works correctly
 

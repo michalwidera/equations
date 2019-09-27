@@ -60,16 +60,17 @@ class TestEisensteinNumbers(unittest.TestCase):
         query: w = ( -1 + i sqrt(3) ) / 2 ; (3, 0w) (2, 0w) + (-1, 2w)
         expected (5, 2w)
 
-        query: w = ( -1 + i sqrt(3) ) / 2 ; (5, 1w) (1, 0w) + (0, 1w)
-        expected (5, 2w)
+        query: w = ( -1 + i sqrt(3) ) / 2 ; (5, 1w) (1, 0w)
+        expected (5, 0w)
         """
         a = 5
         self.assertEqual(1, a % 2)  # int
         a = Eisenstein(5, 0)
         self.assertEqual(Eisenstein(1, 0), a % 2)  # Eisenstein
         a = Eisenstein(5, 2)
-        self.assertEqual(Eisenstein(-1, 2), a % Eisenstein(2, 0))  # Eisenstein
-        self.assertEqual(Eisenstein(0, 1), a % Eisenstein(1, 0))  # Eisenstein
+        self.assertEqual(Eisenstein(1, 0), a % Eisenstein(2, 0))  # Eisenstein
+        a = Eisenstein(5, 1)
+        self.assertEqual(Eisenstein(0, 0), a % Eisenstein(1, 0))  # Eisenstein
 
     def test_the_same_gcd(self):
         """
