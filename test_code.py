@@ -9,7 +9,7 @@ red_green_bar.py is taken from https://github.com/kwadrat/rgb_tdd.git
 import sys
 import unittest
 
-from eisenstein import Eisenstein, gcd
+from eisenstein import Eisenstein, EisensteinFraction, gcd
 
 
 class TestEisensteinNumbers(unittest.TestCase):
@@ -89,6 +89,20 @@ class TestEisensteinNumbers(unittest.TestCase):
         self.assertEqual(gcd(a, b), Eisenstein(2, 1))
 
 
+class TestEisensteinFractionNumbers(unittest.TestCase):
+    def test_multiplication(self):
+        """
+        TestEisensteinNumbers:
+        wolframalfa.com
+        query: w = ( -1 + i sqrt(3) ) / 2 ; c = ( 1 + 2 w ) * ( 2 + 4 w )
+        answer: c = -6
+        """
+        a = EisensteinFraction(Eisenstein(1, 0), Eisenstein(2, 0))
+        b = EisensteinFraction(Eisenstein(4, 0), Eisenstein(2, 0))
+        c = a * b
+        self.assertEqual(c, EisensteinFraction(Eisenstein(1, 0), Eisenstein(1, 0)))
+
+
 """ TODO Not yet implemented - or should be straight in EisensteinFraction? """
 #    def test_division(self):
 #
@@ -103,7 +117,7 @@ class TestEisensteinNumbers(unittest.TestCase):
 #        self.assertEqual(c, Eisenstein( 1 , 0))
 
 
-fast_test_ls = [TestEisensteinNumbers]
+fast_test_ls = [TestEisensteinNumbers, TestEisensteinFractionNumbers]
 
 
 def add_all_fast(suite):

@@ -74,8 +74,10 @@ class Eisenstein:
         """
         return self.a * self.a - self.a * self.b + self.b * self.b
 
-    # sprawdzic
-    # wolfram alpha : w = ( -1 + i sqrt(3) ) / 2 ; z = ( a + b * w ) * ( a + b * ( w ^ 2 ) )-> z = a^2 - ab + b^2
+    def __floordiv__(self, other):
+        other = self.__upgrade_int(other)
+        return get_eisenstein_form(self.get_complex_form / other.get_complex_form)
+
     def __mod__(self, other):
         other = self.__upgrade_int(other)
 
@@ -116,7 +118,7 @@ def gcd(a: Eisenstein, b: Eisenstein):
     if abs(b) > abs(a):
         a, b = b, a
     while b:
-        if b == Eisenstein(0,0):
+        if b == Eisenstein(0, 0):
             return a
         a, b = b, a % b
     return a
@@ -138,6 +140,15 @@ class EisensteinFraction:
             self.d = Eisenstein(denominator, 0)
         else:
             raise TypeError("denominator should be a int or Eisenstein")
+
+        gcd_val = gcd(self.n, self.d)
+
+        if gcd_val != Eisenstein(0, 0):
+            self.n = self.n // gcd_val
+            self.d = self.d // gcd_val
+
+    def __eq__(self, other):
+        return self.n == other.n and self.d == other.d
 
     def __repr__(self):
         return "(%s/%s)" % (self.n, self.d)
