@@ -77,6 +77,10 @@ class Eisenstein:
     def gcd(a, b):
         """Calculate the Greatest Common Divisor of a and b.
 
+        Paper: Efficient algorithms for gcd and cubic residuosity
+               in the ring of Eisenstein integers
+        http://cs.au.dk/~gudmund/Documents/cubicres.pdf
+
         Unless b==0, the result will have the same sign as b (so that when
         b is divided by it, the result comes out positive).
         while b:
