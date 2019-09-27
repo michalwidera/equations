@@ -83,6 +83,7 @@ class Eisenstein:
             a, b = b, a % b
         return a
         """
+        return a
 
 
 class EisensteinFraction:

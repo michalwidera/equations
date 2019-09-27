@@ -49,6 +49,13 @@ class TestEisensteinNumbers(unittest.TestCase):
         c = a * b
         self.assertEqual(c, Eisenstein(-6, 0))
 
+    def test_the_same_gcd(self):
+        """
+        TestEisensteinNumbers:
+        """
+        a = Eisenstein(2, 0)
+        self.assertEqual(a.gcd(a), Eisenstein(2, 0))
+
 
 """ TODO Not yet implemented - or should be straight in EisensteinFraction? """
 #    def test_division(self):
