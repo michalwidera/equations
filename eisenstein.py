@@ -22,7 +22,8 @@ class Eisenstein:
         else:
             raise TypeError("arguments should be an int")
 
-    def __upgrade_int(self, other):
+    @staticmethod
+    def __upgrade_int(other):
         if isinstance(other, int):
             other = Eisenstein(other, 0)
         return other
@@ -58,23 +59,27 @@ class Eisenstein:
     __rmul__ = __mul__
     __radd__ = __add__
 
+    @property
     def get_complex_form(self):
+        """
+        (a,bw)->(x,iy), where x,y: float, a,b: integer
+        :return: Complex number from Eisenstein
+        """
         return complex(self.a - (self.b / 2), (self.b * math.sqrt(3)) / 2)
 
-    def get_eisenstein_form(self, var: complex):
+    @property
+    def get_norm(self):
         """
-        (x,iy) -> (a,bw)
+        :return: Norm in algebraic sense
         """
-        x = var.real
-        y = var.imag
-        return Eisenstein(round(x + y / math.sqrt(3)), round((2 * y) / math.sqrt(3)))
+        return self.a * self.a - self.a * self.b + self.b * self.b
 
     # sprawdzic
     # wolfram alpha : w = ( -1 + i sqrt(3) ) / 2 ; z = ( a + b * w ) * ( a + b * ( w ^ 2 ) )-> z = a^2 - ab + b^2
     def __mod__(self, other):
         other = self.__upgrade_int(other)
 
-        K = self.get_eisenstein_form(self.get_complex_form() / other.get_complex_form())
+        K = get_eisenstein_form(self.get_complex_form / other.get_complex_form)
         # This debug code is important - it creates queries for
         # wolframalfa that can be checked if mod function works correctly
 
@@ -86,20 +91,35 @@ class Eisenstein:
 
         return self - K * other
 
-    def gcd(a, b):
-        """Calculate the Greatest Common Divisor of a and b.
 
-        Paper: Efficient algorithms for gcd and cubic residuosity
-               in the ring of Eisenstein integers
-        http://cs.au.dk/~gudmund/Documents/cubicres.pdf
+def get_eisenstein_form(var: complex):
+    """
+    (x,iy) -> (a,bw), where x,y: float, a,b: integer
+    :return: Eisenstein number from complex
+    """
+    x = var.real
+    y = var.imag
+    return Eisenstein(round(x + y / math.sqrt(3)), round((2 * y) / math.sqrt(3)))
 
-        Unless b==0, the result will have the same sign as b (so that when
-        b is divided by it, the result comes out positive).
-        while b:
-            a, b = b, a % b
-        return a
-        """
-        return a
+
+def gcd(a: Eisenstein, b: Eisenstein):
+    """Calculate the Greatest Common Divisor of a and b.
+
+    Paper: Efficient algorithms for gcd and cubic residuosity
+           in the ring of Eisenstein integers
+    http://cs.au.dk/~gudmund/Documents/cubicres.pdf
+
+    Unless b==0, the result will have the same sign as b (so that when
+    b is divided by it, the result comes out positive).
+    """
+
+    if abs(b) > abs(a):
+        a, b = b, a
+    while b:
+        if b == Eisenstein(0,0):
+            return a
+        a, b = b, a % b
+    return a
 
 
 class EisensteinFraction:
