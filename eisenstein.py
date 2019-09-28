@@ -70,6 +70,10 @@ class Eisenstein:
     @property
     def get_norm(self):
         """
+        wolframalfa
+        query: w = ( -1 + i sqrt(3) ) / 2 ; ( a + b w^2 ) ( a + b w )
+        answer: a^2 - ab + b^2
+
         :return: Norm in algebraic sense
         """
         return self.a * self.a - self.a * self.b + self.b * self.b
@@ -104,7 +108,7 @@ def get_eisenstein_form(var: complex):
     return Eisenstein(round(x + y / math.sqrt(3)), round((2 * y) / math.sqrt(3)))
 
 
-def gcd(a: Eisenstein, b: Eisenstein):
+def gcd(x: Eisenstein, y: Eisenstein):
     """Calculate the Greatest Common Divisor of a and b.
 
     Paper: Efficient algorithms for gcd and cubic residuosity
@@ -115,13 +119,14 @@ def gcd(a: Eisenstein, b: Eisenstein):
     b is divided by it, the result comes out positive).
     """
 
-    if abs(b) > abs(a):
-        a, b = b, a
-    while b:
-        if b == Eisenstein(0, 0):
-            return a
-        a, b = b, a % b
-    return a
+    if abs(y) > abs(x):
+        x, y = y, x
+    while y.a:
+        # if b == Eisenstein(0, 0):
+        #    return a
+        # I don't like that while y.a: , what about y.b != 0 ?
+        x, y = y, x % y
+    return x
 
 
 class EisensteinFraction:
@@ -187,46 +192,20 @@ def floor(var: EisensteinFraction) -> int:
     return int(1)
 
 
-def test():
-    E1 = Eisenstein(2, 1)
-    E2 = Eisenstein(22, 4)
+def inverse(e: EisensteinFraction) -> EisensteinFraction:
+    """
 
-    # print(gcd(E1, 2))
+    query: w = ( -1 + i sqrt(3) ) / 2 ; w^2
+    answer: w^2 = - 1/2 i ( sqrt(3) + (-i) )
 
-    E3 = E1 + E2
-    E4 = E2 - E1
-    E5 = E1 * E2
-    E6 = 2 * E1 * 2
+    w ^ 2 = ( 1 - w )
 
-    print(E1, E2, E3, E4, E5, E6)
-
-    print(math.pow(abs(E5), 2))
-
-    EF1 = EisensteinFraction(E1, 1)
-    EF2 = EisensteinFraction(E2, 1)
-
-    print("EF2 + EF1", EF1 + EF2)
-    print("EF2 / EF1", EF2 / EF1)
-
-    print(EF2 * 3)
-
-    print("modulo E2 % 3", E2, 3, E2 % 3)
-    print("modulo 22 % 3", 22, 3, 22 % 3)
-
-    # TODO this goes crazy where uncommented - need to fix this and find proper value of gcd
-    # print("gcd 22,2:", Eisenstein.gcd(E2, E1))
-
-    print("Success.")
-
-
-def inverse(e: EisensteinFraction):
+    :param e: val
+    :return: 1/val
+    """
     a = e.n.a
     b = e.n.b
     return (
-        EisensteinFraction(a - b, a * a - a * b + b * b)
-        - EisensteinFraction(Eisenstein(0, -b), a * a - a * b + b * b)
+        EisensteinFraction(Eisenstein(a - b, -b), e.n.get_norm)
     ) * EisensteinFraction(e.d, 1)
 
-
-if __name__ == "__main__":
-    test()

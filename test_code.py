@@ -92,7 +92,7 @@ class TestEisensteinNumbers(unittest.TestCase):
 class TestEisensteinFractionNumbers(unittest.TestCase):
     def test_multiplication(self):
         """
-        TestEisensteinNumbers:
+        TestEisensteinFractionNumbers:
         wolframalfa.com
         query: w = ( -1 + i sqrt(3) ) / 2 ; c = ( 1 + 2 w ) * ( 2 + 4 w )
         answer: c = -6
@@ -102,19 +102,18 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         c = a * b
         self.assertEqual(c, EisensteinFraction(Eisenstein(1, 0), Eisenstein(1, 0)))
 
+    def test_division(self):
+        """
+        TestEisensteinFractionNumbers:
+        wolframalfa.com
+        query: w = w = ( -1 + i sqrt(3) ) / 2 ; a = ( 2 + 4 w ); b = ( 2 + 4 w ) ; c = a / b
+        answer: c = 1
+        """
 
-""" TODO Not yet implemented - or should be straight in EisensteinFraction? """
-#    def test_division(self):
-#
-#        TestEisensteinNumbers:
-#        wolframalfa.com
-#        query: w = w = ( -1 + i sqrt(3) ) / 2 ; a = ( 2 + 4 w ); b = ( 2 + 4 w ) ; c = a / b
-#        answer: c = 1
-#
-#        a = Eisenstein(1, 2)
-#        b = Eisenstein(2, 4)
-#        c = a / b
-#        self.assertEqual(c, Eisenstein( 1 , 0))
+        a = EisensteinFraction(Eisenstein(1, 0), Eisenstein(2, 0))
+        b = EisensteinFraction(Eisenstein(2, 0), Eisenstein(4, 0))
+        c = a / b
+        self.assertEqual(c, EisensteinFraction(1))
 
 
 fast_test_ls = [TestEisensteinNumbers, TestEisensteinFractionNumbers]
