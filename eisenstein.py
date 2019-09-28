@@ -105,6 +105,20 @@ class Eisenstein:
         return self - K * other
 
 
+def get_dot_product(x: Eisenstein, y: Eisenstein):
+    """
+    Dot product
+    https://www.quora.com/What-is-dot-product-of-two-complex-numbers
+    google: "if dot product is zero" -> angle 90 degrees
+
+    :return: dot product of two complex numbers
+    """
+
+    val1 = x.get_complex_form
+    val2 = y.get_complex_form
+    return val1.real * val2.real + val1.imag * val2.imag
+
+
 def get_eisenstein_form(var: complex):
     """
     (x,iy) -> (a,bw), where x,y: float, a,b: integer
@@ -128,10 +142,7 @@ def gcd(x: Eisenstein, y: Eisenstein):
 
     if abs(y) > abs(x):
         x, y = y, x
-    while y.a:
-        # if b == Eisenstein(0, 0):
-        #    return a
-        # I don't like that while y.a: , what about y.b != 0 ?
+    while get_dot_product(x, y):
         x, y = y, x % y
     return x
 
