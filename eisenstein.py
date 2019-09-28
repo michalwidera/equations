@@ -23,7 +23,13 @@ class Eisenstein:
             raise TypeError("arguments should be an int")
 
     @staticmethod
-    def __upgrade_int(other):
+    def __upgrade(other):
+        '''
+        This function will upgrade argument to Eisenstein
+
+        :param other: int, Eisenstein
+        :return:  same value but Eisenstein type
+        '''
         if isinstance(other, int):
             other = Eisenstein(other, 0)
         return other
@@ -32,20 +38,21 @@ class Eisenstein:
         return "(%s, %sw)" % (self.a, self.b)
 
     def __eq__(self, other):
+        other = self.__upgrade(other)
         return self.a == other.a and self.b == other.b
 
     def __add__(self, other):
-        other = self.__upgrade_int(other)
+        other = self.__upgrade(other)
         return Eisenstein(self.a + other.a, self.b + other.b)
 
     def __sub__(self, other):
-        other = self.__upgrade_int(other)
+        other = self.__upgrade(other)
         return Eisenstein(self.a - other.a, self.b - other.b)
 
     def __mul__(self, other):
         # (a+bw)(c+dw)=(ac-bd)+(bc+ad-db)w
         # https://en.wikipedia.org/wiki/Eisenstein_integer
-        other = self.__upgrade_int(other)
+        other = self.__upgrade(other)
         return Eisenstein(
             (self.a * other.a) - (self.b * other.b),
             (self.b * other.a) + (self.a * other.b) - (self.b * other.b),
@@ -79,11 +86,11 @@ class Eisenstein:
         return self.a * self.a - self.a * self.b + self.b * self.b
 
     def __floordiv__(self, other):
-        other = self.__upgrade_int(other)
+        other = self.__upgrade(other)
         return get_eisenstein_form(self.get_complex_form / other.get_complex_form)
 
     def __mod__(self, other):
-        other = self.__upgrade_int(other)
+        other = self.__upgrade(other)
 
         K = get_eisenstein_form(self.get_complex_form / other.get_complex_form)
         # This debug code is important - it creates queries for
@@ -152,35 +159,41 @@ class EisensteinFraction:
             self.n = self.n // gcd_val
             self.d = self.d // gcd_val
 
+    @staticmethod
+    def __upgrade(other):
+        '''
+        This function will upgrade argument to EisensteinFraction
+
+        :param other: int,Eisenstien, EisensteinFraction
+        :return:  same value but EisensteinFraction type
+        '''
+        if isinstance(other, int):
+            other = EisensteinFraction(Eisenstein(other,0), 1)
+        if isinstance(other, Eisenstein):
+            other = EisensteinFraction(other, 1)
+        return other
+
     def __eq__(self, other):
+        other = self.__upgrade(other)
         return self.n == other.n and self.d == other.d
 
     def __repr__(self):
         return "(%s/%s)" % (self.n, self.d)
 
     def __add__(self, other):
-        if isinstance(other, int):
-            other = EisensteinFraction(Eisenstein(other, 0), 1)
+        other = self.__upgrade(other)
         return EisensteinFraction(self.n * other.d + other.n * self.d, self.d * other.d)
 
     def __sub__(self, other):
-        if isinstance(other, int):
-            other = EisensteinFraction(Eisenstein(other, 0), 1)
+        other = self.__upgrade(other)
         return EisensteinFraction(self.n * other.d - other.n * self.d, self.d * other.d)
 
     def __mul__(self, other):
-        if isinstance(other, int):
-            other = EisensteinFraction(Eisenstein(other, 0), 1)
-
+        other = self.__upgrade(other)
         return EisensteinFraction(self.n * other.n, self.d * other.d)
 
     def __truediv__(self, other):
-        if isinstance(other, int):
-            other = EisensteinFraction(Eisenstein(other, 0), 1)
-        if isinstance(self, int):
-            other = EisensteinFraction(Eisenstein(other, 0), 1)
-        if isinstance(self, Eisenstein):
-            other = EisensteinFraction(other, 1)
+        other = self.__upgrade(other)
         return self * inverse(other)
 
     __rmul__ = __mul__
