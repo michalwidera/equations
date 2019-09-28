@@ -163,10 +163,10 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         self.assertEqual(c, EisensteinFraction(2, 1))
 
         # (3,1)/1 - 1/1 = 2/1
-        a = EisensteinFraction(Eisenstein(3,1), 1)
+        a = EisensteinFraction(Eisenstein(3, 1), 1)
         b = EisensteinFraction(1, 1)
         c = a - b
-        self.assertEqual(c, EisensteinFraction(Eisenstein(2,1), 1))
+        self.assertEqual(c, EisensteinFraction(Eisenstein(2, 1), 1))
 
 
 fast_test_ls = [TestEisensteinNumbers, TestEisensteinFractionNumbers]
