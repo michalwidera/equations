@@ -24,12 +24,12 @@ class Eisenstein:
 
     @staticmethod
     def __upgrade(other):
-        '''
+        """
         This function will upgrade argument to Eisenstein
 
         :param other: int, Eisenstein
         :return:  same value but Eisenstein type
-        '''
+        """
         if isinstance(other, int):
             other = Eisenstein(other, 0)
         return other
@@ -161,15 +161,13 @@ class EisensteinFraction:
 
     @staticmethod
     def __upgrade(other):
-        '''
+        """
         This function will upgrade argument to EisensteinFraction
 
         :param other: int,Eisenstien, EisensteinFraction
         :return:  same value but EisensteinFraction type
-        '''
-        if isinstance(other, int):
-            other = EisensteinFraction(Eisenstein(other,0), 1)
-        if isinstance(other, Eisenstein):
+        """
+        if isinstance(other, (int, Eisenstein)):
             other = EisensteinFraction(other, 1)
         return other
 
@@ -221,4 +219,3 @@ def inverse(e: EisensteinFraction) -> EisensteinFraction:
     return (
         EisensteinFraction(Eisenstein(a - b, -b), e.n.get_norm)
     ) * EisensteinFraction(e.d, 1)
-

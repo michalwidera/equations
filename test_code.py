@@ -115,6 +115,47 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         c = a / b
         self.assertEqual(c, EisensteinFraction(1))
 
+        a = EisensteinFraction(4)
+        b = EisensteinFraction(2)
+        c = a / b
+        self.assertEqual(c, EisensteinFraction(2))
+
+    def test_add_values(self):
+        """
+        TestEisensteinFractionNumbers:
+        """
+
+        a = EisensteinFraction(4, 2)
+        b = EisensteinFraction(6, 3)
+        c = a + b
+        self.assertEqual(c, EisensteinFraction(4))
+
+        a = EisensteinFraction(1, 2)
+        b = EisensteinFraction(1, 4)
+        c = a + b
+        self.assertEqual(c, EisensteinFraction(3, 4))
+
+        a = EisensteinFraction(Eisenstein(1, 1), 1)
+        b = EisensteinFraction(Eisenstein(1, -1), 1)
+        c = a + b
+        self.assertEqual(c, EisensteinFraction(2, 1))
+
+        a = EisensteinFraction(0, Eisenstein(2, -1))
+        b = EisensteinFraction(0, Eisenstein(1, 1))
+        c = a + b
+        self.assertEqual(c, EisensteinFraction(0, 1))
+
+    def test_substract_values(self):
+        """
+        TestEisensteinFractionNumbers:
+        """
+
+        # 2 - 2 = 0
+        a = EisensteinFraction(4, 2)
+        b = EisensteinFraction(6, 3)
+        c = a - b
+        self.assertEqual(c, EisensteinFraction(0, 1))
+
 
 fast_test_ls = [TestEisensteinNumbers, TestEisensteinFractionNumbers]
 
