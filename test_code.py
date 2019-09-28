@@ -10,6 +10,7 @@ import sys
 import unittest
 
 from eisenstein import Eisenstein, EisensteinFraction, gcd
+from fractions import Fraction
 
 
 class TestEisensteinNumbers(unittest.TestCase):
@@ -167,6 +168,25 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         b = EisensteinFraction(1, 1)
         c = a - b
         self.assertEqual(c, EisensteinFraction(Eisenstein(2, 1), 1))
+
+    def test_fraction_format_values(self):
+        a = EisensteinFraction(Eisenstein(3, 1), 1)
+        self.assertEqual(a.get_fraction_form_real, 3)
+        self.assertEqual(a.get_fraction_form_imag, 1)
+
+        a = EisensteinFraction(3, 2)
+        self.assertEqual(a.get_fraction_form_real, Fraction(3 / 2))
+        self.assertEqual(a.get_fraction_form_imag, Fraction(0))
+
+        # That blow my mind!
+        b = EisensteinFraction(Eisenstein(0, 30), Eisenstein(0, 20))
+        self.assertEqual(b.get_fraction_form_real, Fraction(3 / 2))
+        self.assertEqual(b.get_fraction_form_imag, Fraction(0 / 1))
+
+        # And this I can't understand.
+        a = EisensteinFraction(Eisenstein(3, 1), 2)
+        self.assertEqual(a.get_fraction_form_real, Fraction(1 / 2))
+        self.assertEqual(a.get_fraction_form_imag, Fraction(7 / 2))
 
 
 fast_test_ls = [TestEisensteinNumbers, TestEisensteinFractionNumbers]

@@ -9,12 +9,13 @@
 """
 
 import math
+from fractions import Fraction
 
 # https://docs.python.org/3.7/reference/datamodel.html
 
 
 class Eisenstein:
-    def __init__(self, a=0, b=0):
+    def __init__(self, a, b=0):
 
         if isinstance(a, int) and isinstance(b, int):
             self.a = a
@@ -53,6 +54,7 @@ class Eisenstein:
         # (a+bw)(c+dw)=(ac-bd)+(bc+ad-db)w
         # https://en.wikipedia.org/wiki/Eisenstein_integer
         other = self.__upgrade(other)
+
         return Eisenstein(
             (self.a * other.a) - (self.b * other.b),
             (self.b * other.a) + (self.a * other.b) - (self.b * other.b),
@@ -67,7 +69,7 @@ class Eisenstein:
     __radd__ = __add__
 
     @property
-    def get_complex_form(self):
+    def get_complex_form(self) -> complex:
         """
         (a,bw)->(x,iy), where x,y: float, a,b: integer
         :return: Complex number from Eisenstein
@@ -148,7 +150,7 @@ def gcd(x: Eisenstein, y: Eisenstein):
 
 
 class EisensteinFraction:
-    def __init__(self, numerator=0, denominator=1):
+    def __init__(self, numerator, denominator=1):
 
         if isinstance(numerator, Eisenstein):
             self.n = numerator
@@ -165,7 +167,6 @@ class EisensteinFraction:
             raise TypeError("denominator should be a int or Eisenstein")
 
         gcd_val = gcd(self.n, self.d)
-
         if gcd_val != Eisenstein(0, 0):
             self.n = self.n // gcd_val
             self.d = self.d // gcd_val
@@ -181,6 +182,24 @@ class EisensteinFraction:
         if isinstance(other, (int, Eisenstein)):
             other = EisensteinFraction(other, 1)
         return other
+
+    @property
+    def get_fraction_form_real(self) -> Fraction:
+        # ( a + bw ) / ( c + dw )
+        a = self.n.a
+        b = self.n.b
+        c = self.d.a
+        d = self.d.b
+        return Fraction(a * c + a * d - d * b) / self.d.get_norm
+
+    @property
+    def get_fraction_form_imag(self) -> Fraction:
+        # ( a + bw ) / ( c + dw )
+        a = self.n.a
+        b = self.n.b
+        c = self.d.a
+        d = self.d.b
+        return Fraction(d * b + d * b + b * c - a * d) / self.d.get_norm
 
     def __eq__(self, other):
         other = self.__upgrade(other)
@@ -209,12 +228,12 @@ class EisensteinFraction:
     __radd__ = __add__
 
 
-def floor(var: EisensteinFraction) -> int:
+def floor(var: EisensteinFraction) -> Eisenstein:
     # TODO need figure out how to implement Floor function
     return int(1)
 
 
-def inverse(e: EisensteinFraction) -> EisensteinFraction:
+def inverse(val: EisensteinFraction) -> EisensteinFraction:
     """
 
     query: w = ( -1 + i sqrt(3) ) / 2 ; w^2
@@ -225,8 +244,10 @@ def inverse(e: EisensteinFraction) -> EisensteinFraction:
     :param e: val
     :return: 1/val
     """
-    a = e.n.a
-    b = e.n.b
-    return (
-        EisensteinFraction(Eisenstein(a - b, -b), e.n.get_norm)
-    ) * EisensteinFraction(e.d, 1)
+
+    a = val.n.a
+    b = val.n.b
+    c = val.d.a
+    d = val.d.b
+
+    return EisensteinFraction(Eisenstein(a + b, -b) * Eisenstein(c, d), val.n.get_norm)
