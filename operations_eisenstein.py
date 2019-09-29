@@ -11,7 +11,8 @@
 
 from eisenstein import *
 
-# TODO I'm not sure how to interpret delta as EisnensteinFraction maybe there should appear norm function and delta
+# TODO I'm not sure how to interpret delta as EisnensteinFraction
+#  maybe there should appear norm function and delta
 #  became variable like in vhash?
 A = range(1, 24)
 deltaA = EisensteinFraction(1, 2)

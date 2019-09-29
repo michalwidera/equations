@@ -10,7 +10,7 @@ import sys
 import unittest
 
 from eisenstein import Eisenstein, gcd
-from frctn_eis import EisensteinFraction
+from eisenstein_fractions import EisensteinFraction
 from fractions import Fraction
 
 

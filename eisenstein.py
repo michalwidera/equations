@@ -10,7 +10,7 @@
 
 # https://docs.python.org/3.7/reference/datamodel.html
 
-sqrt_three = 3.0 ** 0.5
+SQRT_THREE: float = 3.0 ** 0.5
 
 
 def upgrade_number(other):
@@ -73,7 +73,7 @@ class Eisenstein:
         (a,bw)->(x,iy), where x,y: float, a,b: integer
         :return: Complex number from Eisenstein
         """
-        return complex(self.a - (self.b / 2), (self.b * sqrt_three) / 2)
+        return complex(self.a - (self.b / 2), (self.b * SQRT_THREE) / 2)
 
     @property
     def get_norm(self):
@@ -127,7 +127,7 @@ def get_eisenstein_form(var: complex):
     """
     x = var.real
     y = var.imag
-    return Eisenstein(round(x + y / sqrt_three), round((2 * y) / sqrt_three))
+    return Eisenstein(round(x + y / SQRT_THREE), round((2 * y) / SQRT_THREE))
 
 
 def gcd(x: Eisenstein, y: Eisenstein):
