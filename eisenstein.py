@@ -64,7 +64,7 @@ class Eisenstein:
     def __abs__(self):
         # |a+bw|^2 = a*a - a*b + b*b
         # https://en.wikipedia.org/wiki/Eisenstein_integer
-        return ((self.a ** 2) - (self.a * self.b) + (self.b ** 2)) ** 0.5
+        return (self.a ** 2 - self.a * self.b + self.b ** 2) ** 0.5
 
     __rmul__ = __mul__
     __radd__ = __add__

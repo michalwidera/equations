@@ -16,6 +16,7 @@ def upgrade_fraction(other):
         other = EisensteinFraction(other, 1)
     return other
 
+
 class EisensteinFraction:
     def __init__(self, numerator, denominator=1):
 
