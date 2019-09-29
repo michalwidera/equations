@@ -8,7 +8,6 @@
    https://en.wikipedia.org/wiki/Eisenstein_integer
 """
 
-import math
 from fractions import Fraction
 
 # https://docs.python.org/3.7/reference/datamodel.html
@@ -65,7 +64,7 @@ class Eisenstein:
     def __abs__(self):
         # |a+bw|^2 = a*a - a*b + b*b
         # https://en.wikipedia.org/wiki/Eisenstein_integer
-        return math.sqrt((self.a * self.a) - (self.a * self.b) + (self.b * self.b))
+        return ((self.a * self.a) - (self.a * self.b) + (self.b * self.b)) ** 0.5
 
     __rmul__ = __mul__
     __radd__ = __add__
