@@ -8,8 +8,6 @@
    https://en.wikipedia.org/wiki/Eisenstein_integer
 """
 
-from fractions import Fraction
-
 # https://docs.python.org/3.7/reference/datamodel.html
 
 sqrt_three = 3.0 ** 0.5
