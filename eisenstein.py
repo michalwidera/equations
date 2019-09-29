@@ -15,6 +15,18 @@ from fractions import Fraction
 sqrt_three = 3.0 ** 0.5
 
 
+def upgrade_number(other):
+    """
+    This function will upgrade argument to Eisenstein
+
+    :param other: int, Eisenstein
+    :return:  same value but Eisenstein type
+    """
+    if isinstance(other, int):
+        other = Eisenstein(other, 0)
+    return other
+
+
 class Eisenstein:
     def __init__(self, a, b=0):
 
@@ -24,37 +36,25 @@ class Eisenstein:
         else:
             raise TypeError("arguments should be an int")
 
-    @staticmethod
-    def __upgrade(other):
-        """
-        This function will upgrade argument to Eisenstein
-
-        :param other: int, Eisenstein
-        :return:  same value but Eisenstein type
-        """
-        if isinstance(other, int):
-            other = Eisenstein(other, 0)
-        return other
-
     def __repr__(self):
         return "(%s, %sw)" % (self.a, self.b)
 
     def __eq__(self, other):
-        other = self.__upgrade(other)
+        other = upgrade_number(other)
         return self.a == other.a and self.b == other.b
 
     def __add__(self, other):
-        other = self.__upgrade(other)
+        other = upgrade_number(other)
         return Eisenstein(self.a + other.a, self.b + other.b)
 
     def __sub__(self, other):
-        other = self.__upgrade(other)
+        other = upgrade_number(other)
         return Eisenstein(self.a - other.a, self.b - other.b)
 
     def __mul__(self, other):
         # (a+bw)(c+dw)=(ac-bd)+(bc+ad-db)w
         # https://en.wikipedia.org/wiki/Eisenstein_integer
-        other = self.__upgrade(other)
+        other = upgrade_number(other)
 
         return Eisenstein(
             (self.a * other.a) - (self.b * other.b),
@@ -86,14 +86,14 @@ class Eisenstein:
 
         :return: Norm in algebraic sense
         """
-        return self.a * self.a - self.a * self.b + self.b * self.b
+        return self.a ** 2 - self.a * self.b + self.b ** 2
 
     def __floordiv__(self, other):
-        other = self.__upgrade(other)
+        other = upgrade_number(other)
         return get_eisenstein_form(self.get_complex_form / other.get_complex_form)
 
     def __mod__(self, other):
-        other = self.__upgrade(other)
+        other = upgrade_number(other)
 
         K = get_eisenstein_form(self.get_complex_form / other.get_complex_form)
         # This debug code is important - it creates queries for
