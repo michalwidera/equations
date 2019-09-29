@@ -9,7 +9,8 @@ red_green_bar.py is taken from https://github.com/kwadrat/rgb_tdd.git
 import sys
 import unittest
 
-from eisenstein import Eisenstein, EisensteinFraction, gcd
+from eisenstein import Eisenstein, gcd
+from frctn_eis import EisensteinFraction
 from fractions import Fraction
 
 
