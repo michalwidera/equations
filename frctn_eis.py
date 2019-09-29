@@ -5,6 +5,17 @@ from eisenstein import Eisenstein, gcd
 from fractions import Fraction
 
 
+def upgrade_fraction(other):
+    """
+    This function will upgrade argument to EisensteinFraction
+
+    :param other: int,Eisenstien, EisensteinFraction
+    :return:  same value but EisensteinFraction type
+    """
+    if isinstance(other, (int, Eisenstein)):
+        other = EisensteinFraction(other, 1)
+    return other
+
 class EisensteinFraction:
     def __init__(self, numerator, denominator=1):
 
@@ -27,18 +38,6 @@ class EisensteinFraction:
             self.n = self.n // gcd_val
             self.d = self.d // gcd_val
 
-    @staticmethod
-    def __upgrade(other):
-        """
-        This function will upgrade argument to EisensteinFraction
-
-        :param other: int,Eisenstien, EisensteinFraction
-        :return:  same value but EisensteinFraction type
-        """
-        if isinstance(other, (int, Eisenstein)):
-            other = EisensteinFraction(other, 1)
-        return other
-
     @property
     def get_fraction_form_real(self) -> Fraction:
         # ( a + bw ) / ( c + dw )
@@ -58,26 +57,26 @@ class EisensteinFraction:
         return Fraction(b * c - a * d) / self.d.get_norm
 
     def __eq__(self, other):
-        other = self.__upgrade(other)
+        other = upgrade_fraction(other)
         return self.n == other.n and self.d == other.d
 
     def __repr__(self):
         return "(%s/%s)" % (self.n, self.d)
 
     def __add__(self, other):
-        other = self.__upgrade(other)
+        other = upgrade_fraction(other)
         return EisensteinFraction(self.n * other.d + other.n * self.d, self.d * other.d)
 
     def __sub__(self, other):
-        other = self.__upgrade(other)
+        other = upgrade_fraction(other)
         return EisensteinFraction(self.n * other.d - other.n * self.d, self.d * other.d)
 
     def __mul__(self, other):
-        other = self.__upgrade(other)
+        other = upgrade_fraction(other)
         return EisensteinFraction(self.n * other.n, self.d * other.d)
 
     def __truediv__(self, other):
-        other = self.__upgrade(other)
+        other = upgrade_fraction(other)
         return self * inverse(other)
 
     __rmul__ = __mul__
