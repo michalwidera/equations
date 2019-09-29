@@ -13,7 +13,7 @@ from fractions import Fraction
 
 # https://docs.python.org/3.7/reference/datamodel.html
 
-sqrt_three = 3.0 ** .5
+sqrt_three = 3.0 ** 0.5
 
 
 class Eisenstein:
