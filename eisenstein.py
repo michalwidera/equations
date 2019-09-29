@@ -199,7 +199,7 @@ class EisensteinFraction:
         b = self.n.b
         c = self.d.a
         d = self.d.b
-        return Fraction( b * c - a * d ) / self.d.get_norm
+        return Fraction(b * c - a * d) / self.d.get_norm
 
     def __eq__(self, other):
         other = self.__upgrade(other)
