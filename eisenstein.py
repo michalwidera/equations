@@ -13,6 +13,8 @@ from fractions import Fraction
 
 # https://docs.python.org/3.7/reference/datamodel.html
 
+sqrt_three = 3.0 ** .5
+
 
 class Eisenstein:
     def __init__(self, a, b=0):
@@ -74,7 +76,7 @@ class Eisenstein:
         (a,bw)->(x,iy), where x,y: float, a,b: integer
         :return: Complex number from Eisenstein
         """
-        return complex(self.a - (self.b / 2), (self.b * math.sqrt(3)) / 2)
+        return complex(self.a - (self.b / 2), (self.b * sqrt_three) / 2)
 
     @property
     def get_norm(self):
@@ -128,7 +130,7 @@ def get_eisenstein_form(var: complex):
     """
     x = var.real
     y = var.imag
-    return Eisenstein(round(x + y / math.sqrt(3)), round((2 * y) / math.sqrt(3)))
+    return Eisenstein(round(x + y / sqrt_three), round((2 * y) / sqrt_three))
 
 
 def gcd(x: Eisenstein, y: Eisenstein):
