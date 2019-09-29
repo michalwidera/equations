@@ -190,7 +190,7 @@ class EisensteinFraction:
         b = self.n.b
         c = self.d.a
         d = self.d.b
-        return Fraction(a * c + a * d - d * b) / self.d.get_norm
+        return Fraction(a * c - a * d + d * b) / self.d.get_norm
 
     @property
     def get_fraction_form_imag(self) -> Fraction:
@@ -199,7 +199,7 @@ class EisensteinFraction:
         b = self.n.b
         c = self.d.a
         d = self.d.b
-        return Fraction(d * b + d * b + b * c - a * d) / self.d.get_norm
+        return Fraction( b * c - a * d ) / self.d.get_norm
 
     def __eq__(self, other):
         other = self.__upgrade(other)
@@ -250,4 +250,4 @@ def inverse(val: EisensteinFraction) -> EisensteinFraction:
     c = val.d.a
     d = val.d.b
 
-    return EisensteinFraction(Eisenstein(a + b, -b) * Eisenstein(c, d), val.n.get_norm)
+    return EisensteinFraction(Eisenstein(a - b, -b) * Eisenstein(c, d), val.n.get_norm)

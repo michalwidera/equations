@@ -183,10 +183,9 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         self.assertEqual(b.get_fraction_form_real, Fraction(3 / 2))
         self.assertEqual(b.get_fraction_form_imag, Fraction(0 / 1))
 
-        # And this I can't understand.
         a = EisensteinFraction(Eisenstein(3, 1), 2)
-        self.assertEqual(a.get_fraction_form_real, Fraction(1 / 2))
-        self.assertEqual(a.get_fraction_form_imag, Fraction(7 / 2))
+        self.assertEqual(a.get_fraction_form_real, Fraction(3 / 2))
+        self.assertEqual(a.get_fraction_form_imag, Fraction(1 / 2))
 
 
 fast_test_ls = [TestEisensteinNumbers, TestEisensteinFractionNumbers]
