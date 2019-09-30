@@ -1,4 +1,4 @@
-# Use case of Complex Fractions on Time Series Decomposition Equations  
+# Use case of Complex Fractions on Time Series Decomposition Equations
 
 This is experimental work that creates base for Abracadabra DB - Time Series Management System.
 Our plan is to create Complex Fractions type set.
@@ -8,7 +8,7 @@ If success - try to implement it on Database System.
 Here is the plan:
 - [x] Create Eisenstein Fraction Type set
 - [ ] Combine Eisenstein Fraction with Time Series Operations
-- [ ] If successful, applay results in Abracadabra DB 
+- [ ] If successful, apply results in Abracadabra DB
 
 ---
 
