@@ -108,7 +108,7 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         """
         TestEisensteinFractionNumbers:
         wolframalfa.com
-        query: w = w = ( -1 + i sqrt(3) ) / 2 ; a = ( 2 + 4 w ); b = ( 2 + 4 w ) ; c = a / b
+        query: w = ( -1 + i sqrt(3) ) / 2 ; a = ( 2 + 4 w ); b = ( 2 + 4 w ) ; c = a / b
         answer: c = 1
         """
 
