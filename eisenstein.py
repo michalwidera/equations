@@ -26,28 +26,28 @@ def upgrade_number(other):
 
 
 class Eisenstein:
-    def __init__(self, a, b=0):
+    def __init__(self, real, imag=0):
 
-        if isinstance(a, int) and isinstance(b, int):
-            self.a = a
-            self.b = b
+        if isinstance(real, int) and isinstance(imag, int):
+            self.real = real
+            self.imag = imag
         else:
             raise TypeError("arguments should be an int")
 
     def __repr__(self):
-        return "(%s, %sw)" % (self.a, self.b)
+        return "(%s, %sw)" % (self.real, self.imag)
 
     def __eq__(self, other):
         other = upgrade_number(other)
-        return self.a == other.a and self.b == other.b
+        return self.real == other.real and self.imag == other.imag
 
     def __add__(self, other):
         other = upgrade_number(other)
-        return Eisenstein(self.a + other.a, self.b + other.b)
+        return Eisenstein(self.real + other.real, self.imag + other.imag)
 
     def __sub__(self, other):
         other = upgrade_number(other)
-        return Eisenstein(self.a - other.a, self.b - other.b)
+        return Eisenstein(self.real - other.real, self.imag - other.imag)
 
     def __mul__(self, other):
         # (a+bw)(c+dw)=(ac-bd)+(bc+ad-db)w
@@ -55,14 +55,14 @@ class Eisenstein:
         other = upgrade_number(other)
 
         return Eisenstein(
-            (self.a * other.a) - (self.b * other.b),
-            (self.b * other.a) + (self.a * other.b) - (self.b * other.b),
+            (self.real * other.real) - (self.imag * other.imag),
+            (self.imag * other.real) + (self.real * other.imag) - (self.imag * other.imag),
         )
 
     def __abs__(self):
         # |a+bw|^2 = a*a - a*b + b*b
         # https://en.wikipedia.org/wiki/Eisenstein_integer
-        return (self.a ** 2 - self.a * self.b + self.b ** 2) ** 0.5
+        return (self.real ** 2 - self.real * self.imag + self.imag ** 2) ** 0.5
 
     __rmul__ = __mul__
     __radd__ = __add__
@@ -73,7 +73,7 @@ class Eisenstein:
         (a,bw)->(x,iy), where x,y: float, a,b: integer
         :return: Complex number from Eisenstein
         """
-        return complex(self.a - (self.b / 2), (self.b * SQRT_THREE) / 2)
+        return complex(self.real - (self.imag / 2), (self.imag * SQRT_THREE) / 2)
 
     @property
     def get_norm(self):
@@ -84,7 +84,7 @@ class Eisenstein:
 
         :return: Norm in algebraic sense
         """
-        return self.a ** 2 - self.a * self.b + self.b ** 2
+        return self.real ** 2 - self.real * self.imag + self.imag ** 2
 
     def __floordiv__(self, other):
         other = upgrade_number(other)

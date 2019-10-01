@@ -42,19 +42,19 @@ class EisensteinFraction:
     @property
     def get_fraction_form_real(self) -> Fraction:
         # ( a + bw ) / ( c + dw )
-        a = self.n.a
-        b = self.n.b
-        c = self.d.a
-        d = self.d.b
+        a = self.n.real
+        b = self.n.imag
+        c = self.d.real
+        d = self.d.imag
         return Fraction(a * c - a * d + d * b) / self.d.get_norm
 
     @property
     def get_fraction_form_imag(self) -> Fraction:
         # ( a + bw ) / ( c + dw )
-        a = self.n.a
-        b = self.n.b
-        c = self.d.a
-        d = self.d.b
+        a = self.n.real
+        b = self.n.imag
+        c = self.d.real
+        d = self.d.imag
         return Fraction(b * c - a * d) / self.d.get_norm
 
     def __eq__(self, other):
@@ -101,9 +101,9 @@ def inverse(val: EisensteinFraction) -> EisensteinFraction:
     :return: 1/val
     """
 
-    a = val.n.a
-    b = val.n.b
-    c = val.d.a
-    d = val.d.b
+    a = val.n.real
+    b = val.n.imag
+    c = val.d.real
+    d = val.d.imag
 
     return EisensteinFraction(Eisenstein(a - b, -b) * Eisenstein(c, d), val.n.get_norm)
