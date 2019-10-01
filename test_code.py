@@ -104,6 +104,18 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         c = a * b
         self.assertEqual(c, 1)
 
+        a = EisensteinFraction(Eisenstein(2, 1))
+        b = EisensteinFraction(Fraction(1 / 2))
+        c = a * b
+        self.assertEqual(c, EisensteinFraction(1, Fraction(1 / 2)))
+
+    def test_alternation(self):
+        # covering issue __rmul__ = __mul__ ,  __radd__ = __add__
+        a = Fraction(1 / 2)
+        b = EisensteinFraction(2)
+        c = a * b
+        self.assertEqual(c, 1)
+
     def test_division(self):
         """
         TestEisensteinFractionNumbers:
@@ -121,6 +133,13 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         b = EisensteinFraction(2)
         c = a / b
         self.assertEqual(c, EisensteinFraction(2))
+
+        a = EisensteinFraction(0, 2)
+        b = EisensteinFraction(0, 4)
+        self.assertEqual(a, EisensteinFraction(Eisenstein(0, 2)))
+        self.assertEqual(b, EisensteinFraction(Eisenstein(0, 4)))
+        c = a / b
+        self.assertEqual(c, 1 / 2)
 
     def test_add_values(self):
         """
@@ -142,6 +161,11 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         b = EisensteinFraction(Eisenstein(1, -1))
         c = a + b
         self.assertEqual(c, EisensteinFraction(Eisenstein(2, 0)))
+
+    def test_inverse(self):
+        a = EisensteinFraction(Fraction(1 / 2), Fraction(1 / 2))
+        c = EisensteinFraction(1) / a
+        self.assertEqual(c, EisensteinFraction(0, -2))
 
     def test_types_mix(self):
         """

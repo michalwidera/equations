@@ -6,16 +6,21 @@ from fractions import Fraction
 
 
 class EisensteinFraction(Eisenstein):
-    def __init__(self, real, imag=0):
+    def __init__(self, object, optional=0):
 
-        if isinstance(real, (int, Fraction)) and isinstance(imag, (int, Fraction)):
-            self.real = Fraction(real)
-            self.imag = Fraction(imag)
-        elif isinstance(real, (Eisenstein, EisensteinFraction)) and imag == 0:
-            self.real = Fraction(real.real)
-            self.imag = Fraction(real.imag)
+        if isinstance(object, (int, Fraction)) and isinstance(
+            optional, (int, Fraction)
+        ):
+            self.real = Fraction(object)
+            self.imag = Fraction(optional)
+        elif isinstance(object, (Eisenstein, EisensteinFraction)) and optional == 0:
+            self.real = Fraction(object.real)
+            self.imag = Fraction(object.imag)
         else:
-            raise TypeError("Both arguments should be an int, Fraction or Eisenstein")
+            raise TypeError("Argument should be an int, Fraction or Eisenstein")
+
+        assert isinstance(self.real, Fraction)
+        assert isinstance(self.imag, Fraction)
 
     def __eq__(self, other):
         other = upgrade_fraction(other)
@@ -44,6 +49,9 @@ class EisensteinFraction(Eisenstein):
     def __truediv__(self, other):
         other = upgrade_fraction(other)
         return self * inverse(other)
+
+    __rmul__ = __mul__
+    __radd__ = __add__
 
 
 def inverse(val: EisensteinFraction) -> EisensteinFraction:
