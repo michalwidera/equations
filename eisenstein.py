@@ -13,18 +13,6 @@
 SQRT_THREE: float = 3.0 ** 0.5
 
 
-def upgrade_number(other):
-    """
-    This function will upgrade argument to Eisenstein
-
-    :param other: int, Eisenstein
-    :return:  same value but Eisenstein type
-    """
-    if isinstance(other, int):
-        other = Eisenstein(other, 0)
-    return other
-
-
 class Eisenstein:
     def __init__(self, real, imag=0):
 
@@ -35,24 +23,24 @@ class Eisenstein:
             raise TypeError("arguments should be an int")
 
     def __repr__(self):
-        return "(%s, %sw)" % (self.real, self.imag)
+        return "(%s,%sw)" % (self.real, self.imag)
 
     def __eq__(self, other):
-        other = upgrade_number(other)
+        other = self.upgrade_number(other)
         return self.real == other.real and self.imag == other.imag
 
     def __add__(self, other):
-        other = upgrade_number(other)
+        other = self.upgrade_number(other)
         return Eisenstein(self.real + other.real, self.imag + other.imag)
 
     def __sub__(self, other):
-        other = upgrade_number(other)
+        other = self.upgrade_number(other)
         return Eisenstein(self.real - other.real, self.imag - other.imag)
 
     def __mul__(self, other):
         # (a+bw)(c+dw)=(ac-bd)+(bc+ad-db)w
         # https://en.wikipedia.org/wiki/Eisenstein_integer
-        other = upgrade_number(other)
+        other = self.upgrade_number(other)
 
         return Eisenstein(
             (self.real * other.real) - (self.imag * other.imag),
@@ -93,7 +81,7 @@ class Eisenstein:
         return get_eisenstein_form(self.get_complex_form / other.get_complex_form)
 
     def __mod__(self, other):
-        other = upgrade_number(other)
+        other = self.upgrade_number(other)
 
         K = get_eisenstein_form(self.get_complex_form / other.get_complex_form)
         # This debug code is important - it creates queries for
@@ -106,6 +94,17 @@ class Eisenstein:
         # )
 
         return self - K * other
+
+    def upgrade_number(self, other):
+        """
+        This function will upgrade argument to Eisenstein
+
+        :param other: int, Eisenstein
+        :return:  same value but Eisenstein type
+        """
+        if isinstance(other, int):
+            other = Eisenstein(other, 0)
+        return other
 
 
 def get_dot_product(x: Eisenstein, y: Eisenstein):

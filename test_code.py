@@ -90,6 +90,10 @@ class TestEisensteinNumbers(unittest.TestCase):
         b = Eisenstein(4, 2)
         self.assertEqual(gcd(a, b), Eisenstein(2, 1))
 
+    def test_presentation(self):
+        a = Eisenstein(2, 2)
+        self.assertEqual(a.__str__(), "(2,2w)")
+
 
 class TestEisensteinFractionNumbers(unittest.TestCase):
     def test_multiplication(self):
@@ -209,6 +213,17 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         b = EisensteinFraction(1, 1)
         c = a - b
         self.assertEqual(c, EisensteinFraction(2, 0))
+
+    def test_comparasion(self):
+        a = EisensteinFraction(Eisenstein(1, 2))
+        b = EisensteinFraction(1, 2)
+        self.assertEqual(a == b, True)
+
+    def test_presentation(self):
+        a = Eisenstein(2, 2)
+        self.assertEqual(a.__str__(), "(2,2w)")
+        a = EisensteinFraction(Fraction(1 / 2), 2)
+        self.assertEqual(a.__str__(), "(1/2,2w)")
 
 
 fast_test_ls = [TestEisensteinNumbers, TestEisensteinFractionNumbers]
