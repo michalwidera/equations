@@ -219,6 +219,21 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         b = EisensteinFraction(1, 2)
         self.assertEqual(a == b, True)
 
+        a = Eisenstein(1, 2)
+        b = EisensteinFraction(1, 2)
+        self.assertEqual(a == b, True)
+        self.assertEqual(b == a, True)
+
+        a = EisensteinFraction(Fraction(1 / 2))
+        b = Fraction(1 / 2)
+        self.assertEqual(a == b, True)
+        self.assertEqual(b == a, True)
+
+        a = EisensteinFraction(2)
+        b = 2
+        self.assertEqual(a == b, True)
+        self.assertEqual(b == a, True)
+
     def test_presentation(self):
         a = Eisenstein(2, 2)
         self.assertEqual(a.__str__(), "(2,2w)")
