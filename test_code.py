@@ -99,10 +99,10 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         query: w = ( -1 + i sqrt(3) ) / 2 ; c = ( 1 + 2 w ) * ( 2 + 4 w )
         answer: c = -6
         """
-        a = EisensteinFraction(Eisenstein(1, 0), Eisenstein(2, 0))
-        b = EisensteinFraction(Eisenstein(4, 0), Eisenstein(2, 0))
+        a = EisensteinFraction(Fraction(1 / 2))
+        b = EisensteinFraction(2)
         c = a * b
-        self.assertEqual(c, EisensteinFraction(Eisenstein(1, 0), Eisenstein(1, 0)))
+        self.assertEqual(c, 1)
 
     def test_division(self):
         """
@@ -112,10 +112,10 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         answer: c = 1
         """
 
-        a = EisensteinFraction(Eisenstein(1, 0), Eisenstein(2, 0))
-        b = EisensteinFraction(Eisenstein(2, 0), Eisenstein(4, 0))
+        a = EisensteinFraction(Fraction(1 / 2))
+        b = EisensteinFraction(Fraction(4 / 2))
         c = a / b
-        self.assertEqual(c, EisensteinFraction(1))
+        self.assertEqual(c, 1 / 4)
 
         a = EisensteinFraction(4)
         b = EisensteinFraction(2)
@@ -127,25 +127,42 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         TestEisensteinFractionNumbers:
         """
 
-        a = EisensteinFraction(4, 2)
-        b = EisensteinFraction(6, 3)
+        # 2 + 2 = 4
+        a = EisensteinFraction(Fraction(4 / 2))
+        b = EisensteinFraction(Fraction(6 / 3))
         c = a + b
-        self.assertEqual(c, EisensteinFraction(4))
+        self.assertEqual(c, 4)
 
-        a = EisensteinFraction(1, 2)
-        b = EisensteinFraction(1, 4)
+        a = EisensteinFraction(Fraction(1 / 2))
+        b = EisensteinFraction(Fraction(1 / 4))
         c = a + b
-        self.assertEqual(c, EisensteinFraction(3, 4))
+        self.assertEqual(c, 3 / 4)
 
-        a = EisensteinFraction(Eisenstein(1, 1), 1)
-        b = EisensteinFraction(Eisenstein(1, -1), 1)
+        a = EisensteinFraction(Eisenstein(1, 1))
+        b = EisensteinFraction(Eisenstein(1, -1))
         c = a + b
-        self.assertEqual(c, EisensteinFraction(2, 1))
+        self.assertEqual(c, EisensteinFraction(Eisenstein(2, 0)))
 
-        a = EisensteinFraction(0, Eisenstein(2, -1))
-        b = EisensteinFraction(0, Eisenstein(1, 1))
+    def test_types_mix(self):
+        """
+        TestEisensteinFractionNumbers:
+        """
+
+        # 2 + 2 = 4
+        a = EisensteinFraction(Fraction(4 / 2))
+        b = Fraction(6 / 3)
         c = a + b
-        self.assertEqual(c, EisensteinFraction(0, 1))
+        self.assertEqual(c, 4)
+
+        a = EisensteinFraction(Fraction(1 / 2))
+        b = Fraction(1 / 4)
+        c = a + b
+        self.assertEqual(c, 3 / 4)
+
+        a = EisensteinFraction(Eisenstein(1, 1))
+        b = Fraction(1 / 2)
+        c = a + b
+        self.assertEqual(c, EisensteinFraction(Fraction(3 / 2), 1))
 
     def test_substract_values(self):
         """
@@ -153,40 +170,21 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         """
 
         # 2 - 2 = 0
-        a = EisensteinFraction(4, 2)
-        b = EisensteinFraction(6, 3)
+        a = EisensteinFraction(Fraction(4 / 2))
+        b = EisensteinFraction(Fraction(6 / 3))
         c = a - b
-        self.assertEqual(c, EisensteinFraction(0, 1))
+        self.assertEqual(c, 0)
 
         # 3/1 - 1/1 = 2/1
+        a = EisensteinFraction(Fraction(3 / 1))
+        b = EisensteinFraction(Fraction(1 / 1))
+        c = a - b
+        self.assertEqual(c, 2)
+
         a = EisensteinFraction(3, 1)
         b = EisensteinFraction(1, 1)
         c = a - b
-        self.assertEqual(c, EisensteinFraction(2, 1))
-
-        # (3,1)/1 - 1/1 = 2/1
-        a = EisensteinFraction(Eisenstein(3, 1), 1)
-        b = EisensteinFraction(1, 1)
-        c = a - b
-        self.assertEqual(c, EisensteinFraction(Eisenstein(2, 1), 1))
-
-    def test_fraction_format_values(self):
-        a = EisensteinFraction(Eisenstein(3, 1), 1)
-        self.assertEqual(a.get_fraction_form_real, 3)
-        self.assertEqual(a.get_fraction_form_imag, 1)
-
-        a = EisensteinFraction(3, 2)
-        self.assertEqual(a.get_fraction_form_real, Fraction(3 / 2))
-        self.assertEqual(a.get_fraction_form_imag, Fraction(0))
-
-        # That blow my mind!
-        b = EisensteinFraction(Eisenstein(0, 30), Eisenstein(0, 20))
-        self.assertEqual(b.get_fraction_form_real, Fraction(3 / 2))
-        self.assertEqual(b.get_fraction_form_imag, Fraction(0 / 1))
-
-        a = EisensteinFraction(Eisenstein(3, 1), 2)
-        self.assertEqual(a.get_fraction_form_real, Fraction(3 / 2))
-        self.assertEqual(a.get_fraction_form_imag, Fraction(1 / 2))
+        self.assertEqual(c, EisensteinFraction(2, 0))
 
 
 fast_test_ls = [TestEisensteinNumbers, TestEisensteinFractionNumbers]

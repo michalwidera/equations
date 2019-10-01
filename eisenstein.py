@@ -56,7 +56,9 @@ class Eisenstein:
 
         return Eisenstein(
             (self.real * other.real) - (self.imag * other.imag),
-            (self.imag * other.real) + (self.real * other.imag) - (self.imag * other.imag),
+            (self.imag * other.real)
+            + (self.real * other.imag)
+            - (self.imag * other.imag),
         )
 
     def __abs__(self):
