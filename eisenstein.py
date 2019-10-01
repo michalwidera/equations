@@ -26,21 +26,21 @@ class Eisenstein:
         return "(%s,%sw)" % (self.real, self.imag)
 
     def __eq__(self, other):
-        other = self.upgrade_number(other)
+        other = self.__upgrade_number(other)
         return self.real == other.real and self.imag == other.imag
 
     def __add__(self, other):
-        other = self.upgrade_number(other)
+        other = self.__upgrade_number(other)
         return Eisenstein(self.real + other.real, self.imag + other.imag)
 
     def __sub__(self, other):
-        other = self.upgrade_number(other)
+        other = self.__upgrade_number(other)
         return Eisenstein(self.real - other.real, self.imag - other.imag)
 
     def __mul__(self, other):
         # (a+bw)(c+dw)=(ac-bd)+(bc+ad-db)w
         # https://en.wikipedia.org/wiki/Eisenstein_integer
-        other = self.upgrade_number(other)
+        other = self.__upgrade_number(other)
 
         return Eisenstein(
             (self.real * other.real) - (self.imag * other.imag),
@@ -77,11 +77,11 @@ class Eisenstein:
         return self.real ** 2 - self.real * self.imag + self.imag ** 2
 
     def __floordiv__(self, other):
-        other = upgrade_number(other)
+        other = __upgrade_number(other)
         return get_eisenstein_form(self.get_complex_form / other.get_complex_form)
 
     def __mod__(self, other):
-        other = self.upgrade_number(other)
+        other = self.__upgrade_number(other)
 
         K = get_eisenstein_form(self.get_complex_form / other.get_complex_form)
         # This debug code is important - it creates queries for
@@ -95,7 +95,7 @@ class Eisenstein:
 
         return self - K * other
 
-    def upgrade_number(self, other):
+    def __upgrade_number(self, other):
         """
         This function will upgrade argument to Eisenstein
 

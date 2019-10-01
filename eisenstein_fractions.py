@@ -23,15 +23,15 @@ class EisensteinFraction(Eisenstein):
         assert isinstance(self.imag, Fraction)
 
     def __add__(self, other):
-        other = self.upgrade_number(other)
+        other = self.__upgrade_number(other)
         return EisensteinFraction(self.real + other.real, self.imag + other.imag)
 
     def __sub__(self, other):
-        other = self.upgrade_number(other)
+        other = self.__upgrade_number(other)
         return EisensteinFraction(self.real - other.real, self.imag - other.imag)
 
     def __mul__(self, other):
-        other = self.upgrade_number(other)
+        other = self.__upgrade_number(other)
         return EisensteinFraction(
             (self.real * other.real) - (self.imag * other.imag),
             (self.imag * other.real)
@@ -40,7 +40,7 @@ class EisensteinFraction(Eisenstein):
         )
 
     def __truediv__(self, other):
-        other = self.upgrade_number(other)
+        other = self.__upgrade_number(other)
         return self * EisensteinFraction(
             (other.real - other.imag) / other.get_norm, (-other.imag) / other.get_norm
         )
@@ -48,7 +48,7 @@ class EisensteinFraction(Eisenstein):
     __rmul__ = __mul__
     __radd__ = __add__
 
-    def upgrade_number(self, other):
+    def __upgrade_number(self, other):
         """
         This function will upgrade argument to EisensteinFraction
 
