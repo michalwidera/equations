@@ -22,7 +22,7 @@ class EisensteinFraction(Eisenstein):
         return self.real == other.real and self.imag == other.imag
 
     def __repr__(self):
-        return "(%s +i%s)" % (self.real, self.imag)
+        return "(%s +%sw)" % (self.real, self.imag)
 
     def __add__(self, other):
         other = upgrade_fraction(other)
