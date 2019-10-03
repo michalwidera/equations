@@ -79,6 +79,7 @@ def eisensteinFloor(var: EisensteinFraction) -> Eisenstein:
     :param var: Eisenstein Fraction
     :return: Floor in Eisenstein Sense
     """
+    assert isinstance(var, EisensteinFraction)
     return Eisenstein(int(floor(var.real)), int(floor(var.imag)))
 
 
