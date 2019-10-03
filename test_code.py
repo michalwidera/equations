@@ -262,6 +262,11 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         self.assertEqual(Eisenstein(-1, 0), eisensteinRound(a))
 
     def test_abs(self):
+        """
+        Hint:
+        abs(1+1i) = sqrt(2)
+        abs(1+1w) = 1 or 0.999999(9) and this should be fixed
+        """
         a = EisensteinFraction(1,1)
         self.assertAlmostEqual(1, eisensteinAbs(a), 10)
 
