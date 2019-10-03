@@ -10,8 +10,7 @@ import sys
 import unittest
 
 from eisenstein import Eisenstein, gcd
-from eisenstein_fractions import EisensteinFraction
-from fractions import Fraction
+from eisenstein_fractions import *
 
 
 class TestEisensteinNumbers(unittest.TestCase):
@@ -240,6 +239,31 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         a = EisensteinFraction(Fraction(1 / 2), 2)
         self.assertEqual(a.__str__(), "(1/2,2w)")
 
+    def test_floor_and_ceil(self):
+        a = EisensteinFraction(Fraction(1 / 2), 2)
+
+        self.assertEqual(Eisenstein(0, 2), eisensteinFloor(a))
+        self.assertEqual( Eisenstein(1, 2), eisensteinCeil(a))
+
+        a = EisensteinFraction(Fraction(1 / 3), 2)
+        self.assertEqual(Eisenstein(0, 2), eisensteinFloor(a))
+        self.assertEqual(Eisenstein(1, 2), eisensteinCeil(a))
+
+        a = EisensteinFraction(Fraction(3 / 4), Fraction(3 / 4))
+
+        self.assertEqual( Eisenstein(0, 0), eisensteinFloor(a))
+        self.assertEqual( Eisenstein(1, 1), eisensteinCeil(a))
+
+    def test_round(self):
+        a = EisensteinFraction(Fraction(1 / 2), Fraction(3 / 4))
+        self.assertEqual( Eisenstein(0, 1), eisensteinRound(a))
+
+        a = EisensteinFraction(Fraction(-3 / 4), Fraction(1 / 2))
+        self.assertEqual(Eisenstein(-1, 0), eisensteinRound(a))
+
+    def test_abs(self):
+        a = EisensteinFraction(1,1)
+        self.assertAlmostEqual(1, eisensteinAbs(a), 10)
 
 fast_test_ls = [TestEisensteinNumbers, TestEisensteinFractionNumbers]
 
