@@ -265,10 +265,11 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         """
         Hint:
         abs(1+1i) = sqrt(2)
-        abs(1+1w) = 1 or 0.999999(9) and this should be fixed
+        abs(1+1w) = 1
+        Beware: if you make computations via complex form you will hit 0.999 as answer
+        and then you need to use self.assertAlmostEqual(1, eisensteinAbs(a), 10)
         """
         a = EisensteinFraction(1, 1)
-        # self.assertAlmostEqual(1, eisensteinAbs(a), 10)
         self.assertEqual(1, eisensteinAbs(a))
 
 
