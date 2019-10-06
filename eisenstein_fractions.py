@@ -115,4 +115,7 @@ def eisensteinAbs(var: EisensteinFraction) -> Eisenstein:
     :return: distance between 0,0 and var
     """
     assert isinstance(var, EisensteinFraction)
-    return abs(var.get_complex_form)
+
+    # abs(var.get_complex_form) <- this form return 0.99999 for 1+1w
+    # current form (var.real ** 2 ... ) return 1 for 1+1w
+    return (var.real ** 2 - var.real * var.imag + ((var.imag) / 4) + (3 / 4)) ** 0.5

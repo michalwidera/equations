@@ -243,7 +243,7 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         a = EisensteinFraction(Fraction(1 / 2), 2)
 
         self.assertEqual(Eisenstein(0, 2), eisensteinFloor(a))
-        self.assertEqual( Eisenstein(1, 2), eisensteinCeil(a))
+        self.assertEqual(Eisenstein(1, 2), eisensteinCeil(a))
 
         a = EisensteinFraction(Fraction(1 / 3), 2)
         self.assertEqual(Eisenstein(0, 2), eisensteinFloor(a))
@@ -251,12 +251,12 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
 
         a = EisensteinFraction(Fraction(3 / 4), Fraction(3 / 4))
 
-        self.assertEqual( Eisenstein(0, 0), eisensteinFloor(a))
-        self.assertEqual( Eisenstein(1, 1), eisensteinCeil(a))
+        self.assertEqual(Eisenstein(0, 0), eisensteinFloor(a))
+        self.assertEqual(Eisenstein(1, 1), eisensteinCeil(a))
 
     def test_round(self):
         a = EisensteinFraction(Fraction(1 / 2), Fraction(3 / 4))
-        self.assertEqual( Eisenstein(0, 1), eisensteinRound(a))
+        self.assertEqual(Eisenstein(0, 1), eisensteinRound(a))
 
         a = EisensteinFraction(Fraction(-3 / 4), Fraction(1 / 2))
         self.assertEqual(Eisenstein(-1, 0), eisensteinRound(a))
@@ -267,8 +267,10 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         abs(1+1i) = sqrt(2)
         abs(1+1w) = 1 or 0.999999(9) and this should be fixed
         """
-        a = EisensteinFraction(1,1)
-        self.assertAlmostEqual(1, eisensteinAbs(a), 10)
+        a = EisensteinFraction(1, 1)
+        # self.assertAlmostEqual(1, eisensteinAbs(a), 10)
+        self.assertEqual(1, eisensteinAbs(a))
+
 
 fast_test_ls = [TestEisensteinNumbers, TestEisensteinFractionNumbers]
 
