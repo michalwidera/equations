@@ -121,4 +121,5 @@ def eisensteinAbs(var: EisensteinFraction) -> Eisenstein:
     :return: distance between 0,0 and var
     """
     assert isinstance(var, EisensteinFraction)
-    return (var.real ** 2 - var.real * var.imag + ((var.imag) / 4) + (3 / 4)) ** 0.5
+
+    return ((var.real - (var.imag / 2)) ** 2 + Fraction(3 / 4) * (var.imag ** 2)) ** 0.5

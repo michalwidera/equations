@@ -271,6 +271,8 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         """
         a = EisensteinFraction(1, 1)
         self.assertEqual(1, eisensteinAbs(a))
+        a = EisensteinFraction(2, 2)
+        self.assertEqual(2, eisensteinAbs(a))
 
 
 fast_test_ls = [TestEisensteinNumbers, TestEisensteinFractionNumbers]
