@@ -242,47 +242,48 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
     def test_floor_and_ceil(self):
         a = EisensteinFraction(Fraction(1 / 2), 2)
 
-        self.assertEqual(Eisenstein(0, 2), eisensteinFloor(a))
-        self.assertEqual(Eisenstein(1, 2), eisensteinCeil(a))
+        self.assertEqual(Eisenstein(0, 2), a.floor)
+        self.assertEqual(Eisenstein(1, 2), a.ceil)
 
         a = EisensteinFraction(Fraction(1 / 3), 2)
-        self.assertEqual(Eisenstein(0, 2), eisensteinFloor(a))
-        self.assertEqual(Eisenstein(1, 2), eisensteinCeil(a))
+        self.assertEqual(Eisenstein(0, 2), a.floor)
+        self.assertEqual(Eisenstein(1, 2), a.ceil)
 
         a = EisensteinFraction(Fraction(3 / 4), Fraction(3 / 4))
 
-        self.assertEqual(Eisenstein(0, 0), eisensteinFloor(a))
-        self.assertEqual(Eisenstein(1, 1), eisensteinCeil(a))
+        self.assertEqual(Eisenstein(0, 0), a.floor)
+        self.assertEqual(Eisenstein(1, 1), a.ceil)
 
     def test_round(self):
         a = EisensteinFraction(Fraction(1 / 2), Fraction(3 / 4))
-        self.assertEqual(Eisenstein(0, 1), eisensteinRound(a))
+        self.assertEqual(Eisenstein(0, 1), a.round)
 
         a = EisensteinFraction(Fraction(-3 / 4), Fraction(1 / 2))
-        self.assertEqual(Eisenstein(-1, 0), eisensteinRound(a))
+        self.assertEqual(Eisenstein(-1, 0), a.round)
 
     def test_abs(self):
         """
         Hint:
         abs(1+1i) = sqrt(2)
         abs(1+1w) = 1
+
         Beware: if you make computations via complex form you will hit 0.999 as answer
         and then you need to use self.assertAlmostEqual(1, eisensteinAbs(a), 10)
         """
         a = EisensteinFraction(1, 1)
-        self.assertEqual(1, eisensteinAbs(a))
+        self.assertEqual(1, abs(a))
         a = EisensteinFraction(2, 2)
-        self.assertEqual(2, eisensteinAbs(a))
+        self.assertEqual(2, abs(a))
 
         a = EisensteinFraction(2, 2)
-        self.assertAlmostEqual(abs(a.get_complex_form), eisensteinAbs(a), 10)
+        self.assertAlmostEqual(abs(a.get_complex_form), abs(a), 10)
         a = EisensteinFraction(1, 1)
-        self.assertAlmostEqual(abs(a.get_complex_form), eisensteinAbs(a), 10)
+        self.assertAlmostEqual(abs(a.get_complex_form), abs(a), 10)
 
         a = EisensteinFraction(-2, 3)
-        self.assertAlmostEqual(abs(a.get_complex_form), eisensteinAbs(a), 10)
+        self.assertAlmostEqual(abs(a.get_complex_form), abs(a), 10)
         a = EisensteinFraction(4, 5)
-        self.assertAlmostEqual(abs(a.get_complex_form), eisensteinAbs(a), 10)
+        self.assertAlmostEqual(abs(a.get_complex_form), abs(a), 10)
 
 
 fast_test_ls = [TestEisensteinNumbers, TestEisensteinFractionNumbers]

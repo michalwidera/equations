@@ -49,10 +49,22 @@ class Eisenstein:
             - (self.imag * other.imag),
         )
 
-    def __abs__(self):
-        # |a+bw|^2 = a*a - a*b + b*b
-        # https://en.wikipedia.org/wiki/Eisenstein_integer
-        return (self.real ** 2 - self.real * self.imag + self.imag ** 2) ** 0.5
+    def __abs__( self ):
+        """
+        Absolute Value of a Complex Number.
+        The absolute value of a complex number , a+bi (also called the modulus )
+        is defined as the distance between the origin (0,0) and the point (a,b)
+        in the complex plane.
+
+        If you use complex form for computation and compute it via abs i.e.
+        abs(var.get_complex_form) <- this form return 0.99999 for 1+1w
+        You will get imprecise result.
+        Current, more complex form gives precise 1 as answer for 1,1w
+
+        :param var: number
+        :return: distance between 0,0 and var
+        """
+        return ((self.real - (self.imag / 2)) ** 2 + 3 * (self.imag ** 2) / 4 ) ** 0.5
 
     __rmul__ = __mul__
     __radd__ = __add__
