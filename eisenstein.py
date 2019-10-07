@@ -49,7 +49,7 @@ class Eisenstein:
             - (self.imag * other.imag),
         )
 
-    def __abs__( self ):
+    def __abs__(self):
         """
         Absolute Value of a Complex Number.
         The absolute value of a complex number , a+bi (also called the modulus )
@@ -64,7 +64,7 @@ class Eisenstein:
         :param var: number
         :return: distance between 0,0 and var
         """
-        return ((self.real - (self.imag / 2)) ** 2 + 3 * (self.imag ** 2) / 4 ) ** 0.5
+        return ((self.real - (self.imag / 2)) ** 2 + 3 * (self.imag ** 2) / 4) ** 0.5
 
     __rmul__ = __mul__
     __radd__ = __add__

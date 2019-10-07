@@ -9,7 +9,7 @@
    https://planetmath.org/StreamInterlaceAndDeinterlace
 """
 
-from eisenstein import *
+from eisenstein_fractions import *
 
 # TODO I'm not sure how to interpret delta as EisnensteinFraction
 #  maybe there should appear norm function and delta
@@ -26,10 +26,10 @@ def hash(A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFractio
     delta = deltaB / (deltaA + deltaB)
 
     for i in range(20):
-        if floor(i * delta) == floor((i + 1) * delta):
-            result.append(B[i - floor((i + 1) * delta)])
+        if floor(i * abs(delta)) == floor((i + 1) * abs(delta)):
+            result.append(B[i - floor((i + 1) * abs(delta))])
         else:
-            result.append(A[floor(i * delta)])
+            result.append(A[floor(i * abs(delta))])
 
     deltaC = (deltaA * deltaB) / (deltaA + deltaB)
     return result, deltaC

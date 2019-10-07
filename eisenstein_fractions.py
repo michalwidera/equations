@@ -67,7 +67,7 @@ class EisensteinFraction(Eisenstein):
         return other
 
     @property
-    def floor( self ) -> Eisenstein:
+    def floor(self) -> Eisenstein:
         """
         Floor is not defined well
         google: floor complex number
@@ -82,7 +82,7 @@ class EisensteinFraction(Eisenstein):
         return Eisenstein(int(floor(self.real)), int(floor(self.imag)))
 
     @property
-    def ceil( self ) -> Eisenstein:
+    def ceil(self) -> Eisenstein:
         """
         See clarification in floor comment.
 
@@ -92,7 +92,7 @@ class EisensteinFraction(Eisenstein):
         return Eisenstein(int(ceil(self.real)), int(ceil(self.imag)))
 
     @property
-    def round( self ) -> Eisenstein:
+    def round(self) -> Eisenstein:
         """
         See clarification in floor comment.
 
