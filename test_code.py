@@ -279,6 +279,11 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         a = EisensteinFraction(1, 1)
         self.assertAlmostEqual(abs(a.get_complex_form), eisensteinAbs(a), 10)
 
+        a = EisensteinFraction(-2, 3)
+        self.assertAlmostEqual(abs(a.get_complex_form), eisensteinAbs(a), 10)
+        a = EisensteinFraction(4, 5)
+        self.assertAlmostEqual(abs(a.get_complex_form), eisensteinAbs(a), 10)
+
 
 fast_test_ls = [TestEisensteinNumbers, TestEisensteinFractionNumbers]
 
