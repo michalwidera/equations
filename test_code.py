@@ -50,6 +50,12 @@ class TestEisensteinNumbers(unittest.TestCase):
         c = a * b
         self.assertEqual(c, Eisenstein(-6, 0))
 
+    def test_multiply_imag_by_imag(self):
+        a = Eisenstein(0, 1)
+        b = Eisenstein(0, 1)
+        c = a * b
+        self.assertEqual(c, Eisenstein(-1, -1))
+
     def test_modulo_operation(self):
         """
         TestEisensteinNumbers:
@@ -92,6 +98,21 @@ class TestEisensteinNumbers(unittest.TestCase):
     def test_presentation(self):
         a = Eisenstein(2, 2)
         self.assertEqual(a.__str__(), "(2,2w)")
+
+    def test_norm(self):
+        a = Eisenstein(2, 0)
+        self.assertEqual(a.get_norm, 4)
+        a = Eisenstein(3, 0)
+        self.assertEqual(a.get_norm, 9)
+        a = Eisenstein(0, 5)
+        self.assertEqual(a.get_norm, 25)
+        a = Eisenstein(0, 7)
+        self.assertEqual(a.get_norm, 49)
+        a = Eisenstein(2, 3)
+        self.assertEqual(a.get_norm, 7)
+
+        a = Eisenstein(-2, -3)
+        self.assertEqual(a.get_norm, 7)
 
 
 class TestEisensteinFractionNumbers(unittest.TestCase):
