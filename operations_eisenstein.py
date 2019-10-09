@@ -45,7 +45,7 @@ def check_result(Var: list):
 
     for item in Var:
 
-        if item.isalpha():
+        if type(item) is str:
             alpha.append(item)
         else:
             digit.append(item)
