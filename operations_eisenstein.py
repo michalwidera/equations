@@ -27,18 +27,19 @@ def hash(A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFractio
     # TODO check if we need here hash of vhash from operations.py or something completly different
     result = []
     delta = deltaB / (deltaA + deltaB)
+    abs_delta = abs(delta)
 
     for i in range(PROBE_LEN):
         tmp_format = "i"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
         tmp_format = "delta"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-        tmp_format = "abs(delta)"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-        tmp_format = "floor(i * abs(delta))"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-        tmp_format = "(i + 1) * abs(delta)"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-        tmp_format = "floor((i + 1) * abs(delta))"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-        if floor(i * abs(delta)) == floor((i + 1) * abs(delta)):
-            result.append(B[i - floor((i + 1) * abs(delta))])
+        tmp_format = "abs_delta"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+        tmp_format = "floor(i * abs_delta)"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+        tmp_format = "(i + 1) * abs_delta"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+        tmp_format = "floor((i + 1) * abs_delta)"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+        if floor(i * abs_delta) == floor((i + 1) * abs_delta):
+            result.append(B[i - floor((i + 1) * abs_delta)])
         else:
-            result.append(A[floor(i * abs(delta))])
+            result.append(A[floor(i * abs_delta)])
 
     deltaC = (deltaA * deltaB) / (deltaA + deltaB)
     return result, deltaC
