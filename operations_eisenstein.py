@@ -66,15 +66,30 @@ def check_result(Var: list):
 
 
 def main():
-    for j in range(20):
-        for i in range(20):
-            deltaA = EisensteinFraction(1, i)
-            deltaB = EisensteinFraction(1, j)
-            hash_result, delta_hash = hash(A, deltaA, B, deltaB)
-            print("DeltaA, DeltaB:", deltaA, deltaB)
-            print("Hash:", hash_result, delta_hash)
+    if 1:
+        ##############################################################################
+        j = 4
+        i = 0
+        deltaA = EisensteinFraction(1, i)
+        deltaB = EisensteinFraction(1, j)
+        hash_result, delta_hash = hash(A, deltaA, B, deltaB)
+        print("DeltaA, DeltaB:", deltaA, deltaB)
+        print("Hash:", hash_result, delta_hash)
 
-            check_result(hash_result)
+        check_result(hash_result)
+        ##############################################################################
+    else:
+        ##############################################################################
+        for j in range(20):
+            for i in range(20):
+                deltaA = EisensteinFraction(1, i)
+                deltaB = EisensteinFraction(1, j)
+                hash_result, delta_hash = hash(A, deltaA, B, deltaB)
+                print("DeltaA, DeltaB:", deltaA, deltaB)
+                print("Hash:", hash_result, delta_hash)
+
+                check_result(hash_result)
+        ##############################################################################
 
 
 if __name__ == "__main__":
