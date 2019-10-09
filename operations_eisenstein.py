@@ -77,8 +77,11 @@ def main():
         ##############################################################################
         j = 4
         i = 0
+        tmp_format = "j, i"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
         deltaA = EisensteinFraction(1, i)
         deltaB = EisensteinFraction(1, j)
+        tmp_format = "deltaA"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+        tmp_format = "deltaB"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
         hash_result, delta_hash = hash(A, deltaA, B, deltaB)
         print("DeltaA, DeltaB:", deltaA, deltaB)
         print("Hash:", hash_result, delta_hash)
