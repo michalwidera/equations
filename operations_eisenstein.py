@@ -28,11 +28,11 @@ def hash(A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFractio
     result = []
     delta = deltaB / (deltaA + deltaB)
     abs_delta = abs(delta)
+    tmp_format = "delta"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+    tmp_format = "abs_delta"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
 
     for i in range(PROBE_LEN):
         tmp_format = "i"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-        tmp_format = "delta"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-        tmp_format = "abs_delta"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
         tmp_format = "floor(i * abs_delta)"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
         tmp_format = "(i + 1) * abs_delta"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
         tmp_format = "floor((i + 1) * abs_delta)"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
