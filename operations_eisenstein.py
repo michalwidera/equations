@@ -20,7 +20,7 @@ B = list(map(chr, range(ord("a"), ord("z") + 1)))
 B = B + B + B + B
 deltaB = EisensteinFraction(1, 1)
 
-PROBE_LEN = 20
+PROBE_LEN = 40
 
 
 def hash(A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFraction):
