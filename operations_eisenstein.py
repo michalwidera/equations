@@ -45,10 +45,9 @@ def check_result(Var: list):
 
     for item in Var:
 
-        try:
-            if item.isalpha():
-                alpha.append(item)
-        except:
+        if item.isalpha():
+            alpha.append(item)
+        else:
             digit.append(item)
 
     print(alpha)
