@@ -29,6 +29,12 @@ def hash(A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFractio
     delta = deltaB / (deltaA + deltaB)
 
     for i in range(PROBE_LEN):
+        tmp_format = "i"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+        tmp_format = "delta"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+        tmp_format = "abs(delta)"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+        tmp_format = "floor(i * abs(delta))"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+        tmp_format = "(i + 1) * abs(delta)"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+        tmp_format = "floor((i + 1) * abs(delta))"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
         if floor(i * abs(delta)) == floor((i + 1) * abs(delta)):
             result.append(B[i - floor((i + 1) * abs(delta))])
         else:
@@ -50,8 +56,8 @@ def check_result(Var: list):
         else:
             digit.append(item)
 
-    print(alpha)
-    print(digit)
+    tmp_format = "alpha"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+    tmp_format = "digit"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
 
     if digit:
         for index, item in enumerate(digit):
