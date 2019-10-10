@@ -28,6 +28,7 @@ def hash(A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFractio
     result = []
     delta = deltaB / (deltaA + deltaB)
     abs_delta = abs(delta)
+    floor_abs_delta = floor(abs(delta))
     tmp_format = "delta"
     print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
     tmp_format = "abs_delta"
@@ -42,10 +43,16 @@ def hash(A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFractio
         print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
         tmp_format = "floor((i + 1) * abs_delta)"
         print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-        if floor(i * abs_delta) == floor((i + 1) * abs_delta):
-            result.append(B[i - floor((i + 1) * abs_delta)])
+        tmp_format = "abs_delta"
+        print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+        tmp_format = "floor_abs_delta"
+        print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+        if i * floor_abs_delta == (i + 1) * floor_abs_delta:
+            result.append(B[i - (i + 1) * floor_abs_delta])
+            print(B[i - i * floor_abs_delta])
         else:
-            result.append(A[floor(i * abs_delta)])
+            result.append(A[i * floor_abs_delta])
+            print(A[i * floor_abs_delta])
 
     deltaC = (deltaA * deltaB) / (deltaA + deltaB)
     return result, deltaC
