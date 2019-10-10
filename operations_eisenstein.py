@@ -27,32 +27,14 @@ def hash(A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFractio
     # TODO check if we need here hash of vhash from operations.py or something completly different
     result = []
     delta = deltaB / (deltaA + deltaB)
-    abs_delta = abs(delta)
-    floor_abs_delta = floor(abs(delta))
-    #tmp_format = "delta"
-    #print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-    #tmp_format = "abs_delta"
-    #print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+    abs_delta = delta.get_norm
+    print(abs_delta)
 
     for i in range(PROBE_LEN):
-        #tmp_format = "i"
-        #print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-        #tmp_format = "floor(i * abs_delta)"
-        #print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-        #tmp_format = "(i + 1) * abs_delta"
-        #print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-        #tmp_format = "floor((i + 1) * abs_delta)"
-        #print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-        #tmp_format = "abs_delta"
-        #print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-        #tmp_format = "floor_abs_delta"
-        #print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-
-        if floor(i * abs_delta) == floor((i + 1) * abs_delta):
-            result.append(B[i - int(floor((i + 1) * abs_delta))])
+        if abs((i * delta).floor) == abs(((i + 1) * delta).floor):
+            result.append(B[i - int(abs((i * delta).floor))])
         else:
-            result.append(A[int(floor(i * abs_delta))])
-
+            result.append(A[int(abs((i * delta).floor))])
 
     deltaC = (deltaA * deltaB) / (deltaA + deltaB)
     return result, deltaC
@@ -78,12 +60,14 @@ def check_result(Var: list):
     if digit:
         for index, item in enumerate(digit):
             if item != A[index]:
-                print("Fail:", item, A[index])
+                print("Fail A:", item, A[index])
+                print("len A:", len(alpha), "len B:", len(digit))
                 raise SystemExit("This algorithm fails A")
 
         for index, item in enumerate(alpha):
             if item != B[index]:
-                print("Fail:", item, B[index])
+                print("Fail B:", item, B[index])
+                print("len A:", len(alpha), "len B:", len(digit))
                 raise SystemExit("This algorithm fails B")
 
 
@@ -108,15 +92,17 @@ def main():
         ##############################################################################
     else:
         ##############################################################################
-        for j in range(20):
-            for i in range(20):
-                deltaA = EisensteinFraction(i, 1)
-                deltaB = EisensteinFraction(j, 1)
-                hash_result, delta_hash = hash(A, deltaA, B, deltaB)
-                print("DeltaA, DeltaB:", deltaA, deltaB)
-                print("Hash:", hash_result, delta_hash)
+        for l in range(20):
+            for k in range(20):
+                for j in range(20):
+                    for i in range(20):
+                        deltaA = EisensteinFraction(i+1, l)
+                        deltaB = EisensteinFraction(j+1, k)
+                        hash_result, delta_hash = hash(A, deltaA, B, deltaB)
+                        print("DeltaA, DeltaB:", deltaA, deltaB)
+                        print("Hash:", hash_result, delta_hash)
 
-                check_result(hash_result)
+                        check_result(hash_result)
         ##############################################################################
 
 
