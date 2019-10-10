@@ -29,30 +29,30 @@ def hash(A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFractio
     delta = deltaB / (deltaA + deltaB)
     abs_delta = abs(delta)
     floor_abs_delta = floor(abs(delta))
-    tmp_format = "delta"
-    print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-    tmp_format = "abs_delta"
-    print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+    #tmp_format = "delta"
+    #print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+    #tmp_format = "abs_delta"
+    #print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
 
     for i in range(PROBE_LEN):
-        tmp_format = "i"
-        print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-        tmp_format = "floor(i * abs_delta)"
-        print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-        tmp_format = "(i + 1) * abs_delta"
-        print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-        tmp_format = "floor((i + 1) * abs_delta)"
-        print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-        tmp_format = "abs_delta"
-        print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-        tmp_format = "floor_abs_delta"
-        print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-        if i * floor_abs_delta == (i + 1) * floor_abs_delta:
-            result.append(B[i - (i + 1) * floor_abs_delta])
-            print(B[i - i * floor_abs_delta])
+        #tmp_format = "i"
+        #print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+        #tmp_format = "floor(i * abs_delta)"
+        #print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+        #tmp_format = "(i + 1) * abs_delta"
+        #print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+        #tmp_format = "floor((i + 1) * abs_delta)"
+        #print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+        #tmp_format = "abs_delta"
+        #print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+        #tmp_format = "floor_abs_delta"
+        #print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+
+        if floor(i * abs_delta) == floor((i + 1) * abs_delta):
+            result.append(B[i - int(floor((i + 1) * abs_delta))])
         else:
-            result.append(A[i * floor_abs_delta])
-            print(A[i * floor_abs_delta])
+            result.append(A[int(floor(i * abs_delta))])
+
 
     deltaC = (deltaA * deltaB) / (deltaA + deltaB)
     return result, deltaC
@@ -70,10 +70,10 @@ def check_result(Var: list):
         else:
             digit.append(item)
 
-    tmp_format = "alpha"
-    print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-    tmp_format = "digit"
-    print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+    #tmp_format = "alpha"
+    #print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+    #tmp_format = "digit"
+    #print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
 
     if digit:
         for index, item in enumerate(digit):
@@ -83,7 +83,7 @@ def check_result(Var: list):
 
         for index, item in enumerate(alpha):
             if item != B[index]:
-                rint("Fail:", item, B[index])
+                print("Fail:", item, B[index])
                 raise SystemExit("This algorithm fails B")
 
 
@@ -110,8 +110,8 @@ def main():
         ##############################################################################
         for j in range(20):
             for i in range(20):
-                deltaA = EisensteinFraction(1, i)
-                deltaB = EisensteinFraction(1, j)
+                deltaA = EisensteinFraction(i, 1)
+                deltaB = EisensteinFraction(j, 1)
                 hash_result, delta_hash = hash(A, deltaA, B, deltaB)
                 print("DeltaA, DeltaB:", deltaA, deltaB)
                 print("Hash:", hash_result, delta_hash)
