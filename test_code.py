@@ -114,6 +114,23 @@ class TestEisensteinNumbers(unittest.TestCase):
         a = Eisenstein(-2, -3)
         self.assertEqual(a.get_norm, 7)
 
+    def test_floor_div(self):
+        a = Eisenstein(3, 4)
+        b = Eisenstein(11, 19)
+        c = a * b
+        self.assertEqual(c // a, b)
+
+    def test_div_mod(self):
+        obj_a = Eisenstein(2, 3)
+        obj_b = Eisenstein(1, 0)
+        self.assertEqual(obj_a / obj_b, Eisenstein(2, 3))
+        self.assertEqual(obj_a // obj_b, Eisenstein(2, 3))
+
+        obj_a = Eisenstein(4, 8)
+        obj_b = Eisenstein(2, 2)
+        self.assertEqual(obj_a / obj_b, Eisenstein(4, 2))
+        self.assertEqual(obj_a // obj_b, Eisenstein(4, 2))
+
 
 class TestEisensteinFractionNumbers(unittest.TestCase):
     def test_multiplication(self):

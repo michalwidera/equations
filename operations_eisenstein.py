@@ -28,14 +28,20 @@ def hash(A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFractio
     result = []
     delta = deltaB / (deltaA + deltaB)
     abs_delta = abs(delta)
-    tmp_format = "delta"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-    tmp_format = "abs_delta"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+    tmp_format = "delta"
+    print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+    tmp_format = "abs_delta"
+    print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
 
     for i in range(PROBE_LEN):
-        tmp_format = "i"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-        tmp_format = "floor(i * abs_delta)"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-        tmp_format = "(i + 1) * abs_delta"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-        tmp_format = "floor((i + 1) * abs_delta)"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+        tmp_format = "i"
+        print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+        tmp_format = "floor(i * abs_delta)"
+        print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+        tmp_format = "(i + 1) * abs_delta"
+        print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+        tmp_format = "floor((i + 1) * abs_delta)"
+        print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
         if floor(i * abs_delta) == floor((i + 1) * abs_delta):
             result.append(B[i - floor((i + 1) * abs_delta)])
         else:
@@ -57,8 +63,10 @@ def check_result(Var: list):
         else:
             digit.append(item)
 
-    tmp_format = "alpha"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-    tmp_format = "digit"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+    tmp_format = "alpha"
+    print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+    tmp_format = "digit"
+    print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
 
     if digit:
         for index, item in enumerate(digit):
@@ -77,11 +85,14 @@ def main():
         ##############################################################################
         j = 4
         i = 0
-        tmp_format = "j, i"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+        tmp_format = "j, i"
+        print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
         deltaA = EisensteinFraction(1, i)
         deltaB = EisensteinFraction(1, j)
-        tmp_format = "deltaA"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-        tmp_format = "deltaB"; print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+        tmp_format = "deltaA"
+        print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+        tmp_format = "deltaB"
+        print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
         hash_result, delta_hash = hash(A, deltaA, B, deltaB)
         print("DeltaA, DeltaB:", deltaA, deltaB)
         print("Hash:", hash_result, delta_hash)

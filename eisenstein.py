@@ -89,8 +89,18 @@ class Eisenstein:
         return self.real ** 2 - self.real * self.imag + self.imag ** 2
 
     def __floordiv__(self, other):
-        other = __upgrade_number(other)
+        other = self.__upgrade_number(other)
         return get_eisenstein_form(self.get_complex_form / other.get_complex_form)
+
+    def __truediv__(self, other):
+        """
+        Piotr Version
+        :param other:
+        :return:
+        """
+        real = self.real * other.real + self.imag * other.imag - self.real * other.imag
+        imag = self.imag * other.real - self.real * other.imag
+        return Eisenstein(int(real / other.get_norm), int(imag / other.get_norm))
 
     def __mod__(self, other):
         other = self.__upgrade_number(other)
