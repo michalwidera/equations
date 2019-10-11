@@ -11,6 +11,7 @@
 
 import data_sets
 from eisenstein_fractions import *
+from eisenstein import get_dot_product
 
 # TODO I'm not sure how to interpret delta as EisnensteinFraction
 #  maybe there should appear norm function and delta
@@ -31,10 +32,11 @@ def hash(A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFractio
     print(abs_delta)
 
     for i in range(PROBE_LEN):
-        if abs((i * delta).floor) == abs(((i + 1) * delta).floor):
-            result.append(B[i - int(abs((i * delta).floor))])
+        di = i * delta
+        if floor(abs(di)) == floor(abs(di+delta)):
+            result.append(B[i - int(abs(di))])
         else:
-            result.append(A[int(abs((i * delta).floor))])
+            result.append(A[int(abs(di))])
 
     deltaC = (deltaA * deltaB) / (deltaA + deltaB)
     return result, deltaC
@@ -99,13 +101,14 @@ def main():
                     for i in range(20):
                         deltaA = EisensteinFraction(i + 1, l)
                         deltaB = EisensteinFraction(j + 1, k)
-                        hash_result, delta_hash = hash(
-                            data_sets.A, deltaA, data_sets.B, deltaB
-                        )
-                        print("DeltaA, DeltaB:", deltaA, deltaB)
-                        print("Hash:", hash_result, delta_hash)
+                        if get_dot_product( deltaA , deltaB ) == 0:
+                            hash_result, delta_hash = hash(
+                                data_sets.A, deltaA, data_sets.B, deltaB
+                            )
+                            print("DeltaA, DeltaB:", deltaA, deltaB)
+                            print("Hash:", hash_result, delta_hash)
 
-                        check_result(hash_result)
+                            check_result(hash_result)
         ##############################################################################
 
 
