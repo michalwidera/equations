@@ -12,19 +12,18 @@ import unittest
 from eisenstein import Eisenstein, gcd
 from eisenstein_fractions import *
 from eisenstein_operations import *
+from pathlib import Path
 
-def runningInDocker():
-    try:
-        with open('/proc/self/cgroup', 'r') as procfile:
-            for line in procfile:
-                fields = line.strip().split('/')
-                if 'docker' in fields:
-                    return True
-    except OSError as e:
-        pass
-        #probably windows
+
+def runningInTravis():
+
+    home = str(Path.home())
+    fields = home.strip().split("/")
+    if "travis" in fields:
+        return True
 
     return False
+
 
 class TestEisensteinNumbers(unittest.TestCase):
     def test_substraction_values(self):
@@ -348,7 +347,7 @@ class TestEisensteinFractionTimeSeriesOperations(unittest.TestCase):
             SystemExit("dot product =< 0")
 
     def testHashMatrix(self):
-        if runningInDocker():
+        if runningInTravis():
             TEST_RANGE = 20
         else:
             TEST_RANGE = 5
@@ -419,7 +418,7 @@ def perform_tests():
 
 
 if __name__ == "__main__":
-    if runningInDocker():
-        print("Are we under Docker CI?")
+    if runningInTravis():
+        print("Wow! We are under Travis CI!")
     result = perform_tests()
     sys.exit(result)
