@@ -22,6 +22,7 @@ PROBE_LEN = 40
 
 verbose_result = 0
 
+
 def hash(A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFraction):
     # TODO check if we need here hash of vhash from operations.py or something completly different
     result = []
@@ -98,7 +99,9 @@ def main():
                     for i in range(20):
                         deltaA = EisensteinFraction(i + 1, l)
                         deltaB = EisensteinFraction(j + 1, k)
-                        hash_result, delta_hash = hash(data_sets.A, deltaA, data_sets.B, deltaB)
+                        hash_result, delta_hash = hash(
+                            data_sets.A, deltaA, data_sets.B, deltaB
+                        )
                         print("DeltaA, DeltaB:", deltaA, deltaB)
                         print("Hash:", hash_result, delta_hash)
 
