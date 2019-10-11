@@ -9,15 +9,13 @@
    https://planetmath.org/StreamInterlaceAndDeinterlace
 """
 
+import data_sets
 from eisenstein_fractions import *
 
 # TODO I'm not sure how to interpret delta as EisnensteinFraction
 #  maybe there should appear norm function and delta
 #  became variable like in vhash?
-A = range(1, 50)
 deltaA = EisensteinFraction(1, 2)
-B = list(map(chr, range(ord("a"), ord("z") + 1)))
-B = B + B + B + B
 deltaB = EisensteinFraction(1, 1)
 
 PROBE_LEN = 40
@@ -61,14 +59,14 @@ def check_result(Var: list):
 
     if digit:
         for index, item in enumerate(digit):
-            if item != A[index]:
-                print("Fail A:", item, A[index])
+            if item != data_sets.A[index]:
+                print("Fail A:", item, data_sets.A[index])
                 print("len A:", len(alpha), "len B:", len(digit))
                 raise SystemExit("This algorithm fails A")
 
         for index, item in enumerate(alpha):
-            if item != B[index]:
-                print("Fail B:", item, B[index])
+            if item != data_sets.B[index]:
+                print("Fail B:", item, data_sets.B[index])
                 print("len A:", len(alpha), "len B:", len(digit))
                 raise SystemExit("This algorithm fails B")
 
@@ -86,7 +84,7 @@ def main():
         print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
         tmp_format = "deltaB"
         print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-        hash_result, delta_hash = hash(A, deltaA, B, deltaB)
+        hash_result, delta_hash = hash(data_sets.A, deltaA, data_sets.B, deltaB)
         print("DeltaA, DeltaB:", deltaA, deltaB)
         print("Hash:", hash_result, delta_hash)
 
@@ -100,7 +98,7 @@ def main():
                     for i in range(20):
                         deltaA = EisensteinFraction(i + 1, l)
                         deltaB = EisensteinFraction(j + 1, k)
-                        hash_result, delta_hash = hash(A, deltaA, B, deltaB)
+                        hash_result, delta_hash = hash(data_sets.A, deltaA, data_sets.B, deltaB)
                         print("DeltaA, DeltaB:", deltaA, deltaB)
                         print("Hash:", hash_result, delta_hash)
 
