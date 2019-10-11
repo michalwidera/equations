@@ -22,6 +22,7 @@ deltaB = EisensteinFraction(1, 1)
 
 PROBE_LEN = 40
 
+verbose_result = 0
 
 def hash(A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFraction):
     # TODO check if we need here hash of vhash from operations.py or something completly different
@@ -52,10 +53,11 @@ def check_result(Var: list):
         else:
             digit.append(item)
 
-    #tmp_format = "alpha"
-    #print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
-    #tmp_format = "digit"
-    #print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+    if verbose_result:
+        tmp_format = "alpha"
+        print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
+        tmp_format = "digit"
+        print("Eval: %s %s" % (tmp_format, eval(tmp_format)))
 
     if digit:
         for index, item in enumerate(digit):
