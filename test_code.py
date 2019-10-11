@@ -348,7 +348,7 @@ class TestEisensteinFractionTimeSeriesOperations(unittest.TestCase):
 
     def testHashMatrix(self):
         if runningInTravis():
-            TEST_RANGE = 10
+            TEST_RANGE = 15
         else:
             TEST_RANGE = 5
 
