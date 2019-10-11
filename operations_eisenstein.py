@@ -98,8 +98,8 @@ def main():
             for k in range(20):
                 for j in range(20):
                     for i in range(20):
-                        deltaA = EisensteinFraction(i+1, l)
-                        deltaB = EisensteinFraction(j+1, k)
+                        deltaA = EisensteinFraction(i + 1, l)
+                        deltaB = EisensteinFraction(j + 1, k)
                         hash_result, delta_hash = hash(A, deltaA, B, deltaB)
                         print("DeltaA, DeltaB:", deltaA, deltaB)
                         print("Hash:", hash_result, delta_hash)
