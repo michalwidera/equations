@@ -11,7 +11,20 @@ import unittest
 
 from eisenstein import Eisenstein, gcd
 from eisenstein_fractions import *
+from eisenstein_operations import *
 
+def runningInDocker():
+    try:
+        with open('/proc/self/cgroup', 'r') as procfile:
+            for line in procfile:
+                fields = line.strip().split('/')
+                if 'docker' in fields:
+                    return True
+    except OSError as e:
+        pass
+        #probably windows
+
+    return False
 
 class TestEisensteinNumbers(unittest.TestCase):
     def test_substraction_values(self):
@@ -324,7 +337,69 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         self.assertAlmostEqual(abs(a.get_complex_form), abs(a), 10)
 
 
-fast_test_ls = [TestEisensteinNumbers, TestEisensteinFractionNumbers]
+class TestEisensteinFractionTimeSeriesOperations(unittest.TestCase):
+    def testHashOne(self):
+        deltaA = EisensteinFraction(1, 0)
+        deltaB = EisensteinFraction(1, 0)
+        if get_dot_product(deltaA, deltaB) > 0:
+            hash_result, delta_hash = hash(data_sets.A, deltaA, data_sets.B, deltaB)
+            check_result(hash_result)
+        else:
+            SystemExit("dot product =< 0")
+
+    def testHashMatrix(self):
+        if runningInDocker():
+            TEST_RANGE = 20
+        else:
+            TEST_RANGE = 5
+
+        for l in range(TEST_RANGE):
+            for k in range(TEST_RANGE):
+                for j in range(TEST_RANGE):
+                    for i in range(TEST_RANGE):
+                        deltaA = EisensteinFraction(i + 1, l)
+                        deltaB = EisensteinFraction(j + 1, k)
+                        if get_dot_product(deltaA, deltaB) > 0:
+                            hash_result, delta_hash = hash(
+                                data_sets.A, deltaA, data_sets.B, deltaB
+                            )
+                            check_result(hash_result)
+                        else:
+                            pass
+                            # ("SKIP orthogonal", deltaA, deltaB)
+
+
+fast_test_ls = [
+    TestEisensteinNumbers,
+    TestEisensteinFractionNumbers,
+    TestEisensteinFractionTimeSeriesOperations,
+]
+
+
+def check_result(Var: list):
+
+    alpha = []
+    digit = []
+
+    for item in Var:
+
+        if type(item) is str:
+            alpha.append(item)
+        else:
+            digit.append(item)
+
+    if digit:
+        for index, item in enumerate(digit):
+            if item != data_sets.A[index]:
+                print("Fail A:", item, data_sets.A[index])
+                print("len A:", len(alpha), "len B:", len(digit))
+                raise SystemExit("This algorithm fails A")
+
+        for index, item in enumerate(alpha):
+            if item != data_sets.B[index]:
+                print("Fail B:", item, data_sets.B[index])
+                print("len A:", len(alpha), "len B:", len(digit))
+                raise SystemExit("This algorithm fails B")
 
 
 def add_all_fast(suite):
@@ -344,5 +419,7 @@ def perform_tests():
 
 
 if __name__ == "__main__":
+    if runningInDocker():
+        print("Are we under Docker CI?")
     result = perform_tests()
     sys.exit(result)
