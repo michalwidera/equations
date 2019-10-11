@@ -28,12 +28,12 @@ def hash(A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFractio
     # TODO check if we need here hash of vhash from operations.py or something completly different
     result = []
     delta = deltaB / (deltaA + deltaB)
-    abs_delta = delta.get_norm
-    print(abs_delta)
+    #abs_delta = delta.get_norm
+    #print(abs_delta)
 
     for i in range(PROBE_LEN):
         di = i * delta
-        if floor(abs(di)) == floor(abs(di+delta)):
+        if int(abs(di)) == int(abs(di+delta)):
             result.append(B[i - int(abs(di))])
         else:
             result.append(A[int(abs(di))])
@@ -101,14 +101,16 @@ def main():
                     for i in range(20):
                         deltaA = EisensteinFraction(i + 1, l)
                         deltaB = EisensteinFraction(j + 1, k)
-                        if get_dot_product( deltaA , deltaB ) == 0:
+                        if get_dot_product( deltaA , deltaB) > 0:
                             hash_result, delta_hash = hash(
                                 data_sets.A, deltaA, data_sets.B, deltaB
                             )
-                            print("DeltaA, DeltaB:", deltaA, deltaB)
+                            print("DeltaA, DeltaB:", deltaA, deltaB, get_dot_product( deltaA , deltaB) , get_dot_product( deltaB , deltaB + deltaA ))
                             print("Hash:", hash_result, delta_hash)
 
                             check_result(hash_result)
+                        else:
+                            print("SKIP orthogonal" , deltaA , deltaB )
         ##############################################################################
 
 
