@@ -19,13 +19,10 @@ from eisenstein import get_dot_product
 
 PROBE_LEN = 40
 
-
+# code under test
 def hash(A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFraction):
-    # TODO check if we need here hash of vhash from operations.py or something completly different
     result = []
     delta = deltaB / (deltaA + deltaB)
-    # abs_delta = delta.get_norm
-    # print(abs_delta)
 
     for i in range(PROBE_LEN):
         di = i * delta
@@ -36,3 +33,25 @@ def hash(A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFractio
 
     deltaC = (deltaA * deltaB) / (deltaA + deltaB)
     return result, deltaC
+
+
+def add(A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFraction):
+    result = []
+    if abs(deltaA) < abs(deltaB):
+        deltaC = deltaA
+    else:
+        deltaC = deltaB
+
+    for i in range(PROBE_LEN):
+        if deltaC == deltaA:
+            first = A[i]
+            second = B[int(abs(i * deltaA / deltaB))]
+        else:
+            first = A[int(abs((i * deltaB / deltaA)))]
+            second = B[i]
+        result.append((first, second))
+    return result, deltaC
+
+
+if __name__ == "__main__":
+    pass

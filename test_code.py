@@ -342,13 +342,13 @@ class TestEisensteinFractionTimeSeriesOperations(unittest.TestCase):
         deltaB = EisensteinFraction(1, 0)
         if get_dot_product(deltaA, deltaB) > 0:
             hash_result, delta_hash = hash(data_sets.A, deltaA, data_sets.B, deltaB)
-            check_result(hash_result)
+            check_result_hash(hash_result)
         else:
             SystemExit("dot product =< 0")
 
     def testHashMatrix(self):
         if runningInTravis():
-            TEST_RANGE = 15
+            TEST_RANGE = 10
         else:
             TEST_RANGE = 5
 
@@ -362,10 +362,28 @@ class TestEisensteinFractionTimeSeriesOperations(unittest.TestCase):
                             hash_result, delta_hash = hash(
                                 data_sets.A, deltaA, data_sets.B, deltaB
                             )
-                            check_result(hash_result)
+                            check_result_hash(hash_result)
                         else:
                             pass
                             # ("SKIP orthogonal", deltaA, deltaB)
+
+    def testAddMatix(self):
+        if runningInTravis():
+            TEST_RANGE = 10
+        else:
+            TEST_RANGE = 5
+
+        for l in range(TEST_RANGE):
+            for k in range(TEST_RANGE):
+                for j in range(TEST_RANGE):
+                    for i in range(TEST_RANGE):
+                        deltaA = EisensteinFraction(i + 1, l)
+                        deltaB = EisensteinFraction(j + 1, k)
+
+                        add_result, delta_add = add(
+                            data_sets.A, deltaA, data_sets.B, deltaB
+                        )
+                        check_result_add(add_result)
 
 
 fast_test_ls = [
@@ -375,7 +393,28 @@ fast_test_ls = [
 ]
 
 
-def check_result(Var: list):
+def check_result_add(Var: list):
+
+    prevNum = 1
+    prevAlpha = "a"
+    for (number, alpha) in Var:
+        if number == prevNum or number == prevNum + 1:
+            pass
+        else:
+            print(number, prevNum)
+            raise SystemExit("Add algorithm fails")
+
+        prevNum = number
+
+        if alpha != prevAlpha or alpha != chr(ord(prevAlpha) + 1):
+            pass
+        else:
+            raise SystemExit("Add algorithm fails")
+
+        prevAlpha = alpha
+
+
+def check_result_hash(Var: list):
 
     alpha = []
     digit = []
