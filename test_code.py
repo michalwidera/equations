@@ -143,6 +143,15 @@ class TestEisensteinNumbers(unittest.TestCase):
         self.assertEqual(obj_a / obj_b, Eisenstein(4, 2))
         self.assertEqual(obj_a // obj_b, Eisenstein(4, 2))
 
+    def test_both_div_and_modulo(self):
+        a = Eisenstein(4, 1)
+        b = Eisenstein(3, 1)
+        c = Eisenstein(2, 1)
+        d = a * b + c
+        e, f = d.div_mod(a)
+        self.assertEqual(e, Eisenstein(3, 1))
+        self.assertEqual(f, Eisenstein(7, 2))
+
 
 class TestEisensteinFractionNumbers(unittest.TestCase):
     def test_multiplication(self):

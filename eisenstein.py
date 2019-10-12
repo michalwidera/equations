@@ -128,6 +128,19 @@ class Eisenstein:
             other = Eisenstein(other, 0)
         return other
 
+    def div_mod(self, other):
+        a = self.real
+        b = self.imag
+        c = other.real
+        d = other.imag
+        bottom = other.get_norm
+        e = a * c + b * d - a * d
+        f = b * c - a * d
+        g, h = divmod(e, bottom)
+        i, j = divmod(f, bottom)
+        result = (Eisenstein(g, i), Eisenstein(h, j))
+        return result
+
 
 def get_dot_product(x: Eisenstein, y: Eisenstein):
     """
