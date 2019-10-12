@@ -454,6 +454,12 @@ def summary_status(suite):
     return not not (text_test_result.failures or text_test_result.errors)
 
 
+def perform_only_fast_tests():
+    suite = unittest.TestSuite()
+    add_all_fast(suite)
+    return summary_status(suite)
+
+
 def perform_tests():
     suite = unittest.TestSuite()
     add_all_fast(suite)
@@ -464,5 +470,8 @@ def perform_tests():
 if __name__ == "__main__":
     if runningInTravis():
         print("Wow! We are under Travis CI!")
-    result = perform_tests()
+    if len(sys.argv) >= 2 and sys.argv[1] == "--fast":
+        result = perform_only_fast_tests()
+    else:
+        result = perform_tests()
     sys.exit(result)
