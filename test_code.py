@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 """
-./test_code.py; red_green_bar.py $? $COLUMNS
+./test_code.py --fast; red_green_bar.py $? $COLUMNS
 red_green_bar.py is taken from https://github.com/kwadrat/rgb_tdd.git
 """
 
