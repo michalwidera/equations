@@ -8,14 +8,12 @@ red_green_bar.py is taken from https://github.com/kwadrat/rgb_tdd.git
 
 import sys
 import unittest
+from pathlib import Path
 
 from eisenstein import Eisenstein, gcd
 from eisenstein_fractions import *
 from eisenstein_operations import *
-from pathlib import Path
-
-global TestRange
-TestRange = 5
+import parameters
 
 
 def runningInTravis():
@@ -359,7 +357,7 @@ class TestEisensteinFractionTimeSeriesOperations(unittest.TestCase):
             SystemExit("dot product =< 0")
 
     def testHashMatrix(self):
-        global TestRange
+        TestRange = parameters.cfg_prm.test_range
 
         for l in range(TestRange):
             for k in range(TestRange):
@@ -377,7 +375,7 @@ class TestEisensteinFractionTimeSeriesOperations(unittest.TestCase):
                             # ("SKIP orthogonal", deltaA, deltaB)
 
     def testAddMatix(self):
-        global TestRange
+        TestRange = parameters.cfg_prm.test_range
 
         for l in range(TestRange):
             for k in range(TestRange):
@@ -479,10 +477,12 @@ if __name__ == "__main__":
         result = perform_only_fast_tests()
     elif len(sys.argv) >= 3 and sys.argv[1] == "--setscale":
         TestRange = int(sys.argv[2])
+        parameters.cfg_prm.set_range(TestRange)
         result = perform_tests()
     elif runningInTravis():
         print("Wow! We are under Travis CI!")
         TestRange = 10
+        parameters.cfg_prm.set_range(TestRange)
         result = perform_tests()
     else:
         result = perform_tests()  # go ahead with defaults
