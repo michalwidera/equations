@@ -485,5 +485,5 @@ if __name__ == "__main__":
         TestRange = 10
         result = perform_tests()
     else:
-        result = perform_tests()    #go ahead with defaults
+        result = perform_tests()  # go ahead with defaults
     sys.exit(result)
