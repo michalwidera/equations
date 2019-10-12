@@ -14,6 +14,9 @@ from eisenstein_fractions import *
 from eisenstein_operations import *
 from pathlib import Path
 
+global TestRange
+TestRange = 5
+
 
 def runningInTravis():
 
@@ -356,15 +359,12 @@ class TestEisensteinFractionTimeSeriesOperations(unittest.TestCase):
             SystemExit("dot product =< 0")
 
     def testHashMatrix(self):
-        if runningInTravis():
-            TEST_RANGE = 10
-        else:
-            TEST_RANGE = 5
+        global TestRange
 
-        for l in range(TEST_RANGE):
-            for k in range(TEST_RANGE):
-                for j in range(TEST_RANGE):
-                    for i in range(TEST_RANGE):
+        for l in range(TestRange):
+            for k in range(TestRange):
+                for j in range(TestRange):
+                    for i in range(TestRange):
                         deltaA = EisensteinFraction(i + 1, l)
                         deltaB = EisensteinFraction(j + 1, k)
                         if get_dot_product(deltaA, deltaB) > 0:
@@ -377,15 +377,12 @@ class TestEisensteinFractionTimeSeriesOperations(unittest.TestCase):
                             # ("SKIP orthogonal", deltaA, deltaB)
 
     def testAddMatix(self):
-        if runningInTravis():
-            TEST_RANGE = 10
-        else:
-            TEST_RANGE = 5
+        global TestRange
 
-        for l in range(TEST_RANGE):
-            for k in range(TEST_RANGE):
-                for j in range(TEST_RANGE):
-                    for i in range(TEST_RANGE):
+        for l in range(TestRange):
+            for k in range(TestRange):
+                for j in range(TestRange):
+                    for i in range(TestRange):
                         deltaA = EisensteinFraction(i + 1, l)
                         deltaB = EisensteinFraction(j + 1, k)
 
@@ -477,10 +474,16 @@ def perform_tests():
 
 
 if __name__ == "__main__":
-    if runningInTravis():
-        print("Wow! We are under Travis CI!")
+    result = 1  # assuming failure of test script
     if len(sys.argv) >= 2 and sys.argv[1] == "--fast":
         result = perform_only_fast_tests()
-    else:
+    elif len(sys.argv) >= 3 and sys.argv[1] == "--setscale":
+        TestRange = int(sys.argv[2])
         result = perform_tests()
+    elif runningInTravis():
+        print("Wow! We are under Travis CI!")
+        TestRange = 10
+        result = perform_tests()
+    else:
+        result = perform_tests()    #go ahead with defaults
     sys.exit(result)
