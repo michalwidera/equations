@@ -7,16 +7,16 @@ from math import floor, ceil
 
 
 class EisensteinFraction(Eisenstein):
-    def __init__(self, object, optional=0):
+    def __init__(self, obj, optional=0):
 
-        if isinstance(object, (int, Fraction)) and isinstance(
+        if isinstance(obj, (int, Fraction)) and isinstance(
             optional, (int, Fraction)
         ):
-            self.real = Fraction(object)
+            self.real = Fraction(obj)
             self.imag = Fraction(optional)
-        elif isinstance(object, (Eisenstein, EisensteinFraction)) and optional == 0:
-            self.real = Fraction(object.real)
-            self.imag = Fraction(object.imag)
+        elif isinstance(obj, (Eisenstein, EisensteinFraction)) and optional == 0:
+            self.real = Fraction(obj.real)
+            self.imag = Fraction(obj.imag)
         else:
             raise TypeError("Arguments should be an ints, Fractions or one Eisenstein")
 
