@@ -133,7 +133,7 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         c = a - b
         self.assertEqual(c, EisensteinFraction(2, 0))
 
-    def test_comparasion(self):
+    def test_comparison(self):
         a = EisensteinFraction(Eisenstein(1, 2))
         b = EisensteinFraction(1, 2)
         self.assertEqual(a == b, True)
