@@ -9,9 +9,7 @@ from math import floor, ceil
 class EisensteinFraction(Eisenstein):
     def __init__(self, obj, optional=0):
 
-        if isinstance(obj, (int, Fraction)) and isinstance(
-            optional, (int, Fraction)
-        ):
+        if isinstance(obj, (int, Fraction)) and isinstance(optional, (int, Fraction)):
             self.real = Fraction(obj)
             self.imag = Fraction(optional)
         elif isinstance(obj, (Eisenstein, EisensteinFraction)) and optional == 0:
