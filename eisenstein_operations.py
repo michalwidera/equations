@@ -27,6 +27,17 @@ PROBE_LEN = 40
 
 # code under test
 def hash_a(A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFraction):
+    """
+    This is hash function for Time series that interwave two Time Series that
+    time steps are computed by a+bw number that a,b are EisensteinFractions
+
+    This is hash_a because Python have hash method in standard lib i.e. __hash__()
+    hash_b is declared in operations.py (for rational coefficients)
+    """
+    # get_dot_product works for Eisenstein and EisensteinFraction
+    # this requirement was invented during experimental work with equations
+    assert get_dot_product(deltaA, deltaB) > 0
+
     result = []
     delta = deltaB / (deltaA + deltaB)
 
