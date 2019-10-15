@@ -10,6 +10,11 @@
 
 # https://docs.python.org/3.7/reference/datamodel.html
 
+import sys
+if sys.version_info[0] < 3:
+    print('You need to run this with Python 3')
+    sys.exit(1)
+
 SQRT_THREE: float = 3.0 ** 0.5
 
 
