@@ -20,7 +20,7 @@ from eisenstein import get_dot_product
 PROBE_LEN = 40
 
 # code under test
-def hash(A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFraction):
+def hash_a(A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFraction):
     result = []
     delta = deltaB / (deltaA + deltaB)
 

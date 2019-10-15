@@ -351,7 +351,7 @@ class TestEisensteinFractionTimeSeriesOperations(unittest.TestCase):
         deltaA = EisensteinFraction(1, 0)
         deltaB = EisensteinFraction(1, 0)
         if get_dot_product(deltaA, deltaB) > 0:
-            hash_result, delta_hash = hash(data_sets.A, deltaA, data_sets.B, deltaB)
+            hash_result, delta_hash = hash_a(data_sets.A, deltaA, data_sets.B, deltaB)
             check_result_hash(hash_result)
         else:
             SystemExit("dot product =< 0")
@@ -366,7 +366,7 @@ class TestEisensteinFractionTimeSeriesOperations(unittest.TestCase):
                         deltaA = EisensteinFraction(i + 1, l)
                         deltaB = EisensteinFraction(j + 1, k)
                         if get_dot_product(deltaA, deltaB) > 0:
-                            hash_result, delta_hash = hash(
+                            hash_result, delta_hash = hash_a(
                                 data_sets.A, deltaA, data_sets.B, deltaB
                             )
                             check_result_hash(hash_result)
