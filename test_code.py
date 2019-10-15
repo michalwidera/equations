@@ -9,10 +9,13 @@ red_green_bar.py is taken from https://github.com/kwadrat/rgb_tdd.git
 import sys
 import unittest
 from pathlib import Path
+from fractions import Fraction
 
 from eisenstein import Eisenstein, gcd
-from eisenstein_fractions import *
-from eisenstein_operations import *
+from eisenstein_fractions import EisensteinFraction
+from eisenstein_operations import hash_a, add
+from eisenstein import get_dot_product
+import data_sets
 import parameters
 
 

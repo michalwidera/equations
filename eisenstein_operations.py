@@ -10,7 +10,7 @@
 """
 
 import data_sets
-from eisenstein_fractions import *
+from eisenstein_fractions import EisensteinFraction
 from eisenstein import get_dot_product
 
 # TODO I'm not sure how to interpret delta as EisnensteinFraction
