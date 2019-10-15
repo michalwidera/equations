@@ -7,8 +7,9 @@ red_green_bar.py is taken from https://github.com/kwadrat/rgb_tdd.git
 """
 
 import sys
+
 if sys.version_info[0] < 3:
-    print('You need to run this with Python 3')
+    print("You need to run this with Python 3")
     sys.exit(1)
 
 import unittest
