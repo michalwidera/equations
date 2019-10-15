@@ -155,9 +155,9 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
 
     def test_presentation(self):
         a = Eisenstein(2, 2)
-        self.assertEqual(a.__str__(), "(2,2w)")
+        self.assertEqual(str(a), "(2,2w)")
         a = EisensteinFraction(Fraction(1, 2), 2)
-        self.assertEqual(a.__str__(), "(1/2,2w)")
+        self.assertEqual(str(a), "(1/2,2w)")
 
     def test_floor_and_ceil(self):
         a = EisensteinFraction(Fraction(1, 2), 2)
