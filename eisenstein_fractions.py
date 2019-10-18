@@ -28,15 +28,12 @@ class EisensteinFraction(Eisenstein):
         assert isinstance(self.imag, Fraction)
 
     def __add__(self, other):
-        other = self.__upgrade_number(other)
         return EisensteinFraction(self.real + other.real, self.imag + other.imag)
 
     def __sub__(self, other):
-        other = self.__upgrade_number(other)
         return EisensteinFraction(self.real - other.real, self.imag - other.imag)
 
     def __mul__(self, other):
-        other = self.__upgrade_number(other)
         return EisensteinFraction(
             (self.real * other.real) - (self.imag * other.imag),
             (self.imag * other.real)
@@ -45,30 +42,12 @@ class EisensteinFraction(Eisenstein):
         )
 
     def __truediv__(self, other):
-        other = self.__upgrade_number(other)
         return self * EisensteinFraction(
             (other.real - other.imag) / other.get_norm, (-other.imag) / other.get_norm
         )
 
     __rmul__ = __mul__
     __radd__ = __add__
-
-    def __upgrade_number(self, other):
-        """
-        This function will upgrade argument to EisensteinFraction
-
-        :param other: int, Fraction Eisenstien, EisensteinFraction
-        :return:  same value but EisensteinFraction type
-        """
-        if isinstance(other, (int, Fraction)):
-            other = EisensteinFraction(other, 0)
-        elif isinstance(other, Eisenstein):
-            other = EisensteinFraction(other)
-
-        assert isinstance(self.real, Fraction)
-        assert isinstance(self.imag, Fraction)
-
-        return other
 
     @property
     def floor(self) -> Eisenstein:

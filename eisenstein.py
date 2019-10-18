@@ -32,21 +32,17 @@ class Eisenstein:
         return "(%s,%sw)" % (self.real, self.imag)
 
     def __eq__(self, other):
-        other = self.__upgrade_number(other)
         return self.real == other.real and self.imag == other.imag
 
     def __add__(self, other):
-        other = self.__upgrade_number(other)
         return Eisenstein(self.real + other.real, self.imag + other.imag)
 
     def __sub__(self, other):
-        other = self.__upgrade_number(other)
         return Eisenstein(self.real - other.real, self.imag - other.imag)
 
     def __mul__(self, other):
         # (a+bw)(c+dw)=(ac-bd)+(bc+ad-db)w
         # https://en.wikipedia.org/wiki/Eisenstein_integer
-        other = self.__upgrade_number(other)
 
         return Eisenstein(
             (self.real * other.real) - (self.imag * other.imag),
@@ -95,7 +91,6 @@ class Eisenstein:
         return self.real ** 2 - self.real * self.imag + self.imag ** 2
 
     def __floordiv__(self, other):
-        other = self.__upgrade_number(other)
         return get_eisenstein_form(self.get_complex_form / other.get_complex_form)
 
     def __truediv__(self, other):
@@ -109,8 +104,6 @@ class Eisenstein:
         return Eisenstein(int(real / other.get_norm), int(imag / other.get_norm))
 
     def __mod__(self, other):
-        other = self.__upgrade_number(other)
-
         K = get_eisenstein_form(self.get_complex_form / other.get_complex_form)
         # This debug code is important - it creates queries for
         # wolframalfa that can be checked if mod function works correctly
@@ -122,17 +115,6 @@ class Eisenstein:
         # )
 
         return self - K * other
-
-    def __upgrade_number(self, other):
-        """
-        This function will upgrade argument to Eisenstein
-
-        :param other: int, Eisenstein
-        :return:  same value but Eisenstein type
-        """
-        if isinstance(other, int):
-            other = Eisenstein(other, 0)
-        return other
 
     def div_mod(self, other):
         a = self.real

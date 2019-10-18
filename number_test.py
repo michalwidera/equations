@@ -72,7 +72,7 @@ class TestEisensteinNumbers(unittest.TestCase):
         a = 5
         self.assertEqual(1, a % 2)  # int
         a = Eisenstein(5, 0)
-        self.assertEqual(Eisenstein(1, 0), a % 2)  # Eisenstein
+        self.assertEqual(Eisenstein(1, 0), a % Eisenstein(2, 0))  # Eisenstein
         a = Eisenstein(5, 2)
         self.assertEqual(Eisenstein(1, 0), a % Eisenstein(2, 0))  # Eisenstein
         a = Eisenstein(5, 1)
