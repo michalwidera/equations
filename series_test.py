@@ -91,7 +91,7 @@ class TestEisensteinFractionTimeSeriesOperations(unittest.TestCase):
                             pass
                             # ("SKIP orthogonal", deltaA, deltaB)
 
-    def testAddMatix(self):
+    def testAddMatrix(self):
         TestRange = parameters.cfg_prm.test_range
 
         for l in range(TestRange):
