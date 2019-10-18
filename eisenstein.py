@@ -137,6 +137,9 @@ class Eisenstein:
         result = (Eisenstein(g, i), Eisenstein(h, j))
         return result
 
+    def math_view(self):
+        return "(%s, %sw)" % (self.co_real, self.co_omega)
+
 
 def get_dot_product(x: Eisenstein, y: Eisenstein):
     """
