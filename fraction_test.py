@@ -200,3 +200,32 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         self.assertEqual(str(obj), "EisensteinFraction(four=(1, 2, 3, 4))")
         obj = EisensteinFraction(four=(5, 6, 7, 11))
         self.assertEqual(str(obj), "EisensteinFraction(four=(5, 6, 7, 11))")
+
+    def test_two_parts(self):
+        a = Fraction(12, 13)
+        b = Fraction(-17, 19)
+        c = EisensteinFraction(two=(a, b))
+        self.assertEqual(str(c), "EisensteinFraction(four=(12, 13, -17, 19))")
+
+    def test_add_values(self):
+        """
+        TestFrac:
+        """
+        a = EisensteinFraction(four=(1, 2, 3, 4))
+        b = EisensteinFraction(four=(1, 3, 3, 4))
+        c = a + b
+        self.assertEqual(str(c), "EisensteinFraction(four=(5, 6, 3, 2))")
+
+    def test_substract_values(self):
+        a = EisensteinFraction(four=(1, 2, 3, 4))
+        b = EisensteinFraction(four=(1, 3, 3, 4))
+        c = a - b
+        self.assertEqual(str(c), "EisensteinFraction(four=(1, 6, 0, 1))")
+
+    def test_multiply_values(self):
+        a = EisensteinFraction(four=(1, 2, 3, 5))
+        b = EisensteinFraction(four=(7, 11, 13, 17))
+        c = a * b
+        self.assertEqual(c.math_view(), "(-263/1870, 571/1870w)")
+        self.assertEqual(str(c), "EisensteinFraction(four=(-263, 1870, 571, 1870))")
+        self.assertEqual(repr(c), "EisensteinFraction(four=(-263, 1870, 571, 1870))")
