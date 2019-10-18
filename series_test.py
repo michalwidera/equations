@@ -64,7 +64,7 @@ def check_result_hash(Var: list):
 
 
 class TestEisensteinFractionTimeSeriesOperations(unittest.TestCase):
-    def testHashOne(self):
+    def test_hash_one(self):
         deltaA = EisensteinFraction(1, 0)
         deltaB = EisensteinFraction(1, 0)
         if get_dot_product(deltaA, deltaB) > 0:
@@ -73,7 +73,7 @@ class TestEisensteinFractionTimeSeriesOperations(unittest.TestCase):
         else:
             SystemExit("dot product =< 0")
 
-    def testHashMatrix(self):
+    def test_hash_matrix(self):
         TestRange = parameters.cfg_prm.test_range
 
         for l in range(TestRange):
@@ -91,7 +91,7 @@ class TestEisensteinFractionTimeSeriesOperations(unittest.TestCase):
                             pass
                             # ("SKIP orthogonal", deltaA, deltaB)
 
-    def testAddMatrix(self):
+    def test_add_matrix(self):
         TestRange = parameters.cfg_prm.test_range
 
         for l in range(TestRange):

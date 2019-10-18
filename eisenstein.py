@@ -66,7 +66,9 @@ class Eisenstein:
         :param var: number
         :return: distance between 0,0 and var
         """
-        return ((self.co_real - (self.co_omega / 2)) ** 2 + 3 * (self.co_omega ** 2) / 4) ** 0.5
+        return (
+            (self.co_real - (self.co_omega / 2)) ** 2 + 3 * (self.co_omega ** 2) / 4
+        ) ** 0.5
 
     __rmul__ = __mul__
     __radd__ = __add__
@@ -77,7 +79,9 @@ class Eisenstein:
         (a,bw)->(x,iy), where x,y: float, a,b: integer
         :return: Complex number from Eisenstein
         """
-        return complex(self.co_real - (self.co_omega / 2), (self.co_omega * SQRT_THREE) / 2)
+        return complex(
+            self.co_real - (self.co_omega / 2), (self.co_omega * SQRT_THREE) / 2
+        )
 
     @property
     def get_norm(self):
@@ -99,7 +103,11 @@ class Eisenstein:
         :param other:
         :return:
         """
-        co_real = self.co_real * other.co_real + self.co_omega * other.co_omega - self.co_real * other.co_omega
+        co_real = (
+            self.co_real * other.co_real
+            + self.co_omega * other.co_omega
+            - self.co_real * other.co_omega
+        )
         co_omega = self.co_omega * other.co_real - self.co_real * other.co_omega
         return Eisenstein(int(co_real / other.get_norm), int(co_omega / other.get_norm))
 

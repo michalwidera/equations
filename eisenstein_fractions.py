@@ -36,10 +36,14 @@ class EisensteinFraction(Eisenstein):
         assert isinstance(self.co_omega, Fraction)
 
     def __add__(self, other):
-        return EisensteinFraction(self.co_real + other.co_real, self.co_omega + other.co_omega)
+        return EisensteinFraction(
+            self.co_real + other.co_real, self.co_omega + other.co_omega
+        )
 
     def __sub__(self, other):
-        return EisensteinFraction(self.co_real - other.co_real, self.co_omega - other.co_omega)
+        return EisensteinFraction(
+            self.co_real - other.co_real, self.co_omega - other.co_omega
+        )
 
     def __mul__(self, other):
         return EisensteinFraction(
@@ -51,7 +55,8 @@ class EisensteinFraction(Eisenstein):
 
     def __truediv__(self, other):
         return self * EisensteinFraction(
-            (other.co_real - other.co_omega) / other.get_norm, (-other.co_omega) / other.get_norm
+            (other.co_real - other.co_omega) / other.get_norm,
+            (-other.co_omega) / other.get_norm,
         )
 
     __rmul__ = __mul__
