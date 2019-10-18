@@ -20,35 +20,35 @@ SQRT_THREE: float = 3.0 ** 0.5
 
 
 class Eisenstein:
-    def __init__(self, real, imag=0):
+    def __init__(self, co_real, co_omega=0):
 
-        if isinstance(real, int) and isinstance(imag, int):
-            self.real = real
-            self.imag = imag
+        if isinstance(co_real, int) and isinstance(co_omega, int):
+            self.co_real = co_real
+            self.co_omega = co_omega
         else:
             raise TypeError("arguments should be an int")
 
     def __repr__(self):
-        return "(%s,%sw)" % (self.real, self.imag)
+        return "(%s,%sw)" % (self.co_real, self.co_omega)
 
     def __eq__(self, other):
-        return self.real == other.real and self.imag == other.imag
+        return self.co_real == other.co_real and self.co_omega == other.co_omega
 
     def __add__(self, other):
-        return Eisenstein(self.real + other.real, self.imag + other.imag)
+        return Eisenstein(self.co_real + other.co_real, self.co_omega + other.co_omega)
 
     def __sub__(self, other):
-        return Eisenstein(self.real - other.real, self.imag - other.imag)
+        return Eisenstein(self.co_real - other.co_real, self.co_omega - other.co_omega)
 
     def __mul__(self, other):
         # (a+bw)(c+dw)=(ac-bd)+(bc+ad-db)w
         # https://en.wikipedia.org/wiki/Eisenstein_integer
 
         return Eisenstein(
-            (self.real * other.real) - (self.imag * other.imag),
-            (self.imag * other.real)
-            + (self.real * other.imag)
-            - (self.imag * other.imag),
+            (self.co_real * other.co_real) - (self.co_omega * other.co_omega),
+            (self.co_omega * other.co_real)
+            + (self.co_real * other.co_omega)
+            - (self.co_omega * other.co_omega),
         )
 
     def __abs__(self):
@@ -66,7 +66,7 @@ class Eisenstein:
         :param var: number
         :return: distance between 0,0 and var
         """
-        return ((self.real - (self.imag / 2)) ** 2 + 3 * (self.imag ** 2) / 4) ** 0.5
+        return ((self.co_real - (self.co_omega / 2)) ** 2 + 3 * (self.co_omega ** 2) / 4) ** 0.5
 
     __rmul__ = __mul__
     __radd__ = __add__
@@ -77,7 +77,7 @@ class Eisenstein:
         (a,bw)->(x,iy), where x,y: float, a,b: integer
         :return: Complex number from Eisenstein
         """
-        return complex(self.real - (self.imag / 2), (self.imag * SQRT_THREE) / 2)
+        return complex(self.co_real - (self.co_omega / 2), (self.co_omega * SQRT_THREE) / 2)
 
     @property
     def get_norm(self):
@@ -88,7 +88,7 @@ class Eisenstein:
 
         :return: Norm in algebraic sense
         """
-        return self.real ** 2 - self.real * self.imag + self.imag ** 2
+        return self.co_real ** 2 - self.co_real * self.co_omega + self.co_omega ** 2
 
     def __floordiv__(self, other):
         return get_eisenstein_form(self.get_complex_form / other.get_complex_form)
@@ -99,9 +99,9 @@ class Eisenstein:
         :param other:
         :return:
         """
-        real = self.real * other.real + self.imag * other.imag - self.real * other.imag
-        imag = self.imag * other.real - self.real * other.imag
-        return Eisenstein(int(real / other.get_norm), int(imag / other.get_norm))
+        co_real = self.co_real * other.co_real + self.co_omega * other.co_omega - self.co_real * other.co_omega
+        co_omega = self.co_omega * other.co_real - self.co_real * other.co_omega
+        return Eisenstein(int(co_real / other.get_norm), int(co_omega / other.get_norm))
 
     def __mod__(self, other):
         K = get_eisenstein_form(self.get_complex_form / other.get_complex_form)
@@ -117,10 +117,10 @@ class Eisenstein:
         return self - K * other
 
     def div_mod(self, other):
-        a = self.real
-        b = self.imag
-        c = other.real
-        d = other.imag
+        a = self.co_real
+        b = self.co_omega
+        c = other.co_real
+        d = other.co_omega
         bottom = other.get_norm
         e = a * c + b * d - a * d
         f = b * c - a * d

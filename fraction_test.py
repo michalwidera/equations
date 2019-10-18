@@ -25,7 +25,7 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         a = EisensteinFraction(Fraction(1, 2))
         b = EisensteinFraction(2)
         c = a * b
-        self.assertEqual(c, 1)
+        self.assertEqual(c, Eisenstein(1))
 
         a = EisensteinFraction(Eisenstein(2, 1))
         b = EisensteinFraction(Fraction(1, 2))
@@ -34,10 +34,10 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
 
     def test_alternation(self):
         # covering issue __rmul__ = __mul__ ,  __radd__ = __add__
-        a = Fraction(1, 2)
+        a = EisensteinFraction(Fraction(1, 2))
         b = EisensteinFraction(2)
         c = a * b
-        self.assertEqual(c, 1)
+        self.assertEqual(c, EisensteinFraction(four=(1, 1, 0, 1)))
 
     def test_division(self):
         """
@@ -50,7 +50,7 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         a = EisensteinFraction(Fraction(1, 2))
         b = EisensteinFraction(Fraction(4, 2))
         c = a / b
-        self.assertEqual(c, 1 / 4)
+        self.assertEqual(c, EisensteinFraction(four=(1, 4, 0, 1)))
 
         a = EisensteinFraction(4)
         b = EisensteinFraction(2)
@@ -62,7 +62,7 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         self.assertEqual(a, EisensteinFraction(Eisenstein(0, 2)))
         self.assertEqual(b, EisensteinFraction(Eisenstein(0, 4)))
         c = a / b
-        self.assertEqual(c, 1 / 2)
+        self.assertEqual(c, EisensteinFraction(four=(1, 2, 0, 1)))
 
     def test_add_values(self):
         """
@@ -73,12 +73,12 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         a = EisensteinFraction(Fraction(4, 2))
         b = EisensteinFraction(Fraction(6, 3))
         c = a + b
-        self.assertEqual(c, 4)
+        self.assertEqual(c, EisensteinFraction(four=(4, 1, 0, 1)))
 
         a = EisensteinFraction(Fraction(1, 2))
         b = EisensteinFraction(Fraction(1, 4))
         c = a + b
-        self.assertEqual(c, 3 / 4)
+        self.assertEqual(c, EisensteinFraction(four=(3, 4, 0, 1)))
 
         a = EisensteinFraction(Eisenstein(1, 1))
         b = EisensteinFraction(Eisenstein(1, -1))
@@ -97,17 +97,17 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
 
         # 2 + 2 = 4
         a = EisensteinFraction(Fraction(4, 2))
-        b = Fraction(6, 3)
+        b = EisensteinFraction(Fraction(6, 3))
         c = a + b
-        self.assertEqual(c, 4)
+        self.assertEqual(c, EisensteinFraction(four=(4, 1, 0, 1)))
 
         a = EisensteinFraction(Fraction(1, 2))
-        b = Fraction(1, 4)
+        b = EisensteinFraction(Fraction(1, 4))
         c = a + b
-        self.assertEqual(c, 3 / 4)
+        self.assertEqual(c, EisensteinFraction(four=(3, 4, 0, 1)))
 
         a = EisensteinFraction(Eisenstein(1, 1))
-        b = Fraction(1, 2)
+        b = EisensteinFraction(Fraction(1, 2))
         c = a + b
         self.assertEqual(c, EisensteinFraction(Fraction(3, 2), 1))
 
@@ -120,13 +120,13 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         a = EisensteinFraction(Fraction(4, 2))
         b = EisensteinFraction(Fraction(6, 3))
         c = a - b
-        self.assertEqual(c, 0)
+        self.assertEqual(c, EisensteinFraction(four=(0, 1, 0, 1)))
 
         # 3/1 - 1/1 = 2/1
         a = EisensteinFraction(Fraction(3, 1))
         b = EisensteinFraction(Fraction(1, 1))
         c = a - b
-        self.assertEqual(c, 2)
+        self.assertEqual(c, EisensteinFraction(four=(2, 1, 0, 1)))
 
         a = EisensteinFraction(3, 1)
         b = EisensteinFraction(1, 1)
@@ -140,16 +140,6 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
 
         a = Eisenstein(1, 2)
         b = EisensteinFraction(1, 2)
-        self.assertEqual(a == b, True)
-        self.assertEqual(b == a, True)
-
-        a = EisensteinFraction(Fraction(1, 2))
-        b = Fraction(1, 2)
-        self.assertEqual(a == b, True)
-        self.assertEqual(b == a, True)
-
-        a = EisensteinFraction(2)
-        b = 2
         self.assertEqual(a == b, True)
         self.assertEqual(b == a, True)
 

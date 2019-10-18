@@ -42,7 +42,8 @@ def hash_a(A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFract
     delta = deltaB / (deltaA + deltaB)
 
     for i in range(PROBE_LEN):
-        di = i * delta
+        ii = EisensteinFraction(four=(i, 1, 0, 1))
+        di = ii * delta
         if int(abs(di)) == int(abs(di + delta)):
             result.append(B[i - int(abs(di))])
         else:
@@ -60,11 +61,12 @@ def add(A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFraction
         deltaC = deltaB
 
     for i in range(PROBE_LEN):
+        ii = EisensteinFraction(four=(i, 1, 0, 1))
         if deltaC == deltaA:
             first = A[i]
-            second = B[int(abs(i * deltaA / deltaB))]
+            second = B[int(abs(ii * deltaA / deltaB))]
         else:
-            first = A[int(abs((i * deltaB / deltaA)))]
+            first = A[int(abs((ii * deltaB / deltaA)))]
             second = B[i]
         result.append((first, second))
     return result, deltaC
