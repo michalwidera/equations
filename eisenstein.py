@@ -28,6 +28,21 @@ class Eisenstein:
         else:
             raise TypeError("arguments should be an int")
 
+    def __str__(self):
+        if self.co_real.denominator == self.co_omega.denominator == 1:
+            result = "Eisenstein(%d, %d)" % (
+                self.co_real.numerator,
+                self.co_omega.numerator,
+            )
+        else:
+            result = "EisensteinFraction(four=(%d, %d, %d, %d))" % (
+                self.co_real.numerator,
+                self.co_real.denominator,
+                self.co_omega.numerator,
+                self.co_omega.denominator,
+            )
+        return result
+
     def __repr__(self):
         return "(%s,%sw)" % (self.co_real, self.co_omega)
 

@@ -96,7 +96,7 @@ class TestEisensteinNumbers(unittest.TestCase):
 
     def test_presentation(self):
         a = Eisenstein(2, 2)
-        self.assertEqual(a.__str__(), "(2,2w)")
+        self.assertEqual(str(a), "Eisenstein(2, 2)")
 
     def test_norm(self):
         a = Eisenstein(2, 0)

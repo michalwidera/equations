@@ -145,9 +145,9 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
 
     def test_presentation(self):
         a = Eisenstein(2, 2)
-        self.assertEqual(str(a), "(2,2w)")
+        self.assertEqual(str(a), "Eisenstein(2, 2)")
         a = EisensteinFraction(Fraction(1, 2), 2)
-        self.assertEqual(str(a), "(1/2,2w)")
+        self.assertEqual(str(a), "EisensteinFraction(four=(1, 2, 2, 1))")
 
     def test_floor_and_ceil(self):
         a = EisensteinFraction(Fraction(1, 2), 2)
@@ -194,3 +194,9 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         self.assertAlmostEqual(abs(a.get_complex_form), abs(a), 10)
         a = EisensteinFraction(4, 5)
         self.assertAlmostEqual(abs(a.get_complex_form), abs(a), 10)
+
+    def test_four_parts(self):
+        obj = EisensteinFraction(four=(1, 2, 3, 4))
+        self.assertEqual(str(obj), "EisensteinFraction(four=(1, 2, 3, 4))")
+        obj = EisensteinFraction(four=(5, 6, 7, 11))
+        self.assertEqual(str(obj), "EisensteinFraction(four=(5, 6, 7, 11))")
