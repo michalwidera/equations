@@ -17,6 +17,8 @@ class EisensteinFraction(Eisenstein):
 
         if four is not None:
             (real_num, real_den, omega_num, omega_den) = four
+            assert real_den != 0
+            assert omega_den != 0
             self.co_real = Fraction(real_num, real_den)
             self.co_omega = Fraction(omega_num, omega_den)
         elif two is not None:
