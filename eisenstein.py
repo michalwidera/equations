@@ -66,6 +66,9 @@ class Eisenstein:
         # (a+bw)(c+dw)=(ac-bd)+(bc+ad-db)w
         # https://en.wikipedia.org/wiki/Eisenstein_integer
 
+        if isinstance(other, int):
+            other = Eisenstein(other)
+
         return Eisenstein(
             (self.co_real * other.co_real) - (self.co_omega * other.co_omega),
             (self.co_omega * other.co_real)
@@ -125,6 +128,9 @@ class Eisenstein:
         :param other:
         :return:
         """
+        if isinstance(other, int):
+            other = Eisenstein(other)
+
         co_real = (
             self.co_real * other.co_real
             + self.co_omega * other.co_omega

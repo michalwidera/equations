@@ -46,6 +46,8 @@ class EisensteinFraction(Eisenstein):
         )
 
     def __mul__(self, other):
+        if isinstance(other, (int, Fraction)):
+            other = EisensteinFraction(other)
         return EisensteinFraction(
             (self.co_real * other.co_real) - (self.co_omega * other.co_omega),
             (self.co_omega * other.co_real)
@@ -54,6 +56,9 @@ class EisensteinFraction(Eisenstein):
         )
 
     def __truediv__(self, other):
+        if isinstance(other, (int, Fraction)):
+            other = EisensteinFraction(other)
+
         return self * EisensteinFraction(
             (other.co_real - other.co_omega) / other.get_norm,
             (-other.co_omega) / other.get_norm,
