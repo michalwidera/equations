@@ -229,3 +229,34 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         self.assertEqual(c.math_view(), "(-263/1870, 571/1870w)")
         self.assertEqual(str(c), "EisensteinFraction(four=(-263, 1870, 571, 1870))")
         self.assertEqual(repr(c), "(-263/1870,571/1870w)")
+
+    def test_no_arguments(self):
+        self.assertRaises(TypeError, EisensteinFraction)
+
+    def test_norm(self):
+        obj_a = EisensteinFraction(four=(1, 1, 1, 1))
+        self.assertEqual(obj_a.get_norm, 1)
+        obj_a = EisensteinFraction(four=(1, 1, 1, 2))
+        self.assertEqual(obj_a.get_norm, Fraction(3, 4))
+
+    def test_compare_values(self):
+        obj_a = EisensteinFraction(four=(2, 4, 2, 3))
+        obj_b = EisensteinFraction(four=(1, 2, 6, 9))
+        self.assertEqual(obj_a == obj_b, True)
+
+    def test_div_mod(self):
+        obj_a = EisensteinFraction(four=(2, 1, 3, 1))
+        obj_b = EisensteinFraction(four=(1, 1, 0, 1))
+        obj_c = obj_a / obj_b
+        self.assertEqual(obj_c, EisensteinFraction(four=(2, 1, 3, 1)))
+
+    def test_fraction_as_integer(self):
+        a = EisensteinFraction(four=(2, 1, -3, 1))
+        self.assertEqual(str(a), "Eisenstein(2, -3)")
+
+    def test_division_by_integer(self):
+        a = EisensteinFraction(four=(1, 1, -3, 2))
+        b = a / Eisenstein(2, 0)
+        self.assertEqual(b, EisensteinFraction(four=(1, 2, -3, 4)))
+        c = a / Eisenstein(3, 0)
+        self.assertEqual(c, EisensteinFraction(four=(1, 3, -1, 2)))
