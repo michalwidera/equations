@@ -25,8 +25,10 @@ from eisenstein import get_dot_product
 
 PROBE_LEN = 40
 
-# code under test
-def hash_a(A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFraction):
+# Code under test
+def hash_Eisenstein_Fraction(
+    A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFraction
+):
     """
     This is hash function for Time series that interwave two Time Series that
     time steps are computed by a+bw number that a,b are EisensteinFractions
@@ -53,7 +55,10 @@ def hash_a(A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFract
     return result, deltaC
 
 
-def add(A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFraction):
+# Code under test
+def add_Eisenstein_Fraction(
+    A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFraction
+):
     result = []
     if abs(deltaA) < abs(deltaB):
         deltaC = deltaA
@@ -72,5 +77,19 @@ def add(A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFraction
     return result, deltaC
 
 
-if __name__ == "__main__":
-    pass
+# Code under development
+def diff_Eisenstein_Fraction(C: list, deltaA: EisensteinFraction, deltaB: EisensteinFraction):
+
+    result = []
+    # deltaC = min(deltaA, deltaB)
+    if abs(deltaA) < abs(deltaB):
+        deltaC = deltaA
+    else:
+        deltaC = deltaB
+
+    for i in range(PROBE_LEN):
+        if abs(deltaA) > abs(deltaB):
+            result.append(C[int(abs(ceil(i * deltaA / deltaB)))])
+        else:
+            result.append(C[i])
+    return result, deltaC

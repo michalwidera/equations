@@ -15,9 +15,9 @@ if sys.version_info[0] < 3:
 import unittest
 from pathlib import Path
 
-from number_test import TestEisensteinNumbers
-from fraction_test import TestEisensteinFractionNumbers
-from series_test import TestEisensteinFractionTimeSeriesOperations
+from test_eisenstein import TestEisensteinNumbers
+from test_eisenstein_fractions import TestEisensteinFractionNumbers
+from test_eisenstein_operations import TestEisensteinFractionTimeSeriesOperations
 import parameters
 
 

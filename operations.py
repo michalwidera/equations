@@ -48,7 +48,7 @@ def diff(C: list, deltaA: Fraction, deltaB: Fraction):
     return result, deltaC
 
 
-def hash_b(A: list, deltaA: Fraction, B: list, deltaB: Fraction):
+def fractionhash(A: list, deltaA: Fraction, B: list, deltaB: Fraction):
 
     result = []
     delta = deltaB / (deltaA + deltaB)
@@ -107,13 +107,16 @@ def vhash():
 
 
 def main():
-    hash_result, delta_hash = hash_b(A, deltaA, B, deltaB)
+    hash_result, delta_hash = fractionhash(A, deltaA, B, deltaB)
     sum_result, delta_sum = sum(A, deltaA, B, deltaB)
+
     print("Sum:", sum(A, deltaA, B, deltaB))
-    print("Hash:", hash_b(A, deltaA, B, deltaB))
     print("Diff:", diff(sum_result, deltaA, deltaB))
+
+    print("Hash:", fractionhash(A, deltaA, B, deltaB))
     print("dehasheven:", dehasheven(hash_result, delta_hash, deltaA))
     print("dehashodd:", dehashodd(hash_result, delta_hash, deltaB))
+
     print("vhash", vhash())
 
 

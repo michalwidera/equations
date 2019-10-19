@@ -8,12 +8,12 @@ if sys.version_info[0] < 3:
     sys.exit(1)
 
 import unittest
+import data_sets
+import parameters
 
 from eisenstein_fractions import EisensteinFraction
 from eisenstein import get_dot_product
-from eisenstein_operations import hash_a, add
-import data_sets
-import parameters
+from eisenstein_operations import hash_Eisenstein_Fraction, add_Eisenstein_Fraction, diff_Eisenstein_Fraction
 
 
 def check_result_add(Var: list):
@@ -68,7 +68,9 @@ class TestEisensteinFractionTimeSeriesOperations(unittest.TestCase):
         deltaA = EisensteinFraction(1, 0)
         deltaB = EisensteinFraction(1, 0)
         if get_dot_product(deltaA, deltaB) > 0:
-            hash_result, delta_hash = hash_a(data_sets.A, deltaA, data_sets.B, deltaB)
+            hash_result, delta_hash = hash_Eisenstein_Fraction(
+                data_sets.A, deltaA, data_sets.B, deltaB
+            )
             check_result_hash(hash_result)
         else:
             SystemExit("dot product =< 0")
@@ -83,7 +85,7 @@ class TestEisensteinFractionTimeSeriesOperations(unittest.TestCase):
                         deltaA = EisensteinFraction(i + 1, l)
                         deltaB = EisensteinFraction(j + 1, k)
                         if get_dot_product(deltaA, deltaB) > 0:
-                            hash_result, delta_hash = hash_a(
+                            hash_result, delta_hash = hash_Eisenstein_Fraction(
                                 data_sets.A, deltaA, data_sets.B, deltaB
                             )
                             check_result_hash(hash_result)
@@ -101,7 +103,7 @@ class TestEisensteinFractionTimeSeriesOperations(unittest.TestCase):
                         deltaA = EisensteinFraction(i + 1, l)
                         deltaB = EisensteinFraction(j + 1, k)
 
-                        add_result, delta_add = add(
+                        add_result, delta_add = add_Eisenstein_Fraction(
                             data_sets.A, deltaA, data_sets.B, deltaB
                         )
                         check_result_add(add_result)

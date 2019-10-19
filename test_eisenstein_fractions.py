@@ -8,8 +8,8 @@ if sys.version_info[0] < 3:
     sys.exit(1)
 
 import unittest
-from fractions import Fraction
 
+from fractions import Fraction
 from eisenstein import Eisenstein
 from eisenstein_fractions import EisensteinFraction
 
