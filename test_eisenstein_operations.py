@@ -13,7 +13,11 @@ import parameters
 
 from eisenstein_fractions import EisensteinFraction
 from eisenstein import get_dot_product
-from eisenstein_operations import hash_Eisenstein_Fraction, add_Eisenstein_Fraction, diff_Eisenstein_Fraction
+from eisenstein_operations import (
+    hash_Eisenstein_Fraction,
+    add_Eisenstein_Fraction,
+    diff_Eisenstein_Fraction,
+)
 
 
 def check_result_add(Var: list):

@@ -78,7 +78,9 @@ def add_Eisenstein_Fraction(
 
 
 # Code under development
-def diff_Eisenstein_Fraction(C: list, deltaA: EisensteinFraction, deltaB: EisensteinFraction):
+def diff_Eisenstein_Fraction(
+    C: list, deltaA: EisensteinFraction, deltaB: EisensteinFraction
+):
 
     result = []
     # deltaC = min(deltaA, deltaB)
@@ -89,7 +91,7 @@ def diff_Eisenstein_Fraction(C: list, deltaA: EisensteinFraction, deltaB: Eisens
 
     for i in range(PROBE_LEN):
         if abs(deltaA) > abs(deltaB):
-            result.append(C[int(abs(ceil(i * deltaA / deltaB)))])
+            result.append(C[int(abs((i * deltaA / deltaB).ceil))])
         else:
             result.append(C[i])
     return result, deltaC

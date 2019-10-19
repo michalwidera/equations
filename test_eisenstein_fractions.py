@@ -265,7 +265,7 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         self.assertEqual(b, EisensteinFraction(four=(1, 1, 0, 1)))
         c = Eisenstein(4, 0) / 2
         self.assertEqual(c, EisensteinFraction(four=(2, 1, 0, 1)))
-        # this is Integer+Integer(w) Numbers divistion
+        # this is Integer+Integer(w) Numbers div
 
     def test_multiplication_by_integer(self):
         a = 2 * EisensteinFraction(four=(1, 1, -3, 2))
