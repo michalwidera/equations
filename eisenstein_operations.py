@@ -10,6 +10,7 @@
 """
 
 import sys
+import math
 
 if sys.version_info[0] < 3:
     print("You need to run this with Python 3")
@@ -89,8 +90,10 @@ def diff_Eisenstein_Fraction(
         deltaC = deltaB
 
     for i in range(PROBE_LEN):
+        ii = EisensteinFraction(four=(i, 1, 0, 1))
         if abs(deltaA) > abs(deltaB):
-            result.append(C[int(abs((i * deltaA / deltaB).ceil))])
+            print(math.ceil(abs(ii * deltaA / deltaB)))
+            result.append(C[int(abs((ii * deltaA / deltaB).ceil))])
         else:
             result.append(C[i])
     return result, deltaC
