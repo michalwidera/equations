@@ -208,9 +208,6 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         self.assertEqual(str(c), "EisensteinFraction(four=(12, 13, -17, 19))")
 
     def test_add_values(self):
-        """
-        TestFrac:
-        """
         a = EisensteinFraction(four=(1, 2, 3, 4))
         b = EisensteinFraction(four=(1, 3, 3, 4))
         c = a + b
