@@ -22,6 +22,7 @@ from eisenstein_operations import (
 # A = range(1, 50)
 # B = a,b,c ...
 
+
 def check_result_is_number_sequence(Var: list):
     index = 0
     for (number, alpha) in Var:
@@ -31,9 +32,10 @@ def check_result_is_number_sequence(Var: list):
         else:
             print(number, alpha, index)
             for (number, alpha) in Var:
-                print(number,alpha)
+                print(number, alpha)
             raise SystemExit("Number Fails")
         index = index + 1
+
 
 def check_result_is_alpha_sequence(Var: list):
     index = 0
@@ -44,9 +46,10 @@ def check_result_is_alpha_sequence(Var: list):
         else:
             print(number, alpha, index)
             for (number, alpha) in Var:
-                print(number,alpha)
+                print(number, alpha)
             raise SystemExit("Alpha Fails")
         index = index + 1
+
 
 def check_result_add(Var: list):
 
@@ -139,6 +142,8 @@ class TestEisensteinFractionTimeSeriesOperations(unittest.TestCase):
                             data_sets.A, deltaA, data_sets.B, deltaB
                         )
                         check_result_add(add_result)
+
+
 """
     def test_add_matrix(self):
         TestRange = parameters.cfg_prm.test_range
