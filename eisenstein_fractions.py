@@ -7,7 +7,7 @@ if sys.version_info[0] < 3:
     print("You need to run this with Python 3")
     sys.exit(1)
 
-from eisenstein import Eisenstein, gcd
+from eisenstein import Eisenstein
 from fractions import Fraction
 from math import floor, ceil
 

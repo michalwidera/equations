@@ -65,10 +65,6 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         self.assertEqual(c, EisensteinFraction(four=(1, 2, 0, 1)))
 
     def test_add_values(self):
-        """
-        TestEisensteinFractionNumbers:
-        """
-
         # 2 + 2 = 4
         a = EisensteinFraction(Fraction(4, 2))
         b = EisensteinFraction(Fraction(6, 3))
@@ -207,7 +203,7 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         c = EisensteinFraction(two=(a, b))
         self.assertEqual(str(c), "EisensteinFraction(four=(12, 13, -17, 19))")
 
-    def test_add_values(self):
+    def test_another_add_values(self):
         a = EisensteinFraction(four=(1, 2, 3, 4))
         b = EisensteinFraction(four=(1, 3, 3, 4))
         c = a + b
@@ -221,7 +217,7 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         c = a + Eisenstein(2)
         self.assertEqual(str(c), "EisensteinFraction(four=(5, 2, 3, 4))")
 
-    def test_substract_values(self):
+    def test_another_substract_values(self):
         a = EisensteinFraction(four=(1, 2, 3, 4))
         b = EisensteinFraction(four=(1, 3, 3, 4))
         c = a - b
