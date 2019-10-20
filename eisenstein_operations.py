@@ -19,9 +19,12 @@ if sys.version_info[0] < 3:
 from eisenstein_fractions import EisensteinFraction
 from eisenstein import get_dot_product
 
-# TODO I'm not sure how to interpret delta as EisnensteinFraction
-#  maybe there should appear norm function and delta
-#  became variable like in vhash?
+# TODO: Implement all functions from operations.py based on EisensteinFarction type and cover UT
+# DONE: add_Eisenstein_Fraction
+# DONE: diff_Eisenstein_Fraction
+# DONE: hash_Eisenstein_Fraction
+# TODO: dehasheven_Eisenstein_Fraction
+# TODO: dehashodd_Eisenstein_Fraction
 
 PROBE_LEN = 40
 
