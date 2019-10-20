@@ -237,7 +237,7 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         c = a * b
         self.assertEqual(c.math_view(), "(-263/1870, 571/1870w)")
         self.assertEqual(str(c), "EisensteinFraction(four=(-263, 1870, 571, 1870))")
-        self.assertEqual(repr(c), "(-263/1870,571/1870w)")
+        self.assertEqual(repr(c), "EisensteinFraction(four=(-263, 1870, 571, 1870))")
 
     def test_no_arguments(self):
         self.assertRaises(TypeError, EisensteinFraction)

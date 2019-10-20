@@ -51,7 +51,7 @@ class Eisenstein:
         return result
 
     def __repr__(self):
-        return "(%s,%sw)" % (self.co_real, self.co_omega)
+        return str(self)
 
     def __eq__(self, other):
         return self.co_real == other.co_real and self.co_omega == other.co_omega
