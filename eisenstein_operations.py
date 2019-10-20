@@ -69,7 +69,7 @@ def add_Eisenstein_Fraction(
         ii = EisensteinFraction(four=(i, 1, 0, 1))
         if deltaC == deltaA:
             first = A[i]
-            second = B[int(abs(ii * deltaA / deltaB))]
+            second = B[int(abs((ii * deltaA / deltaB)))]
         else:
             first = A[int(abs((ii * deltaB / deltaA)))]
             second = B[i]
@@ -92,8 +92,10 @@ def diff_Eisenstein_Fraction(
     for i in range(PROBE_LEN):
         ii = EisensteinFraction(four=(i, 1, 0, 1))
         if abs(deltaA) > abs(deltaB):
-            print(math.ceil(abs(ii * deltaA / deltaB)))
-            result.append(C[int(abs((ii * deltaA / deltaB).ceil))])
+            idx = int(math.ceil(abs(ii * deltaA / deltaB)))
         else:
-            result.append(C[i])
+            idx = i
+        if idx >= len(C):
+            return result, deltaC
+        result.append(C[idx])
     return result, deltaC

@@ -30,11 +30,9 @@ def check_result_is_number_sequence(Var: list):
         if number == data_sets.A[index]:
             pass
         else:
-            print(number, alpha, index)
-            for (number, alpha) in Var:
-                print(number, alpha)
-            raise SystemExit("Number Fails")
+            return True
         index = index + 1
+    return False
 
 
 def check_result_is_alpha_sequence(Var: list):
@@ -44,32 +42,38 @@ def check_result_is_alpha_sequence(Var: list):
         if alpha == data_sets.B[index]:
             pass
         else:
-            print(number, alpha, index)
-            for (number, alpha) in Var:
-                print(number, alpha)
-            raise SystemExit("Alpha Fails")
+            return True
         index = index + 1
+    return False
 
 
 def check_result_add(Var: list):
-
+    """
+    This check goes through Var list (1,a)(2,a)(3,b) ...
+    and test if 1>=2>=3>=4
+    and a>=b>=c>=
+    It means it fails if it not grows
+    :param Var: result from add operation
+    :return: True if need RaiseException, false - eveything ok
+    """
     prevNum = 1
     prevAlpha = "a"
     for (number, alpha) in Var:
         if number == prevNum or number == prevNum + 1:
             pass
         else:
-            print(number, prevNum)
-            raise SystemExit("Add algorithm fails")
+            return True
 
         prevNum = number
 
         if alpha != prevAlpha or alpha != chr(ord(prevAlpha) + 1):
             pass
         else:
-            raise SystemExit("Add algorithm fails")
+            return True
 
         prevAlpha = alpha
+
+    return False
 
 
 def check_result_hash(Var: list):
@@ -141,11 +145,52 @@ class TestEisensteinFractionTimeSeriesOperations(unittest.TestCase):
                         add_result, delta_add = add_Eisenstein_Fraction(
                             data_sets.A, deltaA, data_sets.B, deltaB
                         )
-                        check_result_add(add_result)
+                        if check_result_add(add_result):
+                            raise SystemExit("Add algorithm fails")
 
+    def test_check_function(self):
+        """
+        This function test check_result_is_number_sequence
+        and check_result_is_alpha_sequence
+        Both directions - success and failure scenario
+        :return:
+        """
+        var = []
+        var.append((1, "a"))
+        var.append((2, "b"))
+        var.append((3, "c"))
+        var.append((4, "d"))
+        var.append((5, "e"))
+        # This is success scenario
+        if check_result_is_number_sequence(var):
+            raise SystemExit("Number Fails")
+        if check_result_is_alpha_sequence(var):
+            raise SystemExit("Alpha Fails")
 
-"""
-    def test_add_matrix(self):
+        # This is alpha failure scenario
+        var.append((6, "e"))
+        if check_result_is_number_sequence(var):
+            raise SystemExit("Number Fails")
+        if not check_result_is_alpha_sequence(var):
+            raise SystemExit("Alpha Fails")
+
+        # This is number failure scenario
+        var.append((6, "e"))
+        if not check_result_is_number_sequence(var):
+            raise SystemExit("Number Fails")
+        if not check_result_is_alpha_sequence(var):
+            raise SystemExit("Alpha Fails")
+
+        # Rough check of check_result_add
+        if check_result_add(var):
+            raise SystemExit("Check sequence Fails")
+
+        # Missing 7 scenario - should be recognized
+        var.append((8, "e"))
+        if not check_result_add(var):
+            raise SystemExit("Check sequence Fails")
+
+    def test_add_diff_matrix(self):
         TestRange = parameters.cfg_prm.test_range
 
         for l in range(TestRange):
@@ -155,13 +200,33 @@ class TestEisensteinFractionTimeSeriesOperations(unittest.TestCase):
                         deltaA = EisensteinFraction(i + 1, l)
                         deltaB = EisensteinFraction(j + 1, k)
 
-                        if get_dot_product(deltaA, deltaB) > 0:
-                            add_result, delta_add = add_Eisenstein_Fraction(
-                                data_sets.A, deltaA, data_sets.B, deltaB
-                            )
+                        add_result, delta_add = add_Eisenstein_Fraction(
+                            data_sets.A, deltaA, data_sets.B, deltaB
+                        )
 
-                            diff_result, delta_diff = diff_Eisenstein_Fraction(
-                                add_result, delta_add , deltaB
-                            )
-                            check_result_is_number_sequence( diff_result )
-"""
+                        if check_result_add(add_result):
+                            raise SystemExit("Add algorithm fails")
+
+                        diff_result, delta_diff = diff_Eisenstein_Fraction(
+                            add_result, deltaA, deltaB
+                        )
+
+                        if check_result_is_number_sequence(diff_result):
+                            print()
+                            print(deltaA)
+                            print(deltaA)
+                            print("argument:", add_result)
+                            print("result: ", diff_result)
+                            raise SystemExit("Diff algorithm fails")
+
+                        diff_result, delta_diff = diff_Eisenstein_Fraction(
+                            add_result, deltaB, deltaA
+                        )
+
+                        if check_result_is_alpha_sequence(diff_result):
+                            print()
+                            print(deltaA)
+                            print(deltaA)
+                            print("argument:", add_result)
+                            print("result: ", diff_result)
+                            raise SystemExit("Diff algorithm fails")
