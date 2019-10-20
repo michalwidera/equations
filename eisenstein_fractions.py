@@ -4,7 +4,7 @@
 import sys
 
 if sys.version_info[0] < 3:
-    print("You need to run this with Python 3")
+    print("You need Python 3 to run this script.")
     sys.exit(1)
 
 from eisenstein import Eisenstein

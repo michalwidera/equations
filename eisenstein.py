@@ -14,7 +14,7 @@ import sys
 from fractions import Fraction
 
 if sys.version_info[0] < 3:
-    print("You need to run this with Python 3")
+    print("You need Python 3 to run this script.")
     sys.exit(1)
 
 SQRT_THREE: float = 3.0 ** 0.5
