@@ -13,6 +13,31 @@ from eisenstein import Eisenstein, gcd
 
 
 class TestEisensteinNumbers(unittest.TestCase):
+    def test_true_div(self):
+        """
+        This code is to better understand meaning of eisenstein division
+        :return:
+        """
+        selfy = Eisenstein( 1 , 2 )
+        other = 2
+
+        a = selfy.co_real
+        b = selfy.co_omega
+        if type(other) is int:
+            g = a / other
+            h = b / other
+        else:
+            c = other.co_real
+            d = other.co_omega
+            bottom = other.get_norm
+            e = a * c + b * d - a * d
+            f = b * c - a * d
+            g = e / bottom
+            h = f / bottom
+        result = Eisenstein(g, h)
+
+        self.assertEqual( result , selfy.__truediv__(other) )
+
     def test_substraction_values(self):
         """
         TestEisensteinNumbers:
