@@ -25,8 +25,8 @@ class Eisenstein:
 
         assert isinstance(co_real , int)
         assert isinstance(co_omega , int)
-        self.co_real = co_real
-        self.co_omega = co_omega
+        self.co_real = Fraction(co_real, 1)
+        self.co_omega = Fraction(co_omega, 1)
 
     def __str__(self):
         if self.co_real.denominator == self.co_omega.denominator == 1:

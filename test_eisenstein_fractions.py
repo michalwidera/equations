@@ -264,15 +264,12 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         a = EisensteinFraction(four=(2, 1, -3, 1))
         self.assertEqual(str(a), "Eisenstein(2, -3)")
 
-    """
-    TODO: Need to fix it.
     def test_division_by_eisenstein(self):
         a = EisensteinFraction(four=(1, 1, -3, 2))
         b = a / Eisenstein(2, 0)
         self.assertEqual(b, EisensteinFraction(four=(1, 2, -3, 4)))
         c = a / Eisenstein(3, 0)
         self.assertEqual(c, EisensteinFraction(four=(1, 3, -1, 2)))
-    """
 
     def test_division_by_integer(self):
         a = EisensteinFraction(four=(1, 1, -3, 2)) / 2
