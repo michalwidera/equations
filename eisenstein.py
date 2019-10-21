@@ -22,18 +22,11 @@ SQRT_THREE: float = 3.0 ** 0.5
 
 class Eisenstein:
     def __init__(self, co_real, co_omega=0):
-        if isinstance(co_real, Fraction):
-            self.co_real = co_real
-        elif isinstance(co_real, int):
-            self.co_real = Fraction(co_real, 1)
-        else:
-            raise TypeError("arguments should be an int")
-        if isinstance(co_omega, Fraction):
-            self.co_omega = co_omega
-        elif isinstance(co_omega, int):
-            self.co_omega = Fraction(co_omega, 1)
-        else:
-            raise TypeError("arguments should be an int")
+
+        assert isinstance(co_real , int)
+        assert isinstance(co_omega , int)
+        self.co_real = co_real
+        self.co_omega = co_omega
 
     def __str__(self):
         if self.co_real.denominator == self.co_omega.denominator == 1:

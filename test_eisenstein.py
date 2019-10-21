@@ -34,7 +34,7 @@ class TestEisensteinNumbers(unittest.TestCase):
             f = b * c - a * d
             g = e / bottom
             h = f / bottom
-        result = Eisenstein(g, h)
+        result = Eisenstein(int(g), int(h))
 
         self.assertEqual( result , selfy.__truediv__(other) )
 
