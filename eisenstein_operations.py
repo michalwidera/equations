@@ -40,6 +40,7 @@ def hash_Eisenstein_Fraction(
     This is hash_a because Python have hash method in standard lib i.e. __hash__()
     hash_b is declared in operations.py (for rational coefficients)
     """
+
     # get_dot_product works for Eisenstein and EisensteinFraction
     # this requirement was invented during experimental work with equations
     assert get_dot_product(deltaA, deltaB) > 0
@@ -60,12 +61,13 @@ def hash_Eisenstein_Fraction(
 
 
 def add_Eisenstein_Fraction(
+    A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFraction
+):
     """
     Function combine two series. If values of first comming slower
     Data will be duplicated to faster series.
     """
-    A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFraction
-):
+
     result = []
     if abs(deltaA) < abs(deltaB):
         deltaC = deltaA
@@ -85,14 +87,14 @@ def add_Eisenstein_Fraction(
 
 
 def diff_Eisenstein_Fraction(
+    C: list, deltaA: EisensteinFraction, deltaB: EisensteinFraction
+):
     """
     Function gets primary form argument based on given deltas.
     If we gathering data from slower series, faster
     data will be truncated. If we quering same speed - no probes
     will be dropped.
     """
-    C: list, deltaA: EisensteinFraction, deltaB: EisensteinFraction
-):
 
     result = []
     # deltaC = min(deltaA, deltaB)
