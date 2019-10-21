@@ -128,16 +128,21 @@ class Eisenstein:
         :param other:
         :return:
         """
-        if isinstance(other, int):
-            other = Eisenstein(other)
-
-        co_real = (
-            self.co_real * other.co_real
-            + self.co_omega * other.co_omega
-            - self.co_real * other.co_omega
-        )
-        co_omega = self.co_omega * other.co_real - self.co_real * other.co_omega
-        return Eisenstein(int(co_real / other.get_norm), int(co_omega / other.get_norm))
+        a = self.co_real
+        b = self.co_omega
+        if type(other) is int:
+            g = a / other
+            h = b / other
+        else:
+            c = other.co_real
+            d = other.co_omega
+            bottom = other.get_norm
+            e = a * c + b * d - a * d
+            f = b * c - a * d
+            g = e / bottom
+            h = f / bottom
+        result = Eisenstein(g, h)
+        return result
 
     def __mod__(self, other):
         K = get_eisenstein_form(self.get_complex_form / other.get_complex_form)
