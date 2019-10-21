@@ -274,9 +274,9 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
     def test_division_by_integer(self):
         a = EisensteinFraction(four=(1, 1, -3, 2)) / 2
         self.assertEqual(a, EisensteinFraction(four=(1, 2, -3, 4)))
-        b = Eisenstein(2, 0) / 2
+        b = Eisenstein(2, 0) // 2
         self.assertEqual(b, EisensteinFraction(four=(1, 1, 0, 1)))
-        c = Eisenstein(4, 0) / 2
+        c = Eisenstein(4, 0) // 2
         self.assertEqual(c, EisensteinFraction(four=(2, 1, 0, 1)))
         # this is Integer+Integer(w) Numbers div
 

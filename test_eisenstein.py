@@ -18,7 +18,7 @@ class TestEisensteinNumbers(unittest.TestCase):
         This code is to better understand meaning of eisenstein division
         :return:
         """
-        selfy = Eisenstein( 1 , 2 )
+        selfy = Eisenstein(1, 2)
         other = 2
 
         a = selfy.co_real
@@ -36,7 +36,7 @@ class TestEisensteinNumbers(unittest.TestCase):
             h = f / bottom
         result = Eisenstein(int(g), int(h))
 
-        self.assertEqual( result , selfy.__truediv__(other) )
+        self.assertEqual(result, selfy.__floordiv__(other))
 
     def test_substraction_values(self):
         """
@@ -147,12 +147,12 @@ class TestEisensteinNumbers(unittest.TestCase):
     def test_div_mod(self):
         obj_a = Eisenstein(2, 3)
         obj_b = Eisenstein(1, 0)
-        self.assertEqual(obj_a / obj_b, Eisenstein(2, 3))
+        # self.assertEqual(obj_a / obj_b, Eisenstein(2, 3)) Not allowed!
         self.assertEqual(obj_a // obj_b, Eisenstein(2, 3))
 
         obj_a = Eisenstein(4, 8)
         obj_b = Eisenstein(2, 2)
-        self.assertEqual(obj_a / obj_b, Eisenstein(4, 2))
+        # self.assertEqual(obj_a / obj_b, Eisenstein(4, 2)) Not allowed!
         self.assertEqual(obj_a // obj_b, Eisenstein(4, 2))
 
     def test_both_div_and_modulo(self):

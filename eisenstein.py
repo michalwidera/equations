@@ -23,10 +23,10 @@ SQRT_THREE: float = 3.0 ** 0.5
 class Eisenstein:
     def __init__(self, co_real, co_omega=0):
 
-        assert isinstance(co_real , int)
-        assert isinstance(co_omega , int)
-        self.co_real = Fraction(co_real, 1)
-        self.co_omega = Fraction(co_omega, 1)
+        assert isinstance(co_real, int)
+        assert isinstance(co_omega, int)
+        self.co_real = co_real
+        self.co_omega = co_omega
 
     def __str__(self):
         if self.co_real.denominator == self.co_omega.denominator == 1:
@@ -113,24 +113,34 @@ class Eisenstein:
         return self.co_real ** 2 - self.co_real * self.co_omega + self.co_omega ** 2
 
     def __floordiv__(self, other):
-        return get_eisenstein_form(self.get_complex_form / other.get_complex_form)
-
-    def __truediv__(self, other):
         """
-        Piotr Version
-        :param other:
-        :return:
+        This is Cardinal numbers division operation
+        If we wan to divide two Eisenstein numbers
+        we need to use // operators.
+        When we use / we should get and error.
         """
         if isinstance(other, int):
             other = Eisenstein(other)
 
         co_real = (
-             self.co_real * other.co_real
-             + self.co_omega * other.co_omega
-             - self.co_real * other.co_omega
+            self.co_real * other.co_real
+            + self.co_omega * other.co_omega
+            - self.co_real * other.co_omega
         )
         co_omega = self.co_omega * other.co_real - self.co_real * other.co_omega
+
+        # This is other way of getting the same result - check
+        assert get_eisenstein_form(
+            self.get_complex_form / other.get_complex_form
+        ) == Eisenstein(int(co_real / other.get_norm), int(co_omega / other.get_norm))
+
         return Eisenstein(int(co_real / other.get_norm), int(co_omega / other.get_norm))
+
+    def __truediv__(self, other):
+        """
+        This operation is not allowed in Eisenstein numbers
+        """
+        assert False
 
     def __mod__(self, other):
         K = get_eisenstein_form(self.get_complex_form / other.get_complex_form)

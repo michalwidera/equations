@@ -65,7 +65,7 @@ class EisensteinFraction(Eisenstein):
         )
 
     def __truediv__(self, other):
-        if isinstance(other, (int, Fraction)):
+        if isinstance(other, (int, Fraction, Eisenstein)):
             other = EisensteinFraction(other)
 
         return self * EisensteinFraction(
