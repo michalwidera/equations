@@ -231,7 +231,6 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         a = EisensteinFraction(four=(1, 2, 3, 5))
         b = EisensteinFraction(four=(7, 11, 13, 17))
         c = a * b
-        self.assertEqual(c.math_view(), "(-263/1870, 571/1870w)")
         self.assertEqual(str(c), "EisensteinFraction(four=(-263, 1870, 571, 1870))")
         self.assertEqual(repr(c), "EisensteinFraction(four=(-263, 1870, 571, 1870))")
 
