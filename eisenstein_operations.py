@@ -25,9 +25,11 @@ from eisenstein import get_dot_product
 # TODO: dehasheven_Eisenstein_Fraction
 # TODO: dehashodd_Eisenstein_Fraction
 
+# Length of tested probe. Based on this value following functions will create
+# loops that will return combined series of data.
 PROBE_LEN = 40
 
-# Code under test
+
 def hash_Eisenstein_Fraction(
     A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFraction
 ):
@@ -57,8 +59,11 @@ def hash_Eisenstein_Fraction(
     return result, deltaC
 
 
-# Code under test
 def add_Eisenstein_Fraction(
+    """
+    Function combine two series. If values of first comming slower
+    Data will be duplicated to faster series.
+    """
     A: list, deltaA: EisensteinFraction, B: list, deltaB: EisensteinFraction
 ):
     result = []
@@ -79,8 +84,13 @@ def add_Eisenstein_Fraction(
     return result, deltaC
 
 
-# Code under development
 def diff_Eisenstein_Fraction(
+    """
+    Function gets primary form argument based on given deltas.
+    If we gathering data from slower series, faster
+    data will be truncated. If we quering same speed - no probes
+    will be dropped.
+    """
     C: list, deltaA: EisensteinFraction, deltaB: EisensteinFraction
 ):
 
