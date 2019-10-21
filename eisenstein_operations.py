@@ -2,7 +2,6 @@
 # -*- coding: UTF-8 -*-
 
 """Eisenstein Rational Fractions and Time Series Algebra mix - Python 3.x
-   Copyright (c) 2019 Michal Widera
 
    Defined operations on Eisenstein integers:
    https://en.wikipedia.org/wiki/Eisenstein_integer
