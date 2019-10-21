@@ -182,10 +182,12 @@ def get_dot_product(x: Eisenstein, y: Eisenstein):
 
     :return: dot product of two complex numbers
     """
-
-    val1 = x.get_complex_form
-    val2 = y.get_complex_form
-    return val1.real * val2.real + val1.imag * val2.imag
+    a = x.co_real
+    b = x.co_omega
+    c = y.co_real
+    d = y.co_omega
+    result = a * c + b * d - (b * c + a * d) / 2
+    return result
 
 
 def get_eisenstein_form(var: complex):
