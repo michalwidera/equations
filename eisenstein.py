@@ -137,7 +137,7 @@ class Eisenstein:
              - self.co_real * other.co_omega
         )
         co_omega = self.co_omega * other.co_real - self.co_real * other.co_omega
-        return Eisenstein(int(co_real / other.get_norm), int(co_omega / other.get_norm))
+        return Eisenstein((co_real / other.get_norm), (co_omega / other.get_norm))
 
     def __mod__(self, other):
         K = get_eisenstein_form(self.get_complex_form / other.get_complex_form)
