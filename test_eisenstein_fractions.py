@@ -197,12 +197,6 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         obj = EisensteinFraction(four=(5, 6, 7, 11))
         self.assertEqual(str(obj), "EisensteinFraction(four=(5, 6, 7, 11))")
 
-    def test_two_parts(self):
-        a = Fraction(12, 13)
-        b = Fraction(-17, 19)
-        c = EisensteinFraction(two=(a, b))
-        self.assertEqual(str(c), "EisensteinFraction(four=(12, 13, -17, 19))")
-
     def test_another_add_values(self):
         a = EisensteinFraction(four=(1, 2, 3, 4))
         b = EisensteinFraction(four=(1, 3, 3, 4))

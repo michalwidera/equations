@@ -13,7 +13,7 @@ from math import floor, ceil
 
 
 class EisensteinFraction(Eisenstein):
-    def __init__(self, obj=None, optional=0, four=None, two=None):
+    def __init__(self, obj=None, optional=0, four=None):
 
         if four is not None:
             (real_num, real_den, omega_num, omega_den) = four
@@ -21,10 +21,6 @@ class EisensteinFraction(Eisenstein):
             assert omega_den != 0
             self.co_real = Fraction(real_num, real_den)
             self.co_omega = Fraction(omega_num, omega_den)
-        elif two is not None:
-            (co_real, co_omega) = two
-            self.co_real = co_real
-            self.co_omega = co_omega
         elif isinstance(obj, (int, Fraction)) and isinstance(optional, (int, Fraction)):
             self.co_real = Fraction(obj)
             self.co_omega = Fraction(optional)
