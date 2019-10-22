@@ -49,8 +49,7 @@ def hash_Eisenstein_Fraction(
     delta = deltaB / (deltaA + deltaB)
 
     for i in range(PROBE_LEN):
-        ii = EisensteinFraction(four=(i, 1, 0, 1))
-        di = ii * delta
+        di = i * delta
         if int(abs(di)) == int(abs(di + delta)):
             result.append(B[i - int(abs(di))])
         else:
@@ -75,12 +74,11 @@ def add_Eisenstein_Fraction(
         deltaC = deltaB
 
     for i in range(PROBE_LEN):
-        ii = EisensteinFraction(four=(i, 1, 0, 1))
         if deltaC == deltaA:
             first = A[i]
-            second = B[int(abs((ii * deltaA / deltaB)))]
+            second = B[int(abs((i * deltaA / deltaB)))]
         else:
-            first = A[int(abs((ii * deltaB / deltaA)))]
+            first = A[int(abs((i * deltaB / deltaA)))]
             second = B[i]
         result.append((first, second))
     return result, deltaC
@@ -104,12 +102,68 @@ def diff_Eisenstein_Fraction(
         deltaC = deltaB
 
     for i in range(PROBE_LEN):
-        ii = EisensteinFraction(four=(i, 1, 0, 1))
         if abs(deltaA) > abs(deltaB):
-            idx = int(math.ceil(abs(ii * deltaA / deltaB)))
+            idx = int(math.ceil(abs(i * deltaA / deltaB)))
+            idx = int(math.ceil(abs(i * deltaA / deltaB)))
         else:
             idx = i
         if idx >= len(C):
             return result, deltaC
         result.append(C[idx])
     return result, deltaC
+
+
+"""
+def dehasheven_Eisenstein_Fraction(
+    C: list, deltaC: EisensteinFraction, deltaA: EisensteinFraction
+):
+    # result.append(C[i + int(ceil((i + 1) * deltaA / deltaB))])
+
+    result = []
+
+    # This condition should be true because Hashed TS should be faster than argument
+    assert abs(deltaA) > abs(deltaC)
+
+    deltaB = (deltaA * deltaC) / (deltaA - deltaC)
+
+    assert abs(deltaB) > abs(deltaC)
+
+    for i in range(PROBE_LEN):
+        idx = i + int(math.ceil(abs(((i + 1) * (deltaA / deltaB)))))
+        if idx >= len(C):
+            return result, deltaB
+        result.append(C[idx])
+    return result, deltaB
+
+
+def dehashodd_Eisenstein_Fraction(
+    C: list, deltaC: EisensteinFraction, deltaB: EisensteinFraction
+):
+
+    result = []
+
+    # This condition should be true because Hashed TS should be faster than argument
+    assert abs(deltaB) > abs(deltaC)
+
+    deltaA = deltaB * deltaC / (deltaB - deltaC)
+
+    # This condition should be true because Hashed TS should be faster than argument
+    assert abs(deltaA) > abs(deltaC)
+
+    # source:
+    # odd  result.append(C[i + int(i            * deltaB / deltaA) ])
+    # even result.append(C[i + int(ceil((i + 1) * deltaA / deltaB))])
+    for i in range(PROBE_LEN):
+        #idx = int(i * abs((deltaA + deltaB) / deltaA)) 26
+        #idx = int(abs((i * (deltaA + deltaB) / deltaA))) 26
+        #idx = i + int( abs( i * deltaB / deltaA ) ) 26
+        #idx = i + int( abs(( i * deltaB / deltaA ).floor )) 26
+        #idx = i + int(abs((i * deltaB / deltaA).ceil)) 2
+        #idx = int(abs(i + (i * deltaB / deltaA))) 26
+        #idx = int(abs((i + i * deltaB / deltaA).floor)) 26
+        idx = int(abs((i + i * deltaB / deltaA).floor))
+        if idx >= len(C):
+            return result, deltaA
+        result.append(C[idx])
+    return result, deltaA
+"""

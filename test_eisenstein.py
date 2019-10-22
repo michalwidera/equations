@@ -62,6 +62,16 @@ class TestEisensteinNumbers(unittest.TestCase):
         c = a + b
         self.assertEqual(c, Eisenstein(21, 32))
 
+        a = Eisenstein(1, 2)
+        b = 1
+        c = a + b
+        self.assertEqual(c, Eisenstein(2, 2))
+
+        a = Eisenstein(1, 2)
+        b = 1
+        c = b + a
+        self.assertEqual(c, Eisenstein(2, 2))
+
     def test_multiplication(self):
         """
         TestEisensteinNumbers:
@@ -73,6 +83,16 @@ class TestEisensteinNumbers(unittest.TestCase):
         b = Eisenstein(2, 4)
         c = a * b
         self.assertEqual(c, Eisenstein(-6, 0))
+
+        a = Eisenstein(1, 2)
+        b = 2
+        c = a * b
+        self.assertEqual(c, Eisenstein(2, 4))
+
+        a = Eisenstein(1, 2)
+        b = 2
+        c = b * a
+        self.assertEqual(c, Eisenstein(2, 4))
 
     def test_multiply_imag_by_imag(self):
         a = Eisenstein(0, 1)
@@ -102,6 +122,11 @@ class TestEisensteinNumbers(unittest.TestCase):
         self.assertEqual(Eisenstein(1, 0), a % Eisenstein(2, 0))  # Eisenstein
         a = Eisenstein(5, 1)
         self.assertEqual(Eisenstein(0, 0), a % Eisenstein(1, 0))  # Eisenstein
+
+        a = Eisenstein(5, 2)
+        self.assertEqual(Eisenstein(1, 0), a % 2)  # Eisenstein
+        a = Eisenstein(5, 1)
+        self.assertEqual(Eisenstein(0, 0), a % 1)  # Eisenstein
 
     def test_gcd(self):
         """
@@ -147,13 +172,17 @@ class TestEisensteinNumbers(unittest.TestCase):
     def test_div_mod(self):
         obj_a = Eisenstein(2, 3)
         obj_b = Eisenstein(1, 0)
+        obj_c = 2
         # self.assertEqual(obj_a / obj_b, Eisenstein(2, 3)) Not allowed!
         self.assertEqual(obj_a // obj_b, Eisenstein(2, 3))
+        self.assertEqual(obj_a // obj_c, Eisenstein(1, 1))
 
         obj_a = Eisenstein(4, 8)
         obj_b = Eisenstein(2, 2)
+        obj_c = 2
         # self.assertEqual(obj_a / obj_b, Eisenstein(4, 2)) Not allowed!
         self.assertEqual(obj_a // obj_b, Eisenstein(4, 2))
+        self.assertEqual(obj_a // obj_c, Eisenstein(2, 4))
 
     def test_both_div_and_modulo(self):
         a = Eisenstein(4, 1)

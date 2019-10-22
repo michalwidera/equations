@@ -46,12 +46,24 @@ class Eisenstein:
         return str(self)
 
     def __eq__(self, other):
+
+        if isinstance(other, int):
+            other = Eisenstein(other)
+
         return self.co_real == other.co_real and self.co_omega == other.co_omega
 
     def __add__(self, other):
+
+        if isinstance(other, int):
+            other = Eisenstein(other)
+
         return Eisenstein(self.co_real + other.co_real, self.co_omega + other.co_omega)
 
     def __sub__(self, other):
+
+        if isinstance(other, int):
+            other = Eisenstein(other)
+
         return Eisenstein(self.co_real - other.co_real, self.co_omega - other.co_omega)
 
     def __mul__(self, other):
@@ -128,11 +140,6 @@ class Eisenstein:
         )
         co_omega = self.co_omega * other.co_real - self.co_real * other.co_omega
 
-        # This is other way of getting the same result - check
-        assert get_eisenstein_form(
-            self.get_complex_form / other.get_complex_form
-        ) == Eisenstein(int(co_real / other.get_norm), int(co_omega / other.get_norm))
-
         return Eisenstein(int(co_real / other.get_norm), int(co_omega / other.get_norm))
 
     def __truediv__(self, other):
@@ -142,6 +149,9 @@ class Eisenstein:
         assert False
 
     def __mod__(self, other):
+        if isinstance(other, int):
+            other = Eisenstein(other)
+
         K = get_eisenstein_form(self.get_complex_form / other.get_complex_form)
         # This debug code is important - it creates queries for
         # wolframalfa that can be checked if mod function works correctly
@@ -155,6 +165,9 @@ class Eisenstein:
         return self - K * other
 
     def div_mod(self, other):
+        if isinstance(other, int):
+            other = Eisenstein(other)
+
         a = self.co_real
         b = self.co_omega
         c = other.co_real
@@ -172,7 +185,9 @@ def get_dot_product(x: Eisenstein, y: Eisenstein):
     """
     Dot product
     https://www.quora.com/What-is-dot-product-of-two-complex-numbers
-    google: "if dot product is zero" -> angle 90 degrees
+    google says: "if dot product is zero" -> angle 90 degrees
+    This is true for complex numbers.
+    We need to rethink if we have same definition for Eisenstien Numbers.
 
     :return: dot product of two complex numbers
     """

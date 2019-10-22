@@ -288,3 +288,17 @@ class TestEisensteinFractionNumbers(unittest.TestCase):
         self.assertEqual(a, EisensteinFraction(four=(2, 1, -6, 2)))
         b = Eisenstein(2, 0) * 2
         self.assertEqual(b, EisensteinFraction(four=(4, 1, 0, 1)))
+
+    # This test is required for prof that int + Eisenstein works
+    def test_integer_add_eisensteinFraction(self):
+        a = 1 + EisensteinFraction(four=(1, 1, -3, 2))
+        self.assertEqual(a, EisensteinFraction(four=(2, 1, -3, 2)))
+        b = EisensteinFraction(four=(1, 1, -3, 2)) + 1
+        self.assertEqual(b, EisensteinFraction(four=(2, 1, -3, 2)))
+
+    # This test is required for prof that int == Eisenstein works
+    def test_integer_isequal_eisensteinFraction(self):
+        a = 1 == EisensteinFraction(four=(1, 1, 0, 1))
+        self.assertEqual(a, True)
+        b = EisensteinFraction(four=(1, 1, 0, 1)) == 1
+        self.assertEqual(b, True)

@@ -19,8 +19,36 @@ from eisenstein_operations import (
     diff_Eisenstein_Fraction,
 )
 
+
+# dehasheven_Eisenstein_Fraction,
+# dehashodd_Eisenstein_Fraction,
+
 # A = range(1, 50)
 # B = a,b,c ...
+
+
+def check_result_is_only_number_sequence(Var: list):
+    index = 0
+    for number in Var:
+
+        if number == data_sets.A[index]:
+            pass
+        else:
+            return True
+        index = index + 1
+    return False
+
+
+def check_result_is_only_alpha_sequence(Var: list):
+    index = 0
+    for alpha in Var:
+
+        if alpha == data_sets.B[index]:
+            pass
+        else:
+            return True
+        index = index + 1
+    return False
 
 
 def check_result_is_number_sequence(Var: list):
@@ -230,3 +258,43 @@ class TestEisensteinFractionTimeSeriesOperations(unittest.TestCase):
                             print("argument:", add_result)
                             print("result: ", diff_result)
                             raise SystemExit("Diff algorithm fails")
+
+    """
+    def test_dehash_matrix(self):
+        TestRange = parameters.cfg_prm.test_range
+
+        callCount = 0
+        for l in range(TestRange):
+            for k in range(TestRange):
+                for j in range(TestRange):
+                    for i in range(TestRange):
+                        deltaA = EisensteinFraction(i + 1, l)
+                        deltaB = EisensteinFraction(j + 1, k)
+                        if get_dot_product(deltaA, deltaB) > 0:
+                            hash_result, delta_hash = hash_Eisenstein_Fraction(
+                                data_sets.A, deltaA, data_sets.B, deltaB
+                            )
+                            #check_result_hash(hash_result) Already checked
+                            callCount += 1
+                            dehashOdd_result, delta_dehashOdd = dehashodd_Eisenstein_Fraction(
+                                hash_result, delta_hash, deltaB
+                            )
+
+                            assert delta_dehashOdd == deltaA
+
+                            if check_result_is_only_alpha_sequence(dehashOdd_result):
+                                print()
+                                print("call count", callCount)
+                                print(l, k, j, i)
+                                print(deltaA, deltaB, get_dot_product(deltaA, deltaB))
+                                print((deltaA/deltaB), (deltaB/deltaA))
+                                print(hash_result)
+                                print(dehashOdd_result)
+                                raise SystemExit(
+                                    "dehasheven_Eisenstein_Fraction algorithm fails"
+                                )
+
+                        else:
+                            pass
+                            # ("SKIP orthogonal", deltaA, deltaB)
+    """
