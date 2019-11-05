@@ -10,6 +10,7 @@
 
 import sys
 import math
+import cmath
 
 if sys.version_info[0] < 3:
     print("You need Python 3 to run this script.")
@@ -104,7 +105,6 @@ def diff_Eisenstein_Fraction(
     for i in range(PROBE_LEN):
         if abs(deltaA) > abs(deltaB):
             idx = int(math.ceil(abs(i * deltaA / deltaB)))
-            idx = int(math.ceil(abs(i * deltaA / deltaB)))
         else:
             idx = i
         if idx >= len(C):
@@ -113,7 +113,6 @@ def diff_Eisenstein_Fraction(
     return result, deltaC
 
 
-"""
 def dehasheven_Eisenstein_Fraction(
     C: list, deltaC: EisensteinFraction, deltaA: EisensteinFraction
 ):
@@ -128,10 +127,18 @@ def dehasheven_Eisenstein_Fraction(
 
     assert abs(deltaB) > abs(deltaC)
 
+    delta = deltaB / (deltaA + deltaB)
+
     for i in range(PROBE_LEN):
-        idx = i + int(math.ceil(abs(((i + 1) * (deltaA / deltaB)))))
+
+        di = i * delta
+
+        idx = i
+        if int(abs(di)) == int(abs(di + delta)):
+            continue
+
         if idx >= len(C):
-            return result, deltaB
+            return result, deltaA
         result.append(C[idx])
     return result, deltaB
 
@@ -153,17 +160,18 @@ def dehashodd_Eisenstein_Fraction(
     # source:
     # odd  result.append(C[i + int(i            * deltaB / deltaA) ])
     # even result.append(C[i + int(ceil((i + 1) * deltaA / deltaB))])
+
+    delta = deltaB / (deltaA + deltaB)
+
     for i in range(PROBE_LEN):
-        #idx = int(i * abs((deltaA + deltaB) / deltaA)) 26
-        #idx = int(abs((i * (deltaA + deltaB) / deltaA))) 26
-        #idx = i + int( abs( i * deltaB / deltaA ) ) 26
-        #idx = i + int( abs(( i * deltaB / deltaA ).floor )) 26
-        #idx = i + int(abs((i * deltaB / deltaA).ceil)) 2
-        #idx = int(abs(i + (i * deltaB / deltaA))) 26
-        #idx = int(abs((i + i * deltaB / deltaA).floor)) 26
-        idx = int(abs((i + i * deltaB / deltaA).floor))
+
+        di = i * delta
+
+        idx = i
+        if int(abs(di)) != int(abs(di + delta)):
+            continue
+
         if idx >= len(C):
             return result, deltaA
         result.append(C[idx])
     return result, deltaA
-"""

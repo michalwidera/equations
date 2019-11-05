@@ -7,9 +7,10 @@ if sys.version_info[0] < 3:
     print("You need Python 3 to run this script.")
     sys.exit(1)
 
-from eisenstein import Eisenstein
+from eisenstein import Eisenstein, SQRT_THREE
 from fractions import Fraction
-from math import floor, ceil
+from math import floor, ceil, sqrt
+from decimal import *
 
 
 class EisensteinFraction(Eisenstein):
@@ -85,7 +86,7 @@ class EisensteinFraction(Eisenstein):
         :param var: Eisenstein Fraction
         :return: Floor in Eisenstein Sense
         """
-        return Eisenstein(int(floor(self.co_real)), int(floor(self.co_omega)))
+        return Eisenstein(int(self.co_real), int(self.co_omega))
 
     @property
     def ceil(self) -> Eisenstein:
@@ -106,3 +107,39 @@ class EisensteinFraction(Eisenstein):
         :return: Floor in Eisenstein Sense
         """
         return Eisenstein(int(round(self.co_real)), int(round(self.co_omega)))
+
+    @property
+    def round2(self) -> Eisenstein:
+        """
+        Euclidean domain
+        https://en.wikipedia.org/wiki/Eisenstein_integer
+        :return:
+        """
+        return Eisenstein(
+            int(round(self.co_real + self.co_omega / SQRT_THREE)),
+            int(round(2 * self.co_omega / SQRT_THREE)),
+        )
+
+    @property
+    def floor2(self) -> Eisenstein:
+        """
+        Euclidean domain
+        https://en.wikipedia.org/wiki/Eisenstein_integer
+        :return:
+        """
+        return Eisenstein(
+            int(self.co_real + self.co_omega / SQRT_THREE),
+            int(2 * self.co_omega / SQRT_THREE),
+        )
+
+    @property
+    def ceil2(self) -> Eisenstein:
+        """
+        Euclidean domain
+        https://en.wikipedia.org/wiki/Eisenstein_integer
+        :return:
+        """
+        return Eisenstein(
+            int(ceil(self.co_real + self.co_omega / SQRT_THREE)),
+            int(ceil(2 * self.co_omega / SQRT_THREE)),
+        )

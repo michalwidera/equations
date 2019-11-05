@@ -17,41 +17,29 @@ from eisenstein_operations import (
     hash_Eisenstein_Fraction,
     add_Eisenstein_Fraction,
     diff_Eisenstein_Fraction,
+    dehashodd_Eisenstein_Fraction,
+    dehasheven_Eisenstein_Fraction,
 )
-
-
-# dehasheven_Eisenstein_Fraction,
-# dehashodd_Eisenstein_Fraction,
 
 # A = range(1, 50)
 # B = a,b,c ...
 
 
 def check_result_is_only_number_sequence(Var: list):
-    index = 0
-    for number in Var:
-
-        if number == data_sets.A[index]:
-            pass
-        else:
-            return True
-        index = index + 1
-    return False
+    return Var == data_sets.A[0 : len(Var)]
 
 
 def check_result_is_only_alpha_sequence(Var: list):
-    index = 0
-    for alpha in Var:
-
-        if alpha == data_sets.B[index]:
-            pass
-        else:
-            return True
-        index = index + 1
-    return False
+    # I don't understand why != here
+    return Var != data_sets.B[0 : len(Var)]
 
 
 def check_result_is_number_sequence(Var: list):
+
+    # data = []
+    # for (number, alpha) in Var: data.append( number )
+    # return not check_result_is_only_number_sequence(data)
+
     index = 0
     for (number, alpha) in Var:
 
@@ -259,7 +247,6 @@ class TestEisensteinFractionTimeSeriesOperations(unittest.TestCase):
                             print("result: ", diff_result)
                             raise SystemExit("Diff algorithm fails")
 
-    """
     def test_dehash_matrix(self):
         TestRange = parameters.cfg_prm.test_range
 
@@ -274,7 +261,7 @@ class TestEisensteinFractionTimeSeriesOperations(unittest.TestCase):
                             hash_result, delta_hash = hash_Eisenstein_Fraction(
                                 data_sets.A, deltaA, data_sets.B, deltaB
                             )
-                            #check_result_hash(hash_result) Already checked
+                            # check_result_hash(hash_result) Already checked
                             callCount += 1
                             dehashOdd_result, delta_dehashOdd = dehashodd_Eisenstein_Fraction(
                                 hash_result, delta_hash, deltaB
@@ -284,17 +271,49 @@ class TestEisensteinFractionTimeSeriesOperations(unittest.TestCase):
 
                             if check_result_is_only_alpha_sequence(dehashOdd_result):
                                 print()
-                                print("call count", callCount)
-                                print(l, k, j, i)
-                                print(deltaA, deltaB, get_dot_product(deltaA, deltaB))
-                                print((deltaA/deltaB), (deltaB/deltaA))
+                                print("!! CALL COUNT:", callCount)
+                                print()
+                                print(i + 1, l, j + 1, k)
+                                print(
+                                    "deltaA=",
+                                    deltaA,
+                                    " deltaB=",
+                                    deltaB,
+                                    " dot=",
+                                    get_dot_product(deltaA, deltaB),
+                                )
+                                print(
+                                    ("a/b=", deltaA / deltaB),
+                                    " b/a=",
+                                    (deltaB / deltaA),
+                                )
                                 print(hash_result)
-                                print(dehashOdd_result)
+
+                                for i in dehashOdd_result:
+                                    print("%3s" % str(i), end="")
+                                print()
+                                for i in data_sets.B[0 : len(dehashOdd_result)]:
+                                    print("%3s" % str(i), end="")
+                                print()
+                                raise SystemExit(
+                                    "dehasodd_Eisenstein_Fraction algorithm fails"
+                                )
+                                # input("Press Enter to continue...")
+
+                            dehashEven_result, delta_dehashEven = dehasheven_Eisenstein_Fraction(
+                                hash_result, delta_hash, deltaA
+                            )
+                            if check_result_is_only_number_sequence(dehashEven_result):
+                                print()
+                                for i in dehashEven_result:
+                                    print("%3s" % str(i), end="")
+                                print()
+                                for i in data_sets.A[0 : len(dehashEven_result)]:
+                                    print("%3s" % str(i), end="")
+                                print()
                                 raise SystemExit(
                                     "dehasheven_Eisenstein_Fraction algorithm fails"
                                 )
 
                         else:
                             pass
-                            # ("SKIP orthogonal", deltaA, deltaB)
-    """
