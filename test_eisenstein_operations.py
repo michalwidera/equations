@@ -21,46 +21,29 @@ from eisenstein_operations import (
     dehasheven_Eisenstein_Fraction,
 )
 
-# A = range(1, 50)
-# B = a,b,c ...
-
 
 def check_result_is_only_number_sequence(Var: list):
     return Var == data_sets.A[0 : len(Var)]
 
 
 def check_result_is_only_alpha_sequence(Var: list):
-    # I don't understand why != here
-    return Var != data_sets.B[0 : len(Var)]
+    return Var == data_sets.B[0 : len(Var)]
 
 
 def check_result_is_number_sequence(Var: list):
 
-    # data = []
-    # for (number, alpha) in Var: data.append( number )
-    # return not check_result_is_only_number_sequence(data)
-
-    index = 0
+    data = []
     for (number, alpha) in Var:
-
-        if number == data_sets.A[index]:
-            pass
-        else:
-            return True
-        index = index + 1
-    return False
+        data.append(number)
+    return not check_result_is_only_number_sequence(data)
 
 
 def check_result_is_alpha_sequence(Var: list):
-    index = 0
-    for (number, alpha) in Var:
 
-        if alpha == data_sets.B[index]:
-            pass
-        else:
-            return True
-        index = index + 1
-    return False
+    data = []
+    for (number, alpha) in Var:
+        data.append(alpha)
+    return not check_result_is_only_alpha_sequence(data)
 
 
 def check_result_add(Var: list):
@@ -269,7 +252,9 @@ class TestEisensteinFractionTimeSeriesOperations(unittest.TestCase):
 
                             assert delta_dehashOdd == deltaA
 
-                            if check_result_is_only_alpha_sequence(dehashOdd_result):
+                            if not check_result_is_only_alpha_sequence(
+                                dehashOdd_result
+                            ):
                                 print()
                                 print("!! CALL COUNT:", callCount)
                                 print()
@@ -287,6 +272,15 @@ class TestEisensteinFractionTimeSeriesOperations(unittest.TestCase):
                                     " b/a=",
                                     (deltaB / deltaA),
                                 )
+
+                                print("*", dehashOdd_result)
+                                print("!", data_sets.B[0 : len(dehashOdd_result)])
+
+                                print(
+                                    dehashOdd_result
+                                    == data_sets.B[0 : len(dehashOdd_result)]
+                                )
+
                                 print(hash_result)
 
                                 for i in dehashOdd_result:
@@ -303,8 +297,18 @@ class TestEisensteinFractionTimeSeriesOperations(unittest.TestCase):
                             dehashEven_result, delta_dehashEven = dehasheven_Eisenstein_Fraction(
                                 hash_result, delta_hash, deltaA
                             )
-                            if check_result_is_only_number_sequence(dehashEven_result):
+                            if not check_result_is_only_number_sequence(
+                                dehashEven_result
+                            ):
+
                                 print()
+
+                                print("*", dehashEven_result)
+                                print(data_sets.A[0:2])
+                                print("!", data_sets.A[0 : len(dehashEven_result)])
+
+                                print()
+
                                 for i in dehashEven_result:
                                     print("%3s" % str(i), end="")
                                 print()

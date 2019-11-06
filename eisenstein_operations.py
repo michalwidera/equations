@@ -10,7 +10,6 @@
 
 import sys
 import math
-import cmath
 
 if sys.version_info[0] < 3:
     print("You need Python 3 to run this script.")
