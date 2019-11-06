@@ -19,13 +19,6 @@ if sys.version_info[0] < 3:
 from eisenstein_fractions import EisensteinFraction
 from eisenstein import get_dot_product
 
-# TODO: Implement all functions from operations.py based on EisensteinFarction type and cover UT
-# DONE: add_Eisenstein_Fraction
-# DONE: diff_Eisenstein_Fraction
-# DONE: hash_Eisenstein_Fraction
-# TODO: dehasheven_Eisenstein_Fraction
-# TODO: dehashodd_Eisenstein_Fraction
-
 # Length of tested probe. Based on this value following functions will create
 # loops that will return combined series of data.
 PROBE_LEN = 40
