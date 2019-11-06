@@ -8,5 +8,5 @@ B = ['a','b','c',....]
 """
 
 A = range(1, 50)
-B = list(map(chr, range(ord("a"), ord("z") + 1)))
-B = B + B + B + B
+all_letters_ls = list(map(chr, range(ord("a"), ord("z") + 1)))
+B = 4 * all_letters_ls
