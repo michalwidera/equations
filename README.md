@@ -11,7 +11,7 @@ If success - try to implement it on Database System.
 
 Here is the plan:
 - [x] Create Eisenstein Fraction Type set
-- [ ] Combine Eisenstein Fraction with Time Series Operations
+- [x] Combine Eisenstein Fraction with Time Series Operations
 - [ ] If successful, apply results in Abracadabra DB
 
 ---
