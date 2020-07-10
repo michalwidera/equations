@@ -12,7 +12,7 @@ If success - try to implement it on Database System.
 Here is the plan:
 - [x] Create Eisenstein Fraction Type set
 - [x] Combine Eisenstein Fraction with Time Series Operations
-- [ ] If successful, apply results in Abracadabra DB
+- [ ] If successful, apply results in [RetractorDB](http://retractordb.com)
 
 ---
 
