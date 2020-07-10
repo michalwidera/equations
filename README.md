@@ -4,7 +4,7 @@
   http://img.shields.io/travis/michalwidera/equations/master.svg?style=flat)](
  https://travis-ci.org/michalwidera/equations)
  
-This is experimental work that creates base for Abracadabra DB - Time Series Management System.
+This is experimental work that creates base for RetractorDB - Time Series Management System.
 Our plan is to create Complex Fractions type set.
 Next adapt it on operations.py (implementation of interlace/deinterlace/sum/diff on time series)
 If success - try to implement it on Database System.
