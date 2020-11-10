@@ -3,6 +3,7 @@
 [![build status](
   http://img.shields.io/travis/michalwidera/equations/master.svg?style=flat)](
  https://travis-ci.org/michalwidera/equations)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fmichalwidera%2Fequations.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fmichalwidera%2Fequations?ref=badge_shield)
  
 This is experimental work that creates base for RetractorDB - Time Series Management System.
 Our plan is to create Complex Fractions type set.
