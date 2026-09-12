@@ -130,7 +130,7 @@ def dehasheven_Eisenstein_Fraction(
             continue
 
         if idx >= len(C):
-            return result, deltaA
+            return result, deltaB
         result.append(C[idx])
     return result, deltaB
 

@@ -65,7 +65,8 @@ def check_result_add(Var: list):
 
         prevNum = number
 
-        if alpha != prevAlpha or alpha != chr(ord(prevAlpha) + 1):
+        nextAlpha = chr((ord(prevAlpha) - ord("a") + 1) % 26 + ord("a"))
+        if alpha == prevAlpha or alpha == nextAlpha:
             pass
         else:
             return True
