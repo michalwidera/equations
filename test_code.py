@@ -18,6 +18,11 @@ from pathlib import Path
 from test_eisenstein import TestEisensteinNumbers
 from test_eisenstein_fractions import TestEisensteinFractionNumbers
 from test_eisenstein_operations import TestEisensteinFractionTimeSeriesOperations
+from test_gauss_operations import (
+    TestExactModulus,
+    TestGaussFractionNumbers,
+    TestGaussFractionTimeSeriesOperations,
+)
 import parameters
 
 
@@ -31,20 +36,28 @@ def runningInTravis():
     return False
 
 
-fast_test_ls = [TestEisensteinNumbers, TestEisensteinFractionNumbers]
+fast_test_ls = [
+    TestEisensteinNumbers,
+    TestEisensteinFractionNumbers,
+    TestGaussFractionNumbers,
+    TestExactModulus,
+]
 
 
-slow_test_ls = [TestEisensteinFractionTimeSeriesOperations]
+slow_test_ls = [
+    TestEisensteinFractionTimeSeriesOperations,
+    TestGaussFractionTimeSeriesOperations,
+]
 
 
 def add_all_fast(suite):
     for one_test in fast_test_ls:
-        suite.addTest(unittest.makeSuite(one_test))
+        suite.addTest(unittest.defaultTestLoader.loadTestsFromTestCase(one_test))
 
 
 def add_all_slow(suite):
     for one_test in slow_test_ls:
-        suite.addTest(unittest.makeSuite(one_test))
+        suite.addTest(unittest.defaultTestLoader.loadTestsFromTestCase(one_test))
 
 
 def summary_status(suite):
